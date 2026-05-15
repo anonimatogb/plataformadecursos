@@ -11,6 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($resultado) {
         $_SESSION['cargo'] = $resultado['cargo'];
         $_SESSION['nome'] = $resultado['nome'];
+        $_SESSION['id'] = $resultado['id'];
         if ($resultado['cargo'] === 'aluno') {
             header("Location: inicial.php");
             exit();

@@ -15,20 +15,21 @@ class CursosModel
     }
     public function buscarcursos($id): array
     {
-        $stmt = $this->pdo->query("SELECT * FROM cursos WHERE id = $id");
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt = $this->pdo->query("SELECT * FROM cursos WHERE professor = $id");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function cadastrarcursos($nome, $descricao, $carga_horaria)
+    public function cadastrarcursos($nome, $descricao, $carga_horaria, $professor)
     {
         try {
 
-            $sql = "INSERT INTO cursos (nome, descricao, carga_horaria) VALUES (:nome, :descricao, :carga_horaria)";
+            $sql = "INSERT INTO cursos (nome, descricao, carga_horaria, professor) VALUES (:nome, :descricao, :carga_horaria, :professor)";
             $stmt = $this->pdo->prepare($sql);
             return $stmt->execute([
                 ':nome' => $nome,
                 ':descricao' => $descricao,
-                ':carga_horaria' => $carga_horaria
+                ':carga_horaria' => $carga_horaria,
+                ':professor' => $professor
             ]);
         } catch (PDOException $e) {
             if ($e->getCode() == 23000) {
