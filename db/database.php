@@ -1,7 +1,7 @@
 <?php
 
 $host="localhost";
-$db="escola";
+$db="plataformacursos";
 $user="root";
 $pass="";
 
