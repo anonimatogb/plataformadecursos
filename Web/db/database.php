@@ -1,9 +1,9 @@
 <?php
 
-$host="mysql.railway.internal";
-$db="railway";
+$host="localhost";
+$db="plataformacursos";
 $user="root";
-$pass="DGhJTzpyFFHFrhWSVavJJDmaIXJaVtQE";
+$pass="";
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);

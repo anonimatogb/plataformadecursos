@@ -12,12 +12,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $cargo = $_POST['cargo'];
     
     $resultado = $UsuarioController->cadastrar($nome, $email, $senha, $cargo);
+   
     if($resultado === "duplicado"){
         echo "Email já cadastrado. Por favor, use outro email.";
-    } elseif ($resultado['cargo'] === 'aluno') {
-      header("Location: Login.php");
+    } elseif ($_POST['cargo'] === 'aluno') {
+      header("Location: Index.php");
       exit();
-    } elseif ($resultado['cargo'] === 'professor') {
+    } elseif ($_POST['cargo'] === 'professor') {
       header("Location: admin.php");
       exit();
     } else {
