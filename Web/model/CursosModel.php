@@ -39,9 +39,21 @@ class CursosModel
         }
     }
 
+  public function atualizar($id, $nome, $descricao, $carga_horaria){
+    $sql = "UPDATE cursos 
+            SET nome = :nome,
+                descricao = :descricao,
+                carga_horaria = :carga_horaria
+            WHERE id = :id";
 
+    $stmt = $this->pdo->prepare($sql);
 
-
-
+    return $stmt->execute([
+        ':id' => $id,
+        ':nome' => $nome,
+        ':descricao' => $descricao,
+        ':carga_horaria' => $carga_horaria
+    ]);
+  }
 
     }

@@ -20,4 +20,10 @@ class CursosController
     {
         return $this->cursosModel->cadastrarcursos($nome, $descricao, $carga_horaria, $professor);
     }
+
+    public function atualizar($id, $nome, $descricao, $carga_horaria)
+    {
+        return $this->cursosModel->atualizar($id, $nome, $descricao, $carga_horaria);
+    }
+
 }

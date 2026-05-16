@@ -19,7 +19,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
       header("Location: Index.php");
       exit();
     } elseif ($_POST['cargo'] === 'professor') {
-      header("Location: admin.php");
+      header("Location: professor.php");
       exit();
     } else {
         echo "Erro ao cadastrar usuário. Por favor, tente novamente.";

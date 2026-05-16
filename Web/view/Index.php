@@ -13,10 +13,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['nome'] = $resultado['nome'];
         $_SESSION['id'] = $resultado['id'];
         if ($resultado['cargo'] === 'aluno') {
-            header("Location: inicial.php");
+            header("Location: Paginainicial.php");
             exit();
         } elseif ($resultado['cargo'] === 'professor') {
-            header("Location: admin.php");
+            header("Location: professor.php");
             exit();
         } else {
             echo "Cargo desconhecido. Por favor, contate o suporte.";
