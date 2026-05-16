@@ -8,6 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $senha = $_POST['senha'];
     $resultado = $UsuarioController->login($email, $senha);
+    
     if ($resultado) {
         $_SESSION['cargo'] = $resultado['cargo'];
         $_SESSION['nome'] = $resultado['nome'];

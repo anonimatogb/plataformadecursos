@@ -9,23 +9,24 @@ if (!isset($_SESSION['nome']) || $_SESSION['cargo'] !== 'professor') {
 }
 
 $cursosController = new CursosController($pdo);
-$cursos = $cursosController->buscar($_SESSION['edit']);
+
+$cursos = $cursosController->buscarum($_GET['id_curso']);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $cursosController->atualizar(
-        $_SESSION['edit'],
+    $cursos = $cursosController->atualizar(
+        $_GET['id_curso'],
         $_POST['nome'],
         $_POST['descricao'],
         $_POST['carga_horaria']
     );
 }
-if(!isset($_SESSION['edit'])){
-   echo "<script>
-    alert('Curso não encontrado!');
+if(!isset($_GET['id_curso'])){
+    echo "<script>
+    alert('ID do curso não fornecido!');
     </script>";
-header("Location: professor.php");
-exit;
-   
+    header("Location: professor.php");
+    exit;
+
 }
 
 ?>

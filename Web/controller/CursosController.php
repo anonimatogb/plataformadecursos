@@ -9,7 +9,11 @@ class CursosController
     {
         $this->cursosModel = new CursosModel($pdo);
     }
-
+    public function buscarum($id)
+    {
+        $cursos = $this->cursosModel->buscarum($id);
+        return $cursos;
+    }
     public function todos($id)
     {
         $cursos = $this->cursosModel->buscarcursos($id);
@@ -24,6 +28,11 @@ class CursosController
     public function atualizar($id, $nome, $descricao, $carga_horaria)
     {
         return $this->cursosModel->atualizar($id, $nome, $descricao, $carga_horaria);
+    }
+
+    public function deletar($id)
+    {
+        return $this->cursosModel->deletar($id);
     }
 
 }

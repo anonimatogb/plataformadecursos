@@ -19,6 +19,11 @@ class CursosModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function buscarum($id): array
+    {
+        $stmt = $this->pdo->query("SELECT * FROM cursos WHERE id = $id");
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
     public function cadastrarcursos($nome, $descricao, $carga_horaria, $professor)
     {
         try {
@@ -39,21 +44,27 @@ class CursosModel
         }
     }
 
-  public function atualizar($id, $nome, $descricao, $carga_horaria){
-    $sql = "UPDATE cursos 
+    public function atualizar($id, $nome, $descricao, $carga_horaria)
+    {
+        $sql = "UPDATE cursos 
             SET nome = :nome,
                 descricao = :descricao,
                 carga_horaria = :carga_horaria
             WHERE id = :id";
 
-    $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
 
-    return $stmt->execute([
-        ':id' => $id,
-        ':nome' => $nome,
-        ':descricao' => $descricao,
-        ':carga_horaria' => $carga_horaria
-    ]);
-  }
-
+        return $stmt->execute([
+            ':id' => $id,
+            ':nome' => $nome,
+            ':descricao' => $descricao,
+            ':carga_horaria' => $carga_horaria
+        ]);
     }
+    public function deletar($id)
+    {
+        $sql = "DELETE FROM cursos WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([':id' => $id]);
+    }
+}

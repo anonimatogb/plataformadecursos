@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $professor = $_SESSION['id'];
 
     $resultado = $CursosController->cadastrar($nome, $descricao, $carga_horaria, $professor);
-
+    
     if ($resultado === "ERRO") {
         echo "Erro ao cadastrar curso. Por favor, tente novamente.";
     } else {
@@ -47,6 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <label for="carga_horaria">Carga Horária:</label>
         <input type="number" id="carga_horaria" name="carga_horaria" required><br><br>
+
         <a href="professor.php">Voltar para a Central do Aprendizado</a>
         <input type="submit" value="Cadastrar">
 

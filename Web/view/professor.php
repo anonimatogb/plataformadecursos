@@ -26,8 +26,13 @@ $cursos = $cursosController->todos($_SESSION['id']);
         <h3>Seus Cursos:</h3>
         <ul>
             <?php foreach ($cursos as $curso): ?>
-                <li><?php echo ($curso['id'])." | ".($curso['nome'])." | ".($curso['descricao'])." | ".($curso['carga_horaria'])." horas"."<a href='editarcurso.php'>Cadastrar Novo Curso</a>";  ?></li>
-            <?php endforeach; ?>
+                <li><?php echo ($curso['id'])." | ".($curso['nome'])." | ".($curso['descricao'])." | ".($curso['carga_horaria'])." horas"."<a href='editarcurso.php?id_curso=".$curso['id']."'>Editar</a>"."<a href='deletarcurso.php?id_curso=".$curso['id']."'>Deletar</a>";  ?></li>
+            <?php endforeach; 
+            if(empty($cursos)){
+                echo "Nenhum curso cadastrado ainda.";
+            }
+            ?>
+
             <a href="cadastrarCurso.php">Cadastrar Novo Curso</a>
         </ul>
 </body>
