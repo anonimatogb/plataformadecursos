@@ -33,4 +33,9 @@ class UsuarioController
         return false;
     }
 
+    public function todos()
+    {
+        return $this->usuarioModel->buscarTodos();
+    }
+
 }

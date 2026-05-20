@@ -14,7 +14,12 @@ class CursosController
         $cursos = $this->cursosModel->buscarum($id);
         return $cursos;
     }
-    public function todos($id)
+    public function todos()
+    {
+        $cursos = $this->cursosModel->buscarTodos();
+        return $cursos;
+    }
+    public function todosprof($id)
     {
         $cursos = $this->cursosModel->buscarcursos($id);
         return $cursos;

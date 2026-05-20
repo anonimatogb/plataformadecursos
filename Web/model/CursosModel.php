@@ -10,8 +10,9 @@ class CursosModel
 
     public function buscarTodos(): array
     {
-        $stmt = $this->pdo->query('SELECT * FROM cursos');
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $stmt = $this->pdo->query('SELECT * FROM cursos');
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+     
     }
     public function buscarcursos($id): array
     {

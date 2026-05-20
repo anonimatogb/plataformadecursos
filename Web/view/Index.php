@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $senha = $_POST['senha'];
     $resultado = $UsuarioController->login($email, $senha);
-    
+
     if ($resultado) {
         $_SESSION['cargo'] = $resultado['cargo'];
         $_SESSION['nome'] = $resultado['nome'];
@@ -18,6 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             exit();
         } elseif ($resultado['cargo'] === 'professor') {
             header("Location: professor.php");
+            exit();
+        } elseif ($resultado['cargo'] === 'admin') {
+            header("Location: admin.php");
             exit();
         } else {
             echo "Cargo desconhecido. Por favor, contate o suporte.";
