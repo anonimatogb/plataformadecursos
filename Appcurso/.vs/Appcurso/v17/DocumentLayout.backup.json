@@ -1,0 +1,132 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\User\\source\\repos\\Appcurso\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{58C86FF0-960D-485C-A6C5-649BC2D4A95E}|Appcurso\\Appcurso.csproj|c:\\users\\user\\source\\repos\\appcurso\\appcurso\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{58C86FF0-960D-485C-A6C5-649BC2D4A95E}|Appcurso\\Appcurso.csproj|solutionrelative:appcurso\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{58C86FF0-960D-485C-A6C5-649BC2D4A95E}|Appcurso\\Appcurso.csproj|c:\\users\\user\\source\\repos\\appcurso\\appcurso\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58C86FF0-960D-485C-A6C5-649BC2D4A95E}|Appcurso\\Appcurso.csproj|solutionrelative:appcurso\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{58C86FF0-960D-485C-A6C5-649BC2D4A95E}|Appcurso\\Appcurso.csproj|c:\\users\\user\\source\\repos\\appcurso\\appcurso\\database\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58C86FF0-960D-485C-A6C5-649BC2D4A95E}|Appcurso\\Appcurso.csproj|solutionrelative:appcurso\\database\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{58C86FF0-960D-485C-A6C5-649BC2D4A95E}|Appcurso\\Appcurso.csproj|c:\\users\\user\\source\\repos\\appcurso\\appcurso\\database\\conection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58C86FF0-960D-485C-A6C5-649BC2D4A95E}|Appcurso\\Appcurso.csproj|solutionrelative:appcurso\\database\\conection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{58C86FF0-960D-485C-A6C5-649BC2D4A95E}|Appcurso\\Appcurso.csproj|c:\\users\\user\\source\\repos\\appcurso\\appcurso\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{58C86FF0-960D-485C-A6C5-649BC2D4A95E}|Appcurso\\Appcurso.csproj|solutionrelative:appcurso\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{58C86FF0-960D-485C-A6C5-649BC2D4A95E}|Appcurso\\Appcurso.csproj|c:\\users\\user\\source\\repos\\appcurso\\appcurso\\appcurso.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{58C86FF0-960D-485C-A6C5-649BC2D4A95E}|Appcurso\\Appcurso.csproj|solutionrelative:appcurso\\appcurso.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 100,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\Appcurso\\Appcurso\\MainPage.xaml.cs",
+              "RelativeDocumentMoniker": "Appcurso\\MainPage.xaml.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\Appcurso\\Appcurso\\MainPage.xaml.cs",
+              "RelativeToolTip": "Appcurso\\MainPage.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T01:45:20.247Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainPage.xaml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\Appcurso\\Appcurso\\MainPage.xaml",
+              "RelativeDocumentMoniker": "Appcurso\\MainPage.xaml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\Appcurso\\Appcurso\\MainPage.xaml",
+              "RelativeToolTip": "Appcurso\\MainPage.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-05-14T22:08:56.542Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Appcurso.csproj",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\Appcurso\\Appcurso\\Appcurso.csproj",
+              "RelativeDocumentMoniker": "Appcurso\\Appcurso.csproj",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\Appcurso\\Appcurso\\Appcurso.csproj",
+              "RelativeToolTip": "Appcurso\\Appcurso.csproj",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAEQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-05-19T00:18:20.263Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "App.xaml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\Appcurso\\Appcurso\\App.xaml",
+              "RelativeDocumentMoniker": "Appcurso\\App.xaml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\Appcurso\\Appcurso\\App.xaml",
+              "RelativeToolTip": "Appcurso\\App.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-05-19T00:09:17.215Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "conection.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\Appcurso\\Appcurso\\Database\\conection.cs",
+              "RelativeDocumentMoniker": "Appcurso\\Database\\conection.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\Appcurso\\Appcurso\\Database\\conection.cs",
+              "RelativeToolTip": "Appcurso\\Database\\conection.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T01:55:35.933Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "service.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\Appcurso\\Appcurso\\Database\\service.cs",
+              "RelativeDocumentMoniker": "Appcurso\\Database\\service.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\Appcurso\\Appcurso\\Database\\service.cs",
+              "RelativeToolTip": "Appcurso\\Database\\service.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T01:57:58.896Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
