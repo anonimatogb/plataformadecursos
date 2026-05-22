@@ -7,16 +7,32 @@
 
     <VerticalStackLayout Padding="30">
 
-        <Entry x:Name="txt_email" Placeholder="Email"/>
+        <Entry x:Name="txt_email"
+               Placeholder="Email"
+               TextChanged="Campos_TextChanged"/>
 
         <Entry
             x:Name="txt_senha"
             Placeholder="Senha"
-            IsPassword="True"/>
+            IsPassword="True"
+            TextChanged="Campos_TextChanged"/>
         <Button
             Text="Entrar"
             Clicked="Button_Clicked"/>
+        <Label
+            x:Name="resultado"
+            Text="Email ou Senha incorretos"
+            FontSize="20"
+            TextColor="Red"/>
+        <Label
+            x:Name="criarcontalink"
+            Text="Não tem uma conta? Faça seu cadastro">
+
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="IrParaCadastro"/>
+            </Label.GestureRecognizers>
+
+        </Label>
 
     </VerticalStackLayout>
-
 </ContentPage>

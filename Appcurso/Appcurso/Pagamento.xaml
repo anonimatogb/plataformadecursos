@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Appcurso.Pagamento"
+             Title="Pagamento">
+    <VerticalStackLayout>
+        <Label 
+            Text="Plano Plus"
+             />
+        <Label 
+            Text="Para aproveitar toda a experiência da plataforma, a ativação do nosso Plano Plus é essencial! 🚀
+Com ele, você desbloqueia acesso completo a todos os cursos, conteúdos exclusivos e acompanhamento com diversos professores preparados para te auxiliar na sua jornada de aprendizado.
+
+Ao assinar o Plano Plus, você terá mais suporte, acesso a materiais atualizados, conteúdos organizados para acelerar sua evolução e a liberdade de aprender no seu ritmo, sem limitações. Além disso, você poderá tirar dúvidas, aprofundar seus conhecimentos e desenvolver habilidades de forma muito mais prática e eficiente.
+
+Invista no seu aprendizado e tenha acesso à melhor experiência que a plataforma pode oferecer com o Plano Plus! ✨"
+            
+             />
+        <Label 
+    Text="Valor: R$ 55,00/mês"
+    TextColor="Red"
+    TextDecorations="Strikethrough"
+     />
+        <Label 
+            Text="Valor: R$ 55,00/mês"
+            FontSize="40"
+             />
+        <Label
+            Text="Nome no Cartão"
+            />
+        
+        <Entry
+             x:Name="nomenocartao"
+             />
+        <Label
+       Text="Numero do Cartão"
+       />
+        <Label
+        Text="Atenção o cartão deve ser de credito com limite disponível para compra! Não fazemos remboolso de assinaturas*"
+            TextColor="Red"
+            FontSize="Small"
+        />
+        <Entry
+        x:Name="numerocartao"
+        />
+        <Label
+        Text="Data Validade"
+        />
+        <Entry
+        x:Name="datavalidade"
+        />
+        <Label
+        Text="CVV"
+        />
+        <Entry
+        x:Name="cvv"
+        />
+        <Button
+            Text="Assinar"
+            Clicked="PagamentoButton_Clicked"/>
+
+
+    </VerticalStackLayout>
+</ContentPage>
