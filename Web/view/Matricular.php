@@ -28,14 +28,15 @@ $professor_id=$_GET['professor_id'];
 $resultado = $matriculaController->matricular($aluno_id, $cursos_id, $professor_id);
 
 if ($resultado) {
-     echo "<script>
-    alert('Matricula Realizada com Sucesso!');
-    </script>";
-   
-    header("Location: PaginaInicial.php");
+
+    header("Location: detalhes.php?curso_id=" . $_GET['curso_id'] . "&professor_id=" . $_GET['professor_id']);
     exit;
 } else {
-    echo "Erro ao realizar matrícula. Por favor, tente novamente.";
+    echo "<script>
+    alert('ERRO ao realizar matrícula!');
+    </script>";
+    header("Location: PaginaInicial.php");
+    exit;
 }
 
 }catch(Exception $e){

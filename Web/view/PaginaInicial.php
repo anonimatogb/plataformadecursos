@@ -28,28 +28,27 @@ $sei = $matriculaController->confe($_SESSION['id']);
 </head>
 
 <body>
+    <nav>
+        <h1>Lunex</h1>
+        <a href="paginainicial.php">Início</a>
+        <a href="meus.php">Meus cursos</a>
+        <p><?php echo $_SESSION['nome']; ?></p>
+        <a href="logout.php">Sair</a>
+    </nav>
     <h1>Bem-vindo, <?php echo $_SESSION['nome']; ?>!</h1>
     <p>Esta é a página inicial para alunos.</p>
-    <a href="logout.php">Sair</a>
+    
 
     <h2>Cursos:</h2>
     <ul>
         <?php foreach ($cursos as $curso) : ?>
             <li>
                 <strong><?php echo $curso['nome']; ?></strong><br>
-             <?php
-if (in_array($curso['id'], array_column($sei, 'cursos_id'))) {
-    echo "<em>Matriculado</em>";
-} else {
-    echo "<a href='Matricular.php?curso_id=" . $curso['id'] . "&professor_id=" . $curso['professor'] . "'>Matricular-se</a>";
-}
-
-
-?>
+                <?php echo $curso['descricao']; ?><br>
+                <a href="detalhes.php?curso_id=<?php echo $curso['id']; ?>&professor_id=<?php echo $curso['professor']; ?>">Detalhes</a>
             </li>
         <?php endforeach; ?>
-
-      
+  
 
     </ul>
 

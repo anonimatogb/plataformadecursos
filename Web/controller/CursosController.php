@@ -25,6 +25,12 @@ class CursosController
         return $cursos;
     }
 
+    public function tra($id)
+    {
+        $cursos = $this->cursosModel->tra($id);
+        return $cursos;
+    }
+
     public function cadastrar($nome, $descricao, $carga_horaria, $professor)
     {
         return $this->cursosModel->cadastrarcursos($nome, $descricao, $carga_horaria, $professor);
@@ -40,4 +46,9 @@ class CursosController
         return $this->cursosModel->deletar($id);
     }
 
+    public function todosaluno($id)
+    {
+        return $this->cursosModel->todosaluno($id);
+    }
 }
+

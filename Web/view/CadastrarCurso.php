@@ -16,13 +16,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $descricao = $_POST['descricao'];
     $carga_horaria = $_POST['carga_horaria'];
     $professor = $_SESSION['id'];
+    $cursos_id = $_SESSION['cursos_id_modulo'];
 
     $resultado = $CursosController->cadastrar($nome, $descricao, $carga_horaria, $professor);
     
     if ($resultado === "ERRO") {
         echo "Erro ao cadastrar curso. Por favor, tente novamente.";
     } else {
-        header("Location: professor.php");
+        header("Location: CadastroModulo.php");
         exit();
     }
 } ?>
