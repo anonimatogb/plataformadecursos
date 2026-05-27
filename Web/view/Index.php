@@ -33,18 +33,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="../CSS/style2.css">
 </head>
 
 <body>
 
-    <form method="post">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br><br>
+    <form method="post" class="card-form">
+        <div class="logo">
+    <img src="../IMG/logo-sem-fundo.png" alt="Logo Lunex">
+</div>
 
-        <label for="senha">Senha:</label>
-        <input type="password" id="senha" name="senha" required><br><br>
+        <label for="email">Email:</label class="input-text">
+        <input type="email" id="email" name="email" required>
+        <label for="senha">Senha:</label class="input-text">
+        <input type="password" id="senha" name="senha" required>
 
-        <input type="submit" value="Login">
+        <input type="submit" value="Login" class="btn-primary">
         <a href="CadastrarUsuario.php">Não tem uma conta? Cadastre-se aqui.</a>
 </body>
 
