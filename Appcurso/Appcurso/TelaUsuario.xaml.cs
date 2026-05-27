@@ -5,8 +5,9 @@ namespace Appcurso;
 
 public partial class TelaUsuario : ContentPage
 {
-    public class UsuarioLista
+    public class CursoLista
     {
+        public int Id { get; set; }
         public string Nome { get; set; }
 
         public string Foto { get; set; }
@@ -14,7 +15,7 @@ public partial class TelaUsuario : ContentPage
     }
     public TelaUsuario()
 	{
-		InitializeComponent();
+		InitializeComponent(); 
 		var nome = "";
         var emailuser = MainPage.EmailLog;
 		var nomelog = new Database.Service().NomeUsuario(emailuser);
@@ -31,28 +32,10 @@ public partial class TelaUsuario : ContentPage
 		
 		BemVindo.Text = $"Bem vindo " + nome;
         listaUsuarios.ItemsSource =
-        new List<UsuarioLista>()
-        {
-            new UsuarioLista
-            {
-                Nome = "Php",
-                Foto = "php2.png"
-            },
+new Database.Service()
+    .BuscarCursos();
 
-            new UsuarioLista
-            {
-                Nome = "Css",
-                Foto = "css.png"
-            },
-
-            new UsuarioLista
-            {
-                Nome = "Html",
-                Foto = "html.png"
-            }
-        };
-
-}
+    }
     private async void AbrirPagina(
     object sender,
     SelectionChangedEventArgs e)

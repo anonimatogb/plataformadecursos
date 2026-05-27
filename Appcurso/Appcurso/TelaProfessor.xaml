@@ -6,5 +6,38 @@
     <VerticalStackLayout>
         <Label 
     x:Name="bemvindo"/>
+        <Label
+            Text="Seus cursos"/>
+        <CollectionView
+    x:Name="listacursosprof"
+    SelectionChanged="AbrirPagina"
+    SelectionMode="Single">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+
+                    <Grid Padding="10">
+
+                        <HorizontalStackLayout Spacing="15">
+
+                            <Image
+                        Source="{Binding Foto}"
+                        WidthRequest="60"
+                        HeightRequest="60" />
+
+                            <Label
+                        Text="{Binding Nome}"
+                        FontSize="20"
+                        VerticalOptions="Center" />
+
+                        </HorizontalStackLayout>
+
+                    </Grid>
+
+                </DataTemplate>
+
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
     </VerticalStackLayout>
 </ContentPage>

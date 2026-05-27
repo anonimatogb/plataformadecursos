@@ -4,6 +4,27 @@
              x:Class="Appcurso.Detalhes"
              Title="Detalhes">
     <VerticalStackLayout>
+        <Button Text="Voltar" Clicked="Voltar_Clicked"/>
+        <Label
+        x:Name="sair"
+        Text="Sair"
+        TextColor="Red"
+        TextDecorations="Strikethrough"
+        >
+
+
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer
+            Tapped="Deslogar" />
+            </Label.GestureRecognizers>
+
+        </Label>
+        
+        <Image
+            x:Name="FotoCurso"
+            WidthRequest="200"
+            HeightRequest="200"
+            HorizontalOptions="Center" />
         <Label x:Name="NomeCurso"/>
         <Label x:Name="DescricaoCurso"/>
         <Label x:Name="Professor"/>
@@ -41,6 +62,7 @@
             </CollectionView.ItemTemplate>
 
         </CollectionView>
+        <Button Text="Matricular-se" Clicked="Matricular_Clicked"/>
 
     </VerticalStackLayout>
 </ContentPage>
