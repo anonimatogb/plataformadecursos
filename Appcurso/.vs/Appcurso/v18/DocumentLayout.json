@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\Turma 2\\source\\repos\\plataformadecursos\\Appcurso\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{58C86FF0-960D-485C-A6C5-649BC2D4A95E}|Appcurso\\Appcurso.csproj|c:\\users\\turma 2\\source\\repos\\plataformadecursos\\appcurso\\appcurso\\database\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58C86FF0-960D-485C-A6C5-649BC2D4A95E}|Appcurso\\Appcurso.csproj|solutionrelative:appcurso\\database\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{58C86FF0-960D-485C-A6C5-649BC2D4A95E}|Appcurso\\Appcurso.csproj|c:\\users\\turma 2\\source\\repos\\plataformadecursos\\appcurso\\appcurso\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{58C86FF0-960D-485C-A6C5-649BC2D4A95E}|Appcurso\\Appcurso.csproj|solutionrelative:appcurso\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
@@ -17,10 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{58C86FF0-960D-485C-A6C5-649BC2D4A95E}|Appcurso\\Appcurso.csproj|c:\\users\\turma 2\\source\\repos\\plataformadecursos\\appcurso\\appcurso\\telausuario.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{58C86FF0-960D-485C-A6C5-649BC2D4A95E}|Appcurso\\Appcurso.csproj|solutionrelative:appcurso\\telausuario.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{58C86FF0-960D-485C-A6C5-649BC2D4A95E}|Appcurso\\Appcurso.csproj|c:\\users\\turma 2\\source\\repos\\plataformadecursos\\appcurso\\appcurso\\database\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{58C86FF0-960D-485C-A6C5-649BC2D4A95E}|Appcurso\\Appcurso.csproj|solutionrelative:appcurso\\database\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{58C86FF0-960D-485C-A6C5-649BC2D4A95E}|Appcurso\\Appcurso.csproj|c:\\users\\turma 2\\source\\repos\\plataformadecursos\\appcurso\\appcurso\\appcurso.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
@@ -93,7 +93,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -101,20 +101,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": ".gitignore",
-              "DocumentMoniker": "C:\\Users\\Turma 2\\source\\repos\\plataformadecursos\\Appcurso\\Appcurso\\.gitignore",
-              "RelativeDocumentMoniker": "Appcurso\\.gitignore",
-              "ToolTip": "C:\\Users\\Turma 2\\source\\repos\\plataformadecursos\\Appcurso\\Appcurso\\.gitignore",
-              "RelativeToolTip": "Appcurso\\.gitignore",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-05-22T17:46:45.676Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": ".gitignore",
               "DocumentMoniker": "C:\\Users\\Turma 2\\source\\repos\\plataformadecursos\\Appcurso\\Appcurso\\.gitignore",
               "RelativeDocumentMoniker": "Appcurso\\.gitignore",
@@ -138,7 +125,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "TelaUsuario.xaml",
               "DocumentMoniker": "C:\\Users\\Turma 2\\source\\repos\\plataformadecursos\\Appcurso\\Appcurso\\TelaUsuario.xaml",
               "RelativeDocumentMoniker": "Appcurso\\TelaUsuario.xaml",
@@ -186,7 +173,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "TelaUsuario.xaml.cs",
               "DocumentMoniker": "C:\\Users\\Turma 2\\source\\repos\\plataformadecursos\\Appcurso\\Appcurso\\TelaUsuario.xaml.cs",
               "RelativeDocumentMoniker": "Appcurso\\TelaUsuario.xaml.cs",
@@ -195,6 +182,31 @@
               "ViewState": "AgIAAAcAAAAAAAAAAAA1wDsAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-20T18:33:53.412Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "service.cs",
+              "DocumentMoniker": "C:\\Users\\Turma 2\\source\\repos\\plataformadecursos\\Appcurso\\Appcurso\\Database\\service.cs",
+              "RelativeDocumentMoniker": "Appcurso\\Database\\service.cs",
+              "ToolTip": "C:\\Users\\Turma 2\\source\\repos\\plataformadecursos\\Appcurso\\Appcurso\\Database\\service.cs",
+              "RelativeToolTip": "Appcurso\\Database\\service.cs",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAwwFoAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-20T14:11:59.403Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\Users\\Turma 2\\source\\repos\\plataformadecursos\\Appcurso\\Appcurso\\.gitignore",
+              "RelativeDocumentMoniker": "Appcurso\\.gitignore",
+              "ToolTip": "C:\\Users\\Turma 2\\source\\repos\\plataformadecursos\\Appcurso\\Appcurso\\.gitignore",
+              "RelativeToolTip": "Appcurso\\.gitignore",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-05-22T17:46:45.676Z"
             },
             {
               "$type": "Document",
@@ -207,18 +219,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-22T11:27:20.919Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "service.cs",
-              "DocumentMoniker": "C:\\Users\\Turma 2\\source\\repos\\plataformadecursos\\Appcurso\\Appcurso\\Database\\service.cs",
-              "RelativeDocumentMoniker": "Appcurso\\Database\\service.cs",
-              "ToolTip": "C:\\Users\\Turma 2\\source\\repos\\plataformadecursos\\Appcurso\\Appcurso\\Database\\service.cs",
-              "RelativeToolTip": "Appcurso\\Database\\service.cs",
-              "ViewState": "AgIAADMAAAAAAAAAAAAqwD4AAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-20T14:11:59.403Z"
             },
             {
               "$type": "Document",
