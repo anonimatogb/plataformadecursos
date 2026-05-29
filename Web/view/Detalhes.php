@@ -40,6 +40,7 @@ $quantidade=1;
     <div>
         <a href="paginainicial.php">Voltar</a>
         <h2><?php echo $curso['nome']; ?></h2>
+        <img src="../<?php echo $curso['fotocapa']; ?>" alt="<?php echo $curso['nome']; ?>" width="100">
         <!-- <><?php echo $quantidade ?></h4> -->
         <h4><?php echo $curso['professor_nome'] ?></h4>
 

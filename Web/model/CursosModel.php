@@ -63,17 +63,17 @@ class CursosModel
 
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
-    public function cadastrarcursos($nome, $descricao, $carga_horaria, $professor)
+    public function cadastrarcursos($nome, $descricao, $carga_horaria, $professor, $fotocapaPath)
     {
         try {
-
-            $sql = "INSERT INTO cursos (nome, descricao, carga_horaria, professor) VALUES (:nome, :descricao, :carga_horaria, :professor)";
+            $sql = "INSERT INTO cursos (nome, descricao, carga_horaria, professor, fotocapa) VALUES (:nome, :descricao, :carga_horaria, :professor, :fotocapa)";
             $stmt = $this->pdo->prepare($sql);
             return $stmt->execute([
                 ':nome' => $nome,
                 ':descricao' => $descricao,
                 ':carga_horaria' => $carga_horaria,
-                ':professor' => $professor
+                ':professor' => $professor,
+                ':fotocapa' => $fotocapaPath
             ]);
         } catch (PDOException $e) {
             if ($e->getCode() == 23000) {
@@ -83,8 +83,35 @@ class CursosModel
         }
     }
 
-    public function atualizar($id, $nome, $descricao, $carga_horaria)
+    public function buscarFotocapaPorId($id): ?string
     {
+        $stmt = $this->pdo->prepare("SELECT fotocapa FROM cursos WHERE id = :id");
+        $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row ? $row['fotocapa'] : null;
+    }
+
+    public function atualizar($id, $nome, $descricao, $carga_horaria, $fotocapaPath = null)
+    {
+        if ($fotocapaPath !== null && $fotocapaPath !== '') {
+            $sql = "UPDATE cursos 
+                SET nome = :nome,
+                    descricao = :descricao,
+                    carga_horaria = :carga_horaria,
+                    fotocapa = :fotocapa
+                WHERE id = :id";
+
+            $stmt = $this->pdo->prepare($sql);
+            return $stmt->execute([
+                ':id' => $id,
+                ':nome' => $nome,
+                ':descricao' => $descricao,
+                ':carga_horaria' => $carga_horaria,
+                ':fotocapa' => $fotocapaPath
+            ]);
+        }
+
         $sql = "UPDATE cursos 
             SET nome = :nome,
                 descricao = :descricao,
@@ -100,10 +127,40 @@ class CursosModel
             ':carga_horaria' => $carga_horaria
         ]);
     }
+
+    private function removerArquivoPorCaminho($path): void
+    {
+        if (!$path) {
+            return;
+        }
+
+        $baseDir = __DIR__ . '/../uploads/';
+        $fullPath = realpath($baseDir . $path);
+
+        // Se realpath falhar (arquivo não existe), ainda assim checamos o caminho relativo simples.
+        if ($fullPath === false) {
+            $candidate = $baseDir . $path;
+            if (is_file($candidate)) {
+                @unlink($candidate);
+            }
+            return;
+        }
+
+        if (is_file($fullPath)) {
+            @unlink($fullPath);
+        }
+    }
+
     public function deletar($id)
     {
+        // tenta remover a capa antiga antes de deletar do banco
+        $fotocapa = $this->buscarFotocapaPorId($id);
+        $this->removerArquivoPorCaminho($fotocapa);
+
         $sql = "DELETE FROM cursos WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([':id' => $id]);
+
+        
     }
 }

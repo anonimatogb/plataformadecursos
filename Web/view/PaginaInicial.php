@@ -43,6 +43,7 @@ $sei = $matriculaController->confe($_SESSION['id']);
     <ul>
         <?php foreach ($cursos as $curso) : ?>
             <li>
+                <img src="../<?php echo $curso['fotocapa']; ?>" alt="<?php echo $curso['nome']; ?>" width="100">
                 <strong><?php echo $curso['nome']; ?></strong><br>
                 <?php echo $curso['descricao']; ?><br>
                 <a href="detalhes.php?curso_id=<?php echo $curso['id']; ?>&professor_id=<?php echo $curso['professor']; ?>">Detalhes</a>
