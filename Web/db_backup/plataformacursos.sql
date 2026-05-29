@@ -39,9 +39,7 @@ CREATE TABLE `cursos` (
 -- Despejando dados para a tabela `cursos`
 --
 
-INSERT INTO `cursos` (`id`, `nome`, `descricao`, `professor`, `carga_horaria`) VALUES
-(1, 'PHP do melhor', '', 0, 67),
-(2, 'JAVA com café', '', 0, 110);
+
 
 -- --------------------------------------------------------
 
@@ -75,11 +73,6 @@ CREATE TABLE `usuarios` (
 -- Despejando dados para a tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `cargo`) VALUES
-(1, 'Gabriel Machado Cavalcante', 'gabrielcavalcante22@outlook.com', '', ''),
-(2, 'Pedro Borborema Comino', 'pedro@senai.com', '', ''),
-(3, 'Vitor Cardoso', 'vitor@senai.com', '', ''),
-(4, 'Miguel Cardozo Alves', 'miguel@senai.com', '', '');
 
 --
 -- Índices para tabelas despejadas
@@ -144,3 +137,15 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+CREATE TABLE IF NOT EXISTS `modulo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(255) NOT NULL,
+  `cursos_id` int(11) NOT NULL,
+  `video` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_modulo_cursos` (`cursos_id`),
+  CONSTRAINT `fk_modulo_cursos`
+    FOREIGN KEY (`cursos_id`) REFERENCES `cursos` (`id`)
+    ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
