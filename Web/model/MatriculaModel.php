@@ -75,4 +75,17 @@ INNER JOIN cursos
             throw $e;
         }
     }
+
+    public function concluirCurso(int $matriculaId): bool
+    {
+        try {
+            $sql = "UPDATE matriculas SET concluido = 1 WHERE id = :id";
+            $stmt = $this->pdo->prepare($sql);
+            return $stmt->execute([':id' => $matriculaId]);
+        } catch (PDOException $e) {
+            error_log("Erro ao concluir curso: " . $e->getMessage());
+            return false;
+        }
+    }
 }
+

@@ -17,6 +17,7 @@ $moduloController = new ModuloController($pdo);
 $modulos = $moduloController->porcurso($cursoId);
 $moduloAtual = $modulos[$mod] ?? null;
 
+$matriculaController = new MatriculaController($pdo);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,27 +38,36 @@ $moduloAtual = $modulos[$mod] ?? null;
     </nav>
 
     <main>
-        <?php if ($moduloAtual === null): ?>
+        <?php if ($moduloAtual === null): 
+            // Ao concluir (quando não há mais módulos), marca matricula.concluido = 1
+            $matr = $matriculaController->confe((int)($_SESSION['id'] ?? 0));
+            foreach ($matr as $m) {
+                if ((int)($m['cursos_id'] ?? 0) === (int)$cursoId) {
+                    $matriculaController->concluirCurso((int)($m['id'] ?? 0));
+                    break;
+                }
+            }
+        ?>
             <h2>Curso concluído</h2>
             <p>Você finalizou todos os módulos deste curso.</p>
             <a href="meus.php">Voltar para meus cursos</a>
-                
         <?php else: ?>
             <h2><?php echo htmlspecialchars($moduloAtual['titulo'] ?? '', ENT_QUOTES, 'UTF-8'); ?></h2>
 
-            <video controls width="640" src="<?php echo htmlspecialchars($moduloAtual['video'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"></video>
+            <video controls width="640" src="../<?php echo htmlspecialchars($moduloAtual['video'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"></video>
 
             <div style="margin-top: 16px;">
                 <?php if ($mod > 0): ?>
-                <a href="continuar.php?id=<?php echo (int)$cursoId; ?>&mod=<?php echo (int)($mod - 1); ?>">
-                    <button type="button">Voltar</button>
-                </a>
+                    <a href="continuar.php?id=<?php echo (int)$cursoId; ?>&mod=<?php echo (int)($mod - 1); ?>">
+                        <button type="button">Voltar</button>
+                    </a>
                 <a href="continuar.php?id=<?php echo (int)$cursoId; ?>&mod=<?php echo (int)($mod + 1); ?>">
                     <button type="button">Continuar</button>
                 </a>
                 <?php else: ?>
                 <a href="continuar.php?id=<?php echo (int)$cursoId; ?>&mod=<?php echo (int)($mod + 1); ?>">
                     <button type="button">Continuar</button>
+                </a>
             </div>
         <?php endif; ?>
         <?php endif; ?>
