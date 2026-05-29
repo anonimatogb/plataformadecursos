@@ -42,7 +42,7 @@ $quantidade=1;
         <h2><?php echo $curso['nome']; ?></h2>
         <img src="../<?php echo $curso['fotocapa']; ?>" alt="<?php echo $curso['nome']; ?>" width="100">
         <!-- <><?php echo $quantidade ?></h4> -->
-        <h4><?php echo $curso['professor_nome'] ?></h4>
+        <h4>Professor: <?php echo $curso['professor_nome'] ?></h4>
 
             <h3>Descriçao do Curso</h3>
             <p><?php echo $curso['descricao']; ?></p>

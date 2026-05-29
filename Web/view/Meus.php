@@ -30,7 +30,8 @@ $cursos = $cursosController->todosaluno($_SESSION['id']);
     <ul>
         <?php foreach ($cursos as $curso): ?>
             <li>
-                <?php echo $curso['nome'] . " | " . $curso['descricao'] . " | " . $curso['carga_horaria'] . " horas"; ?>
+                 <img src="../<?php echo $curso['fotocapa']; ?>" alt="<?php echo $curso['nome']; ?>" width="100">
+                <?php echo $curso['nome'] . " | " . $curso['descricao'] . " | " . ($curso['concluido'] == 0 ? "Em andamento" : "Concluído") . " |  <a href='continuar.php?id=" . $curso['id'] . "'>Continuar</a>"  ; ?>
             </li>
         <?php endforeach; 
         if (empty($cursos)) {

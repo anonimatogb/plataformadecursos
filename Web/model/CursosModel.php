@@ -18,14 +18,17 @@ class CursosModel
     public function todosaluno($alunoId): array
     {
         $sql = "SELECT
+        matriculas.concluido AS concluido,
             cursos.id,
             cursos.nome,
             cursos.descricao,
-            cursos.carga_horaria
+            cursos.carga_horaria,
+            cursos.fotocapa
         FROM matriculas
         INNER JOIN cursos
             ON matriculas.cursos_id = cursos.id
-        WHERE matriculas.aluno_id = :aluno_id";
+        WHERE matriculas.aluno_id = :aluno_id"
+        ;
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(':aluno_id', (int)$alunoId, PDO::PARAM_INT);
@@ -161,6 +164,6 @@ class CursosModel
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([':id' => $id]);
 
-        
+
     }
 }
