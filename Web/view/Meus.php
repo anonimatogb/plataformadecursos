@@ -27,6 +27,7 @@ $cursos = $cursosController->todosaluno($_SESSION['id']);
 
     <h1>Meus Cursos</h1>
     <a href="PaginaInicial.php">Voltar para a Página Inicial</a>
+    <a href="logout.php">Sair</a>
     <ul>
         <?php foreach ($cursos as $curso): ?>
             <li>

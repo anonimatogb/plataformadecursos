@@ -4,6 +4,7 @@ class ModuloModel
     private $pdo;
 
     public function __construct(PDO $pdo)
+
     {
         $this->pdo = $pdo;
     }
@@ -53,5 +54,23 @@ class ModuloModel
         }
 
     }
+
+    public function porcurso(int $cursoId): array
+    {
+        try {
+            $sql = "SELECT *
+                    FROM modulo
+                    WHERE cursos_id = :cursoId
+                    ORDER BY id ASC";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindValue(':cursoId', $cursoId, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Erro ao buscar módulos do curso: " . $e->getMessage());
+            return [];
+        }
+    }
 }
+
 

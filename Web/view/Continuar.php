@@ -4,12 +4,18 @@ require_once "../db/database.php";
 require_once "../Controller/CursosController.php";
 require_once "../Controller/MatriculaController.php";
 require_once "../Controller/moduloController.php";
+require_once "../Controller/ModuloController.php";
 if (!isset($_SESSION['nome']) || $_SESSION['cargo'] !== 'aluno') {
     header('Location: Index.php');
     exit();
 }
 
-var_dump($_GET['id']);
+$cursoId = (int)($_GET['id'] ?? 0);
+$mod = (int)($_GET['mod'] ?? 0);
+
+$moduloController = new ModuloController($pdo);
+$modulos = $moduloController->porcurso($cursoId);
+$moduloAtual = $modulos[$mod] ?? null;
 
 ?>
 <!DOCTYPE html>
@@ -22,12 +28,40 @@ var_dump($_GET['id']);
 </head>
 
 <body>
+    <nav>
+        <h1>Lunex</h1>
+        <a href="paginainicial.php">Início</a>
+        <a href="meus.php">Meus cursos</a>
+        <p><?php echo htmlspecialchars($_SESSION['nome'] ?? '', ENT_QUOTES, 'UTF-8'); ?></p>
+        <a href="logout.php">Sair</a>
+    </nav>
 
+    <main>
+        <?php if ($moduloAtual === null): ?>
+            <h2>Curso concluído</h2>
+            <p>Você finalizou todos os módulos deste curso.</p>
+            <a href="meus.php">Voltar para meus cursos</a>
+                
+        <?php else: ?>
+            <h2><?php echo htmlspecialchars($moduloAtual['titulo'] ?? '', ENT_QUOTES, 'UTF-8'); ?></h2>
 
+            <video controls width="640" src="<?php echo htmlspecialchars($moduloAtual['video'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"></video>
 
-
-
-
+            <div style="margin-top: 16px;">
+                <?php if ($mod > 0): ?>
+                <a href="continuar.php?id=<?php echo (int)$cursoId; ?>&mod=<?php echo (int)($mod - 1); ?>">
+                    <button type="button">Voltar</button>
+                </a>
+                <a href="continuar.php?id=<?php echo (int)$cursoId; ?>&mod=<?php echo (int)($mod + 1); ?>">
+                    <button type="button">Continuar</button>
+                </a>
+                <?php else: ?>
+                <a href="continuar.php?id=<?php echo (int)$cursoId; ?>&mod=<?php echo (int)($mod + 1); ?>">
+                    <button type="button">Continuar</button>
+            </div>
+        <?php endif; ?>
+        <?php endif; ?>
+    </main>
 </body>
 
 </html>
