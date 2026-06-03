@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 22/05/2026 às 12:38
+-- Tempo de geração: 03/06/2026 às 12:36
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -30,16 +30,12 @@ SET time_zone = "+00:00";
 CREATE TABLE `cursos` (
   `id` int(11) NOT NULL,
   `nome` varchar(255) NOT NULL,
+  `fotocapa` varchar(255) NOT NULL,
   `descricao` varchar(255) NOT NULL,
   `professor` int(11) NOT NULL,
-  `carga_horaria` int(11) NOT NULL
+  `carga_horaria` int(11) NOT NULL,
+  `certificado` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Despejando dados para a tabela `cursos`
---
-
-
 
 -- --------------------------------------------------------
 
@@ -52,8 +48,23 @@ CREATE TABLE `matriculas` (
   `aluno_id` int(11) NOT NULL,
   `cursos_id` int(11) NOT NULL,
   `professor_id` int(11) NOT NULL,
-  `data_matricula` date NOT NULL
+  `data_matricula` date NOT NULL,
+  `concluido` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `modulo`
+--
+
+CREATE TABLE `modulo` (
+  `id` int(11) NOT NULL,
+  `titulo` varchar(255) NOT NULL,
+  `cursos_id` int(11) NOT NULL,
+  `video` varchar(255) NOT NULL,
+  `professor` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -73,6 +84,10 @@ CREATE TABLE `usuarios` (
 -- Despejando dados para a tabela `usuarios`
 --
 
+INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `cargo`) VALUES
+(5, 'Gabriel Machado Cavalcante', 'gabrielcavalcante22@outlook.com', '123', 'professor'),
+(6, 'Vinicius Zucolin', 'vinicius@gmail', '123', 'aluno'),
+(7, 'Dhiogo', 'dhiogo@gmail', '123', 'aluno');
 
 --
 -- Índices para tabelas despejadas
@@ -94,6 +109,14 @@ ALTER TABLE `matriculas`
   ADD KEY `fk_cursos_matricula` (`cursos_id`);
 
 --
+-- Índices de tabela `modulo`
+--
+ALTER TABLE `modulo`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_modulo_cursos` (`cursos_id`),
+  ADD KEY `fk_professor_modulo` (`professor`);
+
+--
 -- Índices de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -107,19 +130,25 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `cursos`
 --
 ALTER TABLE `cursos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `matriculas`
 --
 ALTER TABLE `matriculas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+
+--
+-- AUTO_INCREMENT de tabela `modulo`
+--
+ALTER TABLE `modulo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restrições para tabelas despejadas
@@ -132,20 +161,15 @@ ALTER TABLE `matriculas`
   ADD CONSTRAINT `fk_aluno_matricula` FOREIGN KEY (`aluno_id`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_cursos_matricula` FOREIGN KEY (`cursos_id`) REFERENCES `cursos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_professor_matricula` FOREIGN KEY (`professor_id`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Restrições para tabelas `modulo`
+--
+ALTER TABLE `modulo`
+  ADD CONSTRAINT `fk_modulo_cursos` FOREIGN KEY (`cursos_id`) REFERENCES `cursos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_professor_modulo` FOREIGN KEY (`professor`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-CREATE TABLE IF NOT EXISTS `modulo` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `titulo` varchar(255) NOT NULL,
-  `cursos_id` int(11) NOT NULL,
-  `video` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_modulo_cursos` (`cursos_id`),
-  CONSTRAINT `fk_modulo_cursos`
-    FOREIGN KEY (`cursos_id`) REFERENCES `cursos` (`id`)
-    ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
