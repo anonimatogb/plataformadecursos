@@ -14,6 +14,7 @@ $cursos = $cursosController->buscarum($_GET['id_curso']);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fotocapaPath = null;
+    $certificadoPath = null;
 
     if (!empty($_FILES['fotocapa']['name'])) {
         $erro = $_FILES['fotocapa']['error'] ?? UPLOAD_ERR_NO_FILE;
@@ -34,12 +35,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
+    if (!empty($_FILES['certificado']['name'])) {
+        $erro = $_FILES['certificado']['error'] ?? UPLOAD_ERR_NO_FILE;
+        if ($erro === UPLOAD_ERR_OK) {
+            $ext = pathinfo($_FILES['certificado']['name'], PATHINFO_EXTENSION);
+            $nomeArquivo = uniqid('cert_', true) . ($ext ? '.' . $ext : '');
+
+            $destDir = __DIR__ . '/../uploads/certificados/';
+            if (!is_dir($destDir)) {
+                mkdir($destDir, 0777, true);
+            }
+
+            $destFullPath = $destDir . $nomeArquivo;
+
+            if (move_uploaded_file($_FILES['certificado']['tmp_name'], $destFullPath)) {
+                $certificadoPath = 'uploads/certificados/' . $nomeArquivo;
+            }
+        }
+    }
+
     $cursos = $cursosController->atualizar(
         $_GET['id_curso'],
         $_POST['nome'],
         $_POST['descricao'],
         $_POST['carga_horaria'],
-        $fotocapaPath
+        $fotocapaPath,
+        $certificadoPath
     );
 }
 if(!isset($_GET['id_curso'])){
@@ -69,6 +90,9 @@ if(!isset($_GET['id_curso'])){
 
     <label for="fotocapa">Trocar Foto Capa do Curso (opcional):</label>
     <input type="file" id="fotocapa" name="fotocapa" accept="image/*"><br><br>
+
+    <label for="certificado">Trocar Certificado do Curso (opcional):</label>
+    <input type="file" id="certificado" name="certificado" accept="image/*"><br><br>
 
     <button type="submit">Atualizar</button>
     <a href="professor.php">Voltar</a>

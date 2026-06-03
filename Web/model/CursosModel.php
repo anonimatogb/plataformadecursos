@@ -66,17 +66,18 @@ class CursosModel
 
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
-    public function cadastrarcursos($nome, $descricao, $carga_horaria, $professor, $fotocapaPath)
+    public function cadastrarcursos($nome, $descricao, $carga_horaria, $professor, $fotocapaPath, $certificadoPath = null)
     {
         try {
-            $sql = "INSERT INTO cursos (nome, descricao, carga_horaria, professor, fotocapa) VALUES (:nome, :descricao, :carga_horaria, :professor, :fotocapa)";
+            $sql = "INSERT INTO cursos (nome, descricao, carga_horaria, professor, fotocapa, certificado) VALUES (:nome, :descricao, :carga_horaria, :professor, :fotocapa, :certificado)";
             $stmt = $this->pdo->prepare($sql);
             return $stmt->execute([
                 ':nome' => $nome,
                 ':descricao' => $descricao,
                 ':carga_horaria' => $carga_horaria,
                 ':professor' => $professor,
-                ':fotocapa' => $fotocapaPath
+                ':fotocapa' => $fotocapaPath,
+                ':certificado' => $certificadoPath
             ]);
         } catch (PDOException $e) {
             if ($e->getCode() == 23000) {
@@ -95,8 +96,44 @@ class CursosModel
         return $row ? $row['fotocapa'] : null;
     }
 
-    public function atualizar($id, $nome, $descricao, $carga_horaria, $fotocapaPath = null)
+    public function buscarCertificadoPorId($id): ?string
     {
+        $stmt = $this->pdo->prepare("SELECT certificado FROM cursos WHERE id = :id");
+        $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row ? $row['certificado'] : null;
+    }
+
+
+    public function atualizar($id, $nome, $descricao, $carga_horaria, $fotocapaPath = null, $certificadoPath = null)
+    {
+        // Se trocou certificado, remove arquivo antigo (quando houver)
+        if ($certificadoPath !== null && $certificadoPath !== '') {
+            $certificadoAntigo = $this->buscarCertificadoPorId($id);
+            $this->removerArquivoPorCaminho($certificadoAntigo);
+        }
+
+        if ($fotocapaPath !== null && $fotocapaPath !== '' && $certificadoPath !== null && $certificadoPath !== '') {
+            $sql = "UPDATE cursos 
+                SET nome = :nome,
+                    descricao = :descricao,
+                    carga_horaria = :carga_horaria,
+                    fotocapa = :fotocapa,
+                    certificado = :certificado
+                WHERE id = :id";
+
+            $stmt = $this->pdo->prepare($sql);
+            return $stmt->execute([
+                ':id' => $id,
+                ':nome' => $nome,
+                ':descricao' => $descricao,
+                ':carga_horaria' => $carga_horaria,
+                ':fotocapa' => $fotocapaPath,
+                ':certificado' => $certificadoPath
+            ]);
+        }
+
         if ($fotocapaPath !== null && $fotocapaPath !== '') {
             $sql = "UPDATE cursos 
                 SET nome = :nome,
@@ -112,6 +149,24 @@ class CursosModel
                 ':descricao' => $descricao,
                 ':carga_horaria' => $carga_horaria,
                 ':fotocapa' => $fotocapaPath
+            ]);
+        }
+
+        if ($certificadoPath !== null && $certificadoPath !== '') {
+            $sql = "UPDATE cursos 
+                SET nome = :nome,
+                    descricao = :descricao,
+                    carga_horaria = :carga_horaria,
+                    certificado = :certificado
+                WHERE id = :id";
+
+            $stmt = $this->pdo->prepare($sql);
+            return $stmt->execute([
+                ':id' => $id,
+                ':nome' => $nome,
+                ':descricao' => $descricao,
+                ':carga_horaria' => $carga_horaria,
+                ':certificado' => $certificadoPath
             ]);
         }
 
@@ -156,9 +211,12 @@ class CursosModel
 
     public function deletar($id)
     {
-        // tenta remover a capa antiga antes de deletar do banco
+        // tenta remover arquivos antigos antes de deletar do banco
         $fotocapa = $this->buscarFotocapaPorId($id);
         $this->removerArquivoPorCaminho($fotocapa);
+
+        $certificado = $this->buscarCertificadoPorId($id);
+        $this->removerArquivoPorCaminho($certificado);
 
         $sql = "DELETE FROM cursos WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);

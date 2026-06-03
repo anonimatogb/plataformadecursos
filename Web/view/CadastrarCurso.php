@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $cursos_id = $_SESSION['cursos_id_modulo'];
 
     $fotocapaPath = null;
+    $certificadoPath = null;
 
     if (!empty($_FILES['fotocapa']['name'])) {
         $erro = $_FILES['fotocapa']['error'] ?? UPLOAD_ERR_NO_FILE;
@@ -39,7 +40,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    $resultado = $CursosController->cadastrar($nome, $descricao, $carga_horaria, $professor, $fotocapaPath);
+    if (!empty($_FILES['certificado']['name'])) {
+        $erro = $_FILES['certificado']['error'] ?? UPLOAD_ERR_NO_FILE;
+        if ($erro === UPLOAD_ERR_OK) {
+            $ext = pathinfo($_FILES['certificado']['name'], PATHINFO_EXTENSION);
+            $nomeArquivo = uniqid('cert_', true) . ($ext ? '.' . $ext : '');
+
+            $destDir = __DIR__ . '/../uploads/certificados/';
+            if (!is_dir($destDir)) {
+                mkdir($destDir, 0777, true);
+            }
+
+            $destFullPath = $destDir . $nomeArquivo;
+
+            if (move_uploaded_file($_FILES['certificado']['tmp_name'], $destFullPath)) {
+                $certificadoPath = 'uploads/certificados/' . $nomeArquivo;
+            }
+        }
+    }
+
+    $resultado = $CursosController->cadastrar($nome, $descricao, $carga_horaria, $professor, $fotocapaPath, $certificadoPath);
     
     if ($resultado === "ERRO") {
         echo "Erro ao cadastrar curso. Por favor, tente novamente.";
@@ -72,6 +92,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <label for="fotocapa">Foto Capa do Curso:</label>
         <input type="file" id="fotocapa" name="fotocapa" accept="image/*" required><br><br>
+
+        <label for="certificado">Certificado do Curso (imagem):</label>
+        <input type="file" id="certificado" name="certificado" accept="image/*" required><br><br>
 
         <a href="professor.php">Voltar para a Central do Aprendizado</a>
         <input type="submit" value="Cadastrar">

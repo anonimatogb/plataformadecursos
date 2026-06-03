@@ -31,14 +31,14 @@ class CursosController
         return $cursos;
     }
 
-    public function cadastrar($nome, $descricao, $carga_horaria, $professor, $fotocapaPath = null)
+    public function cadastrar($nome, $descricao, $carga_horaria, $professor, $fotocapaPath = null, $certificadoPath = null)
     {
-        return $this->cursosModel->cadastrarcursos($nome, $descricao, $carga_horaria, $professor, $fotocapaPath);
+        return $this->cursosModel->cadastrarcursos($nome, $descricao, $carga_horaria, $professor, $fotocapaPath, $certificadoPath);
     }
 
-    public function atualizar($id, $nome, $descricao, $carga_horaria, $fotocapaPath = null)
+    public function atualizar($id, $nome, $descricao, $carga_horaria, $fotocapaPath = null, $certificadoPath = null)
     {
-        return $this->cursosModel->atualizar($id, $nome, $descricao, $carga_horaria, $fotocapaPath);
+        return $this->cursosModel->atualizar($id, $nome, $descricao, $carga_horaria, $fotocapaPath, $certificadoPath);
     }
 
     public function deletar($id)

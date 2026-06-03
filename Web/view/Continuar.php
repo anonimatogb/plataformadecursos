@@ -18,6 +18,8 @@ $modulos = $moduloController->porcurso($cursoId);
 $moduloAtual = $modulos[$mod] ?? null;
 
 $matriculaController = new MatriculaController($pdo);
+$cursosController = new CursosController($pdo);
+$cursoAtual = $cursosController->tra($cursoId);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,11 +52,23 @@ $matriculaController = new MatriculaController($pdo);
         ?>
             <h2>Curso concluído</h2>
             <p>Você finalizou todos os módulos deste curso.</p>
+
+            <?php
+                $certificado = $cursoAtual['certificado'] ?? null;
+                if (!empty($certificado)):
+            ?>
+                <p>
+                    <a href="../<?php echo htmlspecialchars($certificado, ENT_QUOTES, 'UTF-8'); ?>" download>
+                        Baixar certificado
+                    </a>
+                </p>
+            <?php endif; ?>
+
             <a href="meus.php">Voltar para meus cursos</a>
         <?php else: ?>
             <h2><?php echo htmlspecialchars($moduloAtual['titulo'] ?? '', ENT_QUOTES, 'UTF-8'); ?></h2>
 
-            <video controls width="640" src="../<?php echo htmlspecialchars($moduloAtual['video'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"></video>
+            <video controls width="640" src="<?php echo htmlspecialchars($moduloAtual['video'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"></video>
 
             <div style="margin-top: 16px;">
                 <?php if ($mod > 0): ?>
