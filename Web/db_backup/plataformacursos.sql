@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 03/06/2026 às 12:36
+-- Tempo de geração: 03/06/2026 às 14:15
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -37,6 +37,13 @@ CREATE TABLE `cursos` (
   `certificado` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Despejando dados para a tabela `cursos`
+--
+
+INSERT INTO `cursos` (`id`, `nome`, `fotocapa`, `descricao`, `professor`, `carga_horaria`, `certificado`) VALUES
+(7, 'Java Básico', 'uploads/cursos/capa_6a2018f7997d92.13185313.png', 'Aprenda os fundamentos da linguagem Java, uma das tecnologias mais utilizadas no desenvolvimento de software. Neste curso, você conhecerá conceitos essenciais como variáveis, operadores, estruturas de decisão e repetição, métodos, classes e objetos, desen', 5, 15, 'uploads/certificados/cert_6a2018f79a0c88.10036100.png');
+
 -- --------------------------------------------------------
 
 --
@@ -66,6 +73,14 @@ CREATE TABLE `modulo` (
   `professor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Despejando dados para a tabela `modulo`
+--
+
+INSERT INTO `modulo` (`id`, `titulo`, `cursos_id`, `video`, `professor`) VALUES
+(11, 'Introdução a Java', 7, '../videos/6a201a0fb4347.mp4', 5),
+(12, 'Entendendo .This', 7, '../videos/6a201a509bce3.mp4', 5);
+
 -- --------------------------------------------------------
 
 --
@@ -77,17 +92,18 @@ CREATE TABLE `usuarios` (
   `nome` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `senha` varchar(255) NOT NULL,
-  `cargo` varchar(255) NOT NULL
+  `cargo` varchar(255) NOT NULL,
+  `foto_perfil` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Despejando dados para a tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `cargo`) VALUES
-(5, 'Gabriel Machado Cavalcante', 'gabrielcavalcante22@outlook.com', '123', 'professor'),
-(6, 'Vinicius Zucolin', 'vinicius@gmail', '123', 'aluno'),
-(7, 'Dhiogo', 'dhiogo@gmail', '123', 'aluno');
+INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `cargo`, `foto_perfil`) VALUES
+(5, 'Gabriel Machado Cavalcante', 'gabrielcavalcante22@outlook.com', '123', 'professor', ''),
+(6, 'Vinicius Zucolin', 'vinicius@gmail', '123', 'aluno', ''),
+(7, 'Dhiogo', 'dhiogo@gmail', '123', 'aluno', '');
 
 --
 -- Índices para tabelas despejadas
@@ -130,19 +146,19 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `cursos`
 --
 ALTER TABLE `cursos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `matriculas`
 --
 ALTER TABLE `matriculas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT de tabela `modulo`
 --
 ALTER TABLE `modulo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`

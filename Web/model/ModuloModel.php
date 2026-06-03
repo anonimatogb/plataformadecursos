@@ -77,21 +77,42 @@ class ModuloModel
             return;
         }
 
-        // Em cadastrar(): $caminho = "../videos/<nome>"
-        // Persistimos esse valor na coluna `video`.
-        $baseDir = __DIR__ . '/../';
-        $fullPath = realpath($baseDir . $caminho);
+        $baseDir = __DIR__ . '/../'; // .../Web/
+        $videosDir = $baseDir . 'videos/';
 
-        if ($fullPath === false) {
-            $candidato = $baseDir . $caminho;
+        // Normaliza possíveis formatos que podem estar salvos no banco
+        $caminho = trim((string)$caminho);
+
+        // 1) Se for só o nome do arquivo (ex.: 123.mp4)
+        if (!str_contains($caminho, '/') && !str_contains($caminho, '\\')) {
+            $candidato = $videosDir . $caminho;
             if (is_file($candidato)) {
                 @unlink($candidato);
             }
             return;
         }
 
-        if (is_file($fullPath)) {
-            @unlink($fullPath);
+        // 2) Se estiver no formato "../videos/arquivo.mp4" (como está no upload)
+        $fullPath1 = realpath($baseDir . $caminho);
+        if ($fullPath1 !== false && is_file($fullPath1)) {
+            @unlink($fullPath1);
+            return;
+        }
+
+        // 3) Se estiver no formato "videos/arquivo.mp4" (sem ../) OU qualquer path que termine em videos/<arquivo>
+        $filename = basename(str_replace(['\\', '/'], '/', $caminho));
+        if ($filename) {
+            $candidatoVideos = $videosDir . $filename;
+            if (is_file($candidatoVideos)) {
+                @unlink($candidatoVideos);
+                return;
+            }
+        }
+
+        // 4) Fallback: tenta montar candidato diretamente
+        $fallback = $baseDir . $caminho;
+        if (is_file($fallback)) {
+            @unlink($fallback);
         }
     }
 
