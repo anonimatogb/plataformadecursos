@@ -83,6 +83,9 @@
 	  <Compile Update="Detalhes.xaml.cs">
 	    <DependentUpon>Detalhes.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="DatalhesProf.xaml.cs">
+	    <DependentUpon>DatalhesProf.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pagamento.xaml.cs">
 	    <DependentUpon>Pagamento.xaml</DependentUpon>
 	  </Compile>
@@ -110,6 +113,12 @@
 	  <MauiXaml Update="TelaUsuario.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="NewPage1.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
 	</ItemGroup>
 
 </Project>
