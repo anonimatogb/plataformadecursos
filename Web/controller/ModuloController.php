@@ -6,17 +6,16 @@ class ModuloController
 {
     private $moduloModel;
 
-
     public function __construct($pdo)
     {
         $this->moduloModel = new ModuloModel($pdo);
     }
 
-      public function cadastrar($titulo, $cursos_id, $video) {
-
+    public function cadastrar($titulo, $cursos_id, $video) {
         if ($video['error'] !== 0) {
             return "Erro no upload";
         }
+
 
         $ext = pathinfo($video['name'], PATHINFO_EXTENSION);
         $nomeFinal = uniqid() . '.' . $ext;
@@ -53,5 +52,11 @@ class ModuloController
     public function porcurso($cursoId) {
         return $this->moduloModel->porcurso((int)$cursoId);
     }
+
+    public function deletar($id) {
+        return $this->moduloModel->deletar((int)$id);
+    }
 }
+
+
 

@@ -75,9 +75,10 @@ $modulos = $moduloController->porprof($_SESSION['id']);
             echo '<ul>';
             foreach ($listaModulos as $modulo) {
                 echo "<li>";
-                echo ($modulo['titulo']);
-                echo " | Curso: " . ($cursoNome);
+                echo htmlspecialchars($modulo['titulo']);
+                echo " | Curso: " . htmlspecialchars($cursoNome);
                 echo " | <a href=\"" . ($modulo['video']) . "\" target=\"_blank\">Assistir Vídeo</a>";
+                echo " | <a href='deletarmodulo.php?id_modulo=" . (int)$modulo['id'] . "'>Deletar</a>";
                 echo "</li>";
             }
             echo '</ul>';
