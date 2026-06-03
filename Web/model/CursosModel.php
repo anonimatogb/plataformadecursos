@@ -211,17 +211,96 @@ class CursosModel
 
     public function deletar($id)
     {
-        // tenta remover arquivos antigos antes de deletar do banco
-        $fotocapa = $this->buscarFotocapaPorId($id);
-        $this->removerArquivoPorCaminho($fotocapa);
+        $cursoId = (int)$id;
 
-        $certificado = $this->buscarCertificadoPorId($id);
-        $this->removerArquivoPorCaminho($certificado);
+        try {
+            $this->pdo->beginTransaction();
 
-        $sql = "DELETE FROM cursos WHERE id = :id";
-        $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute([':id' => $id]);
+            // 1) Buscar módulos do curso (para remover vídeos do disco)
+            $sqlModulos = "SELECT id, video FROM modulo WHERE cursos_id = :cursoId";
+            $stmtModulos = $this->pdo->prepare($sqlModulos);
+            $stmtModulos->bindValue(':cursoId', $cursoId, PDO::PARAM_INT);
+            $stmtModulos->execute();
+            $modulos = $stmtModulos->fetchAll(PDO::FETCH_ASSOC);
 
+            // 2) Remover vídeos dos módulos do disco
+            foreach ($modulos as $modulo) {
+                if (!isset($modulo['video'])) {
+                    continue;
+                }
+                $this->removerVideoDoModulo($modulo['video']);
+            }
 
+            // 3) Remover matrículas relacionadas ao curso
+            $sqlMat = "DELETE FROM matriculas WHERE cursos_id = :cursoId";
+            $stmtMat = $this->pdo->prepare($sqlMat);
+            $stmtMat->bindValue(':cursoId', $cursoId, PDO::PARAM_INT);
+            $stmtMat->execute();
+
+            // 4) Remover módulos do banco
+            $sqlModDel = "DELETE FROM modulo WHERE cursos_id = :cursoId";
+            $stmtModDel = $this->pdo->prepare($sqlModDel);
+            $stmtModDel->bindValue(':cursoId', $cursoId, PDO::PARAM_INT);
+            $stmtModDel->execute();
+
+            // 5) Remover arquivos do curso (capa e certificado)
+            $fotocapa = $this->buscarFotocapaPorId($cursoId);
+            $this->removerArquivoPorCaminho($fotocapa);
+
+            $certificado = $this->buscarCertificadoPorId($cursoId);
+            $this->removerArquivoPorCaminho($certificado);
+
+            // 6) Remover curso
+            $sql = "DELETE FROM cursos WHERE id = :id";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([':id' => $cursoId]);
+
+            $this->pdo->commit();
+            return true;
+        } catch (Throwable $e) {
+            if ($this->pdo->inTransaction()) {
+                $this->pdo->rollBack();
+            }
+            error_log('Erro ao deletar curso completo (id=' . $cursoId . '): ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    private function removerVideoDoModulo($caminho): void
+    {
+        if (!$caminho) {
+            return;
+        }
+
+        $baseDir = __DIR__ . '/../'; // .../Web/
+        $videosDir = $baseDir . 'videos/';
+
+        $caminho = trim((string)$caminho);
+
+        // 1) Se for só o nome do arquivo (ex.: 123.mp4)
+        if (!str_contains($caminho, '/') && !str_contains($caminho, '\\')) {
+            $candidato = $videosDir . $caminho;
+            if (is_file($candidato)) {
+                @unlink($candidato);
+            }
+            return;
+        }
+
+        // 2) Se estiver em ../videos/arquivo.mp4 (como está no upload)
+        $fullPath1 = realpath($baseDir . $caminho);
+        if ($fullPath1 !== false && is_file($fullPath1)) {
+            @unlink($fullPath1);
+            return;
+        }
+
+        // 3) Tenta pegar o filename e remover dentro de videos/
+        $filename = basename(str_replace(['\\', '/'], '/', $caminho));
+        if ($filename) {
+            $candidatoVideos = $videosDir . $filename;
+            if (is_file($candidatoVideos)) {
+                @unlink($candidatoVideos);
+            }
+        }
     }
 }
+

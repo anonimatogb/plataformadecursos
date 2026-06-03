@@ -16,6 +16,9 @@ $cursos = $cursosController->todos();
 $matriculaController = new MatriculaController($pdo);
 $sei = $matriculaController->confe($_SESSION['id']);
 
+$usuarioController = new UsuarioController($pdo);
+$fotoPerfil = $usuarioController->buscarFotoPerfil($_SESSION['id']);
+
 ?>
 
 <!DOCTYPE html>
@@ -32,12 +35,16 @@ $sei = $matriculaController->confe($_SESSION['id']);
         <h1>Lunex</h1>
         <a href="paginainicial.php">Início</a>
         <a href="meus.php">Meus cursos</a>
+        <img
+            src="data:image/jpeg;base64,<?= base64_encode($fotoPerfil) ?>"
+            alt="Foto de Perfil"
+            width="120">
         <p><?php echo $_SESSION['nome']; ?></p>
         <a href="logout.php">Sair</a>
     </nav>
     <h1>Bem-vindo, <?php echo $_SESSION['nome']; ?>!</h1>
     <p>Esta é a página inicial para alunos.</p>
-    
+
 
     <h2>Cursos:</h2>
     <ul>
@@ -49,7 +56,7 @@ $sei = $matriculaController->confe($_SESSION['id']);
                 <a href="detalhes.php?curso_id=<?php echo $curso['id']; ?>&professor_id=<?php echo $curso['professor']; ?>">Detalhes</a>
             </li>
         <?php endforeach; ?>
-  
+
 
     </ul>
 

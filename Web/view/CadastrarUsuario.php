@@ -11,9 +11,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $senha = $_POST['senha'];
     $cargo = $_POST['cargo'];
+    $fotoperfil = null;
 
+    if (!empty($_FILES['foto_perfil']['tmp_name'])) {
+        $fotoperfil = file_get_contents($_FILES['foto_perfil']['tmp_name']);
+    }
 
-    $resultado = $UsuarioController->cadastrar($nome, $email, $senha, $cargo);
+    $resultado = $UsuarioController->cadastrar($nome, $email, $senha, $cargo, $fotoperfil);
 
     if ($resultado === "duplicado") {
         echo "Email já cadastrado. Por favor, use outro email.";
@@ -30,36 +34,113 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar-se</title>
+    <link rel="stylesheet" href="../CSS/style2.css">
 </head>
 
 <body>
-    <h1>Cadastrar-se</h1>
-    <form method="post">
-        <section id="voltar">
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" required><br><br>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required><br><br>
+    <form method="post" class="card-form" enctype="multipart/form-data">
 
-            <label for="senha">Senha:</label>
-            <input type="password" id="senha" name="senha" required><br><br>
+        <div class="logo">
+            <img src="../IMG/logo-sem-fundo.png">
+        </div>
 
-            <a href="index.php">Já tem uma conta? Faça login aqui.</a>
-            <a href="#cargo">Cadastrar-se</a>
+        <h2 class="form-title"> Cadastrar-se </h2>
+
+        <!-- PRIMEIRA TELA -->
+        <section class="form-screen" id="inicio" >
+
+            <label>Nome</label>
+            <input type="text" name="nome" required>
+
+            <label>Email</label>
+            <input type="email" name="email" required>
+
+            <label>Senha</label>
+            <input type="password" name="senha" required>
+
+            <label>Foto de Perfil</label>
+            <input type="file" name="foto_perfil" accept="image/*">
+
+            <!-- abre segunda tela -->
+            <a href="#cargo" class="btn-primary">
+                Continuar
+            </a>
+
         </section>
 
-        <section id="cargo">
-            <label for="cargo">Cargo:</label>
-            <select id="cargo" name="cargo">
-                <option value="aluno">Aluno</option>
-                <option value="professor">Professor</option>
-            </select>
-            <a href="#voltar">voltar</a>
-            <input type="submit" value="Cadastrar">
+        <!-- SEGUNDA TELA -->
+        <section class="cargo-screen" id="cargo">
+
+            <div class="cargo-header">
+
+                <h2>Escolha seu perfil</h2>
+
+                <p>
+                    Selecione como deseja usar a plataforma
+                </p>
+
+            </div>
+
+            <div class="cargo-options">
+
+                <!-- BOTÃO ALUNO -->
+                <button
+                    type="submit"
+                    name="cargo"
+                    value="aluno"
+                    class="cargo-card">
+
+                    <div class="cargo-icon">
+                        <img src="../IMG/aluno.png" alt="Aluno">
+                    </div>
+
+                    <h3>Aluno</h3>
+
+                    <p>
+                        Acessar cursos e conteúdos
+                    </p>
+
+                </button>
+
+                <!-- BOTÃO PROFESSOR -->
+                <button
+                    type="submit"
+                    name="cargo"
+                    value="professor"
+                    class="cargo-card">
+
+                    <div class="cargo-icon">
+                        <img src="../IMG/professor.png" alt="Professor">
+                    </div>
+
+
+                    <h3>Professor</h3>
+
+                    <p>
+                        Criar aulas e gerenciar cursos
+                    </p>
+
+                </button>
+
+            </div>
+
+            <a href="#" class="voltar">
+                Voltar
+            </a>
+
         </section>
 
     </form>
+
+    <script>
+        function selecionarCargo(cargo) {
+
+            document.getElementById("cargoInput").value = cargo;
+
+            window.location.href = "#inicio";
+        }
+    </script>
 </body>
 
 </html>

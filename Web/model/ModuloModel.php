@@ -4,7 +4,6 @@ class ModuloModel
     private $pdo;
 
     public function __construct(PDO $pdo)
-
     {
         $this->pdo = $pdo;
     }
@@ -71,6 +70,69 @@ class ModuloModel
             return [];
         }
     }
+
+    private function removerArquivoPorCaminho($caminho): void
+    {
+        if (!$caminho) {
+            return;
+        }
+
+        $baseDir = __DIR__ . '/../'; // .../Web/
+        $videosDir = $baseDir . 'videos/';
+
+        // Normaliza possíveis formatos que podem estar salvos no banco
+        $caminho = trim((string)$caminho);
+
+        // 1) Se for só o nome do arquivo (ex.: 123.mp4)
+        if (!str_contains($caminho, '/') && !str_contains($caminho, '\\')) {
+            $candidato = $videosDir . $caminho;
+            if (is_file($candidato)) {
+                @unlink($candidato);
+            }
+            return;
+        }
+
+        // 2) Se estiver no formato "../videos/arquivo.mp4" (como está no upload)
+        $fullPath1 = realpath($baseDir . $caminho);
+        if ($fullPath1 !== false && is_file($fullPath1)) {
+            @unlink($fullPath1);
+            return;
+        }
+
+        // 3) Se estiver no formato "videos/arquivo.mp4" (sem ../) OU qualquer path que termine em videos/<arquivo>
+        $filename = basename(str_replace(['\\', '/'], '/', $caminho));
+        if ($filename) {
+            $candidatoVideos = $videosDir . $filename;
+            if (is_file($candidatoVideos)) {
+                @unlink($candidatoVideos);
+                return;
+            }
+        }
+
+        // 4) Fallback: tenta montar candidato diretamente
+        $fallback = $baseDir . $caminho;
+        if (is_file($fallback)) {
+            @unlink($fallback);
+        }
+    }
+
+    public function deletar($id)
+    {
+        $sqlSelect = $this->pdo->prepare("SELECT video FROM modulo WHERE id = :id");
+        $sqlSelect->execute([':id' => (int)$id]);
+        $row = $sqlSelect->fetch(PDO::FETCH_ASSOC);
+
+        if ($row && isset($row['video'])) {
+            $this->removerArquivoPorCaminho($row['video']);
+        }
+
+        $sql = "DELETE FROM modulo WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([':id' => (int)$id]);
+    }
 }
+
+
+
 
 
