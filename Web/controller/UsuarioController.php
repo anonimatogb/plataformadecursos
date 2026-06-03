@@ -17,9 +17,9 @@ class UsuarioController
         return $usuario;
     }
 
-    public function cadastrar($nome, $email, $senha, $cargo)
+    public function cadastrar($nome, $email, $senha, $cargo, $fotoperfil)
     {
-        return $this->usuarioModel->cadastrar($nome, $email, $senha, $cargo);
+        return $this->usuarioModel->cadastrar($nome, $email, $senha, $cargo, $fotoperfil);
     }
 
     public function login($email, $senha)
@@ -36,6 +36,11 @@ class UsuarioController
     public function todos()
     {
         return $this->usuarioModel->buscarTodos();
+    }
+
+public function buscarFotoPerfil($idUsuario)
+    {
+        return $this->usuarioModel->buscarFotoPerfil($idUsuario);
     }
 
 }

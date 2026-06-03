@@ -11,9 +11,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $senha = $_POST['senha'];
     $cargo = $_POST['cargo'];
+    $fotoperfil = null;
 
+    if (!empty($_FILES['foto_perfil']['tmp_name'])) {
+        $fotoperfil = file_get_contents($_FILES['foto_perfil']['tmp_name']);
+    }
 
-    $resultado = $UsuarioController->cadastrar($nome, $email, $senha, $cargo);
+    $resultado = $UsuarioController->cadastrar($nome, $email, $senha, $cargo, $fotoperfil);
 
     if ($resultado === "duplicado") {
         echo "Email já cadastrado. Por favor, use outro email.";
@@ -34,108 +38,109 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body>
-    
-    <form method="post" class="card-form">
 
-    <div class="logo">
-        <img src="../IMG/logo-sem-fundo.png">
-    </div>
+    <form method="post" class="card-form" enctype="multipart/form-data">
 
-    <h2 class="form-title"> Cadastrar-se </h2>
-
-    <!-- PRIMEIRA TELA -->
-    <section class="form-screen" id="inicio">
-
-        <label>Nome</label>
-        <input type="text" name="nome" required>
-
-        <label>Email</label>
-        <input type="email" name="email" required>
-
-        <label>Senha</label>
-        <input type="password" name="senha" required>
-
-        <!-- abre segunda tela -->
-        <a href="#cargo" class="btn-primary">
-            Continuar
-        </a>
-
-    </section>
-
-    <!-- SEGUNDA TELA -->
-    <section class="cargo-screen" id="cargo">
-
-        <div class="cargo-header">
-
-            <h2>Escolha seu perfil</h2>
-
-            <p>
-                Selecione como deseja usar a plataforma
-            </p>
-
+        <div class="logo">
+            <img src="../IMG/logo-sem-fundo.png">
         </div>
 
-        <div class="cargo-options">
+        <h2 class="form-title"> Cadastrar-se </h2>
 
-            <!-- BOTÃO ALUNO -->
-            <button
-                type="submit"
-                name="cargo"
-                value="aluno"
-                class="cargo-card">
+        <!-- PRIMEIRA TELA -->
+        <section class="form-screen" id="inicio" >
 
-                 <div class="cargo-icon">
-        <img src="../IMG/aluno.png" alt="Aluno">
-    </div>
+            <label>Nome</label>
+            <input type="text" name="nome" required>
 
-                <h3>Aluno</h3>
+            <label>Email</label>
+            <input type="email" name="email" required>
 
-                <p>
-                    Acessar cursos e conteúdos
-                </p>
+            <label>Senha</label>
+            <input type="password" name="senha" required>
 
-            </button>
+            <label>Foto de Perfil</label>
+            <input type="file" name="foto_perfil" accept="image/*">
 
-            <!-- BOTÃO PROFESSOR -->
-            <button
-                type="submit"
-                name="cargo"
-                value="professor"
-                class="cargo-card">
+            <!-- abre segunda tela -->
+            <a href="#cargo" class="btn-primary">
+                Continuar
+            </a>
 
-                <div class="cargo-icon">
-        <img src="../IMG/professor.png" alt="Professor">
-    </div>
+        </section>
 
+        <!-- SEGUNDA TELA -->
+        <section class="cargo-screen" id="cargo">
 
-                <h3>Professor</h3>
+            <div class="cargo-header">
+
+                <h2>Escolha seu perfil</h2>
 
                 <p>
-                    Criar aulas e gerenciar cursos
+                    Selecione como deseja usar a plataforma
                 </p>
 
-            </button>
+            </div>
 
-        </div>
+            <div class="cargo-options">
 
-        <a href="#" class="voltar">
-            Voltar
-        </a>
+                <!-- BOTÃO ALUNO -->
+                <button
+                    type="submit"
+                    name="cargo"
+                    value="aluno"
+                    class="cargo-card">
 
-    </section>
+                    <div class="cargo-icon">
+                        <img src="../IMG/aluno.png" alt="Aluno">
+                    </div>
 
-</form>
+                    <h3>Aluno</h3>
 
-<script>
+                    <p>
+                        Acessar cursos e conteúdos
+                    </p>
 
-function selecionarCargo(cargo) {
+                </button>
 
-    document.getElementById("cargoInput").value = cargo;
+                <!-- BOTÃO PROFESSOR -->
+                <button
+                    type="submit"
+                    name="cargo"
+                    value="professor"
+                    class="cargo-card">
 
-    window.location.href = "#inicio";
-}
+                    <div class="cargo-icon">
+                        <img src="../IMG/professor.png" alt="Professor">
+                    </div>
 
-</script>
+
+                    <h3>Professor</h3>
+
+                    <p>
+                        Criar aulas e gerenciar cursos
+                    </p>
+
+                </button>
+
+            </div>
+
+            <a href="#" class="voltar">
+                Voltar
+            </a>
+
+        </section>
+
+    </form>
+
+    <script>
+        function selecionarCargo(cargo) {
+
+            document.getElementById("cargoInput").value = cargo;
+
+            window.location.href = "#inicio";
+        }
+    </script>
 </body>
 
 </html>

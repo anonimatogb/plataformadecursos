@@ -1,0 +1,11 @@
+# Mudar para inserir a imagem diretamente no banco
+# Rever o projeto para implementar a desativação de um curso em vez da exclusão
+# Alterar os videos para salvar o link do youtube em vez dar upload no video
+# Validação de Professor (algo para comprovar que o professor seria professor)
+# Parte da Assinatura para ter opções de pagamento como pix ou cartão (de preferência depois do cadastro do usuario como aluno)
+# Implementar a foto de perfil
+# Fazer a edição de usuário
+# Arrumar o select da criação de módulos
+# Criar página Admin.php
+# Fazer todo o processo de CRUD na página admin.php
+# Revisar o projeto para ter certeza de que não está errado #
