@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Appcurso.Cadastro"
+             Title="Cadastro">
+    <VerticalStackLayout>
+        <Label
+            x:Name="cadastrotext"
+            Text="Tela de Cadastro"
+            />
+        <Entry x:Name="txt_nome" Placeholder="Nome"/>
+        <Entry
+        x:Name="txt_emailcadastro"
+        Keyboard="Email"
+        Placeholder="xxxx@xx.com"/>
+        <Entry
+        x:Name="txt_senhacadastro"
+        Placeholder="*****"
+        IsPassword="True"/>
+        <Label
+           Text="Aluno ou Professor?"/>
+        <Picker
+         x:Name="txt_cargo"
+          Title="Professor ou Aluno">
+
+            <Picker.Items>
+                <x:String>Aluno</x:String>
+                <x:String>Professor</x:String>
+            </Picker.Items>
+
+        </Picker>
+        <Button
+        Text="Cadastro"
+        Clicked="CadastrarUsuario"/>
+    </VerticalStackLayout>
+</ContentPage>

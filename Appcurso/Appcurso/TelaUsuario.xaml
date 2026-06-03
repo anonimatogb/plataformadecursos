@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Appcurso.TelaUsuario"
+    Title="TelaUsuario">
+
+    <VerticalStackLayout>
+
+        <Label
+            x:Name="BemVindo" />
+
+        <Label
+            x:Name="sair"
+            Text="Sair"
+            TextColor="Red"
+            TextDecorations="Strikethrough"
+            >
+
+
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer
+                    Tapped="Deslogar" />
+            </Label.GestureRecognizers>
+
+        </Label>
+
+        <Label
+            Text="Conheça os nossos cursos" />
+
+        <CollectionView
+            x:Name="listaUsuarios"
+            SelectionChanged="AbrirPagina"
+            SelectionMode="Single">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+
+                    <Grid Padding="10">
+
+                        <HorizontalStackLayout Spacing="15">
+
+                            <Image
+                                Source="{Binding Foto}"
+                                WidthRequest="60"
+                                HeightRequest="60" />
+
+                            <Label
+                                Text="{Binding Nome}"
+                                FontSize="20"
+                                VerticalOptions="Center" />
+
+                        </HorizontalStackLayout>
+
+                    </Grid>
+
+                </DataTemplate>
+
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+    </VerticalStackLayout>
+
+</ContentPage>

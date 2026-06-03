@@ -14,20 +14,31 @@ class CursosController
         $cursos = $this->cursosModel->buscarum($id);
         return $cursos;
     }
-    public function todos($id)
+    public function todos()
+    {
+        $cursos = $this->cursosModel->buscarTodos();
+        return $cursos;
+    }
+    public function todosprof($id)
     {
         $cursos = $this->cursosModel->buscarcursos($id);
         return $cursos;
     }
 
-    public function cadastrar($nome, $descricao, $carga_horaria, $professor)
+    public function tra($id)
     {
-        return $this->cursosModel->cadastrarcursos($nome, $descricao, $carga_horaria, $professor);
+        $cursos = $this->cursosModel->tra($id);
+        return $cursos;
     }
 
-    public function atualizar($id, $nome, $descricao, $carga_horaria)
+    public function cadastrar($nome, $descricao, $carga_horaria, $professor, $fotocapaPath = null, $certificadoPath = null)
     {
-        return $this->cursosModel->atualizar($id, $nome, $descricao, $carga_horaria);
+        return $this->cursosModel->cadastrarcursos($nome, $descricao, $carga_horaria, $professor, $fotocapaPath, $certificadoPath);
+    }
+
+    public function atualizar($id, $nome, $descricao, $carga_horaria, $fotocapaPath = null, $certificadoPath = null)
+    {
+        return $this->cursosModel->atualizar($id, $nome, $descricao, $carga_horaria, $fotocapaPath, $certificadoPath);
     }
 
     public function deletar($id)
@@ -35,4 +46,9 @@ class CursosController
         return $this->cursosModel->deletar($id);
     }
 
+    public function todosaluno($id)
+    {
+        return $this->cursosModel->todosaluno($id);
+    }
 }
+

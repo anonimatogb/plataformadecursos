@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Appcurso.MainPage">
+
+    <VerticalStackLayout Padding="30">
+
+        <Entry x:Name="txt_email"
+               Placeholder="Email"
+               TextChanged="Campos_TextChanged"/>
+
+        <Entry
+            x:Name="txt_senha"
+            Placeholder="Senha"
+            IsPassword="True"
+            TextChanged="Campos_TextChanged"/>
+        <Button
+            Text="Entrar"
+            Clicked="Button_Clicked"/>
+        <Label
+            x:Name="resultado"
+            Text="Email ou Senha incorretos"
+            FontSize="20"
+            TextColor="Red"/>
+        <Label
+            x:Name="criarcontalink"
+            Text="Não tem uma conta? Faça seu cadastro">
+
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="IrParaCadastro"/>
+            </Label.GestureRecognizers>
+
+        </Label>
+
+    </VerticalStackLayout>
+</ContentPage>
