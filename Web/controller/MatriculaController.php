@@ -6,6 +6,7 @@ class MatriculaController
 {
     private $matriculaModel;
 
+
     public function __construct($pdo)
     {
         $this->matriculaModel = new MatriculaModel($pdo);
@@ -30,4 +31,10 @@ class MatriculaController
     {
         return $this->matriculaModel->relacao();
     }
+
+    public function concluirCurso(int $matriculaId): bool
+    {
+        return $this->matriculaModel->concluirCurso($matriculaId);
+    }
 }
+

@@ -6,6 +6,7 @@ class ModuloController
 {
     private $moduloModel;
 
+
     public function __construct($pdo)
     {
         $this->moduloModel = new ModuloModel($pdo);
@@ -48,4 +49,9 @@ class ModuloController
     public function porprof($professor_id) {
         return $this->moduloModel->porprof($professor_id);
     }
+
+    public function porcurso($cursoId) {
+        return $this->moduloModel->porcurso((int)$cursoId);
+    }
 }
+

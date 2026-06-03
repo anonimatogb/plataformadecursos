@@ -59,13 +59,14 @@ INNER JOIN cursos
     public function matricular($aluno_id, $cursos_id, $professor_id)
     {
         try {
-            $sql = "INSERT INTO matriculas (aluno_id, cursos_id, professor_id, data_matricula) VALUES (:aluno_id, :cursos_id, :professor_id, :data_matricula)";
+            $sql = "INSERT INTO matriculas (aluno_id, cursos_id, professor_id, data_matricula,concluido) VALUES (:aluno_id, :cursos_id, :professor_id, :data_matricula, :concluido)";
             $stmt = $this->pdo->prepare($sql);
             return $stmt->execute([
                 ':aluno_id' => $aluno_id,
                 ':cursos_id' => $cursos_id,
                 ':professor_id' => $professor_id,
-                ':data_matricula' => date('Y-m-d H:i:s')
+                ':data_matricula' => date('Y-m-d H:i:s'),
+                ':concluido' => 0
             ]);
         } catch (PDOException $e) {
             if ($e->getCode() == 23000) {
@@ -74,4 +75,17 @@ INNER JOIN cursos
             throw $e;
         }
     }
+
+    public function concluirCurso(int $matriculaId): bool
+    {
+        try {
+            $sql = "UPDATE matriculas SET concluido = 1 WHERE id = :id";
+            $stmt = $this->pdo->prepare($sql);
+            return $stmt->execute([':id' => $matriculaId]);
+        } catch (PDOException $e) {
+            error_log("Erro ao concluir curso: " . $e->getMessage());
+            return false;
+        }
+    }
 }
+

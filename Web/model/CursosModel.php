@@ -18,14 +18,17 @@ class CursosModel
     public function todosaluno($alunoId): array
     {
         $sql = "SELECT
+        matriculas.concluido AS concluido,
             cursos.id,
             cursos.nome,
             cursos.descricao,
-            cursos.carga_horaria
+            cursos.carga_horaria,
+            cursos.fotocapa
         FROM matriculas
         INNER JOIN cursos
             ON matriculas.cursos_id = cursos.id
-        WHERE matriculas.aluno_id = :aluno_id";
+        WHERE matriculas.aluno_id = :aluno_id"
+        ;
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(':aluno_id', (int)$alunoId, PDO::PARAM_INT);
@@ -63,17 +66,18 @@ class CursosModel
 
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
-    public function cadastrarcursos($nome, $descricao, $carga_horaria, $professor)
+    public function cadastrarcursos($nome, $descricao, $carga_horaria, $professor, $fotocapaPath, $certificadoPath = null)
     {
         try {
-
-            $sql = "INSERT INTO cursos (nome, descricao, carga_horaria, professor) VALUES (:nome, :descricao, :carga_horaria, :professor)";
+            $sql = "INSERT INTO cursos (nome, descricao, carga_horaria, professor, fotocapa, certificado) VALUES (:nome, :descricao, :carga_horaria, :professor, :fotocapa, :certificado)";
             $stmt = $this->pdo->prepare($sql);
             return $stmt->execute([
                 ':nome' => $nome,
                 ':descricao' => $descricao,
                 ':carga_horaria' => $carga_horaria,
-                ':professor' => $professor
+                ':professor' => $professor,
+                ':fotocapa' => $fotocapaPath,
+                ':certificado' => $certificadoPath
             ]);
         } catch (PDOException $e) {
             if ($e->getCode() == 23000) {
@@ -83,8 +87,89 @@ class CursosModel
         }
     }
 
-    public function atualizar($id, $nome, $descricao, $carga_horaria)
+    public function buscarFotocapaPorId($id): ?string
     {
+        $stmt = $this->pdo->prepare("SELECT fotocapa FROM cursos WHERE id = :id");
+        $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row ? $row['fotocapa'] : null;
+    }
+
+    public function buscarCertificadoPorId($id): ?string
+    {
+        $stmt = $this->pdo->prepare("SELECT certificado FROM cursos WHERE id = :id");
+        $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row ? $row['certificado'] : null;
+    }
+
+
+    public function atualizar($id, $nome, $descricao, $carga_horaria, $fotocapaPath = null, $certificadoPath = null)
+    {
+        // Se trocou certificado, remove arquivo antigo (quando houver)
+        if ($certificadoPath !== null && $certificadoPath !== '') {
+            $certificadoAntigo = $this->buscarCertificadoPorId($id);
+            $this->removerArquivoPorCaminho($certificadoAntigo);
+        }
+
+        if ($fotocapaPath !== null && $fotocapaPath !== '' && $certificadoPath !== null && $certificadoPath !== '') {
+            $sql = "UPDATE cursos 
+                SET nome = :nome,
+                    descricao = :descricao,
+                    carga_horaria = :carga_horaria,
+                    fotocapa = :fotocapa,
+                    certificado = :certificado
+                WHERE id = :id";
+
+            $stmt = $this->pdo->prepare($sql);
+            return $stmt->execute([
+                ':id' => $id,
+                ':nome' => $nome,
+                ':descricao' => $descricao,
+                ':carga_horaria' => $carga_horaria,
+                ':fotocapa' => $fotocapaPath,
+                ':certificado' => $certificadoPath
+            ]);
+        }
+
+        if ($fotocapaPath !== null && $fotocapaPath !== '') {
+            $sql = "UPDATE cursos 
+                SET nome = :nome,
+                    descricao = :descricao,
+                    carga_horaria = :carga_horaria,
+                    fotocapa = :fotocapa
+                WHERE id = :id";
+
+            $stmt = $this->pdo->prepare($sql);
+            return $stmt->execute([
+                ':id' => $id,
+                ':nome' => $nome,
+                ':descricao' => $descricao,
+                ':carga_horaria' => $carga_horaria,
+                ':fotocapa' => $fotocapaPath
+            ]);
+        }
+
+        if ($certificadoPath !== null && $certificadoPath !== '') {
+            $sql = "UPDATE cursos 
+                SET nome = :nome,
+                    descricao = :descricao,
+                    carga_horaria = :carga_horaria,
+                    certificado = :certificado
+                WHERE id = :id";
+
+            $stmt = $this->pdo->prepare($sql);
+            return $stmt->execute([
+                ':id' => $id,
+                ':nome' => $nome,
+                ':descricao' => $descricao,
+                ':carga_horaria' => $carga_horaria,
+                ':certificado' => $certificadoPath
+            ]);
+        }
+
         $sql = "UPDATE cursos 
             SET nome = :nome,
                 descricao = :descricao,
@@ -100,10 +185,43 @@ class CursosModel
             ':carga_horaria' => $carga_horaria
         ]);
     }
+
+    private function removerArquivoPorCaminho($path): void
+    {
+        if (!$path) {
+            return;
+        }
+
+        $baseDir = __DIR__ . '/../uploads/';
+        $fullPath = realpath($baseDir . $path);
+
+        // Se realpath falhar (arquivo não existe), ainda assim checamos o caminho relativo simples.
+        if ($fullPath === false) {
+            $candidate = $baseDir . $path;
+            if (is_file($candidate)) {
+                @unlink($candidate);
+            }
+            return;
+        }
+
+        if (is_file($fullPath)) {
+            @unlink($fullPath);
+        }
+    }
+
     public function deletar($id)
     {
+        // tenta remover arquivos antigos antes de deletar do banco
+        $fotocapa = $this->buscarFotocapaPorId($id);
+        $this->removerArquivoPorCaminho($fotocapa);
+
+        $certificado = $this->buscarCertificadoPorId($id);
+        $this->removerArquivoPorCaminho($certificado);
+
         $sql = "DELETE FROM cursos WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([':id' => $id]);
+
+
     }
 }
