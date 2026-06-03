@@ -1,0 +1,696 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   VARIÁVEIS
+========================= */
+
+.form-title {
+   font-family: "Montserrat", sans-serif;
+    justify-content: center;
+    display: flex;
+
+}
+
+:root {
+
+    --bg-primary: #070B1A;
+    --bg-secondary: #0B1023;
+    --bg-third: #111827;
+
+    --card-bg: rgba(15, 23, 42, 0.82);
+
+    --border: rgba(255,255,255,0.05);
+
+    --input-bg: rgba(255,255,255,0.04);
+
+    --text: #ffffff;
+    --text-soft: #cbd5e1;
+    --placeholder: #94a3b8;
+
+    --purple: #8B5CF6;
+    --blue: #3B82F6;
+
+    --transition: 0.3s ease;
+
+    --shadow:
+        0 0 25px rgba(0,0,0,0.35);
+
+    --glow:
+        0 0 14px rgba(139,92,246,0.35);
+}
+
+/* =========================
+   BODY
+========================= */
+
+body {
+
+    font-family: 'Poppins', sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--bg-primary),
+            var(--bg-secondary),
+            var(--bg-third)
+        );
+
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    color: var(--text);
+
+    overflow-x: hidden;
+}
+
+/* =========================
+   CARD FORM
+========================= */
+
+.card-form {
+
+    width: 100%;
+    max-width: 520px;
+
+    padding: 24px 34px;
+
+    border-radius: 24px;
+
+    background: var(--card-bg);
+
+    backdrop-filter: blur(18px);
+
+    border: 1px solid var(--border);
+
+    box-shadow: var(--shadow);
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 18px;
+
+    position: relative;
+
+    animation: fadeIn 0.6s ease;
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.logo {
+
+    display: flex;
+    justify-content: center;
+
+    margin-bottom: 4px;
+}
+
+.logo img {
+
+    width: 170px;
+
+    transition: var(--transition);
+}
+
+.logo img:hover {
+
+    transform: scale(1.02);
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+.card-form section {
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+/* =========================
+   LABELS
+========================= */
+
+label {
+
+    font-size: 0.85rem;
+
+    color: var(--text-soft);
+
+    margin-bottom: 2px;
+}
+
+/* =========================
+   INPUTS E SELECT
+========================= */
+
+input,
+select {
+
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border-radius: 11px;
+
+    border: 1px solid var(--border);
+
+    background: var(--input-bg);
+
+    color: var(--text);
+
+    font-size: 0.92rem;
+
+    outline: none;
+
+    transition: var(--transition);
+}
+
+/* =========================
+   FOCUS
+========================= */
+
+
+input:focus,
+select:focus {
+
+    border: 1px solid var(--purple);
+
+    background: rgba(255,255,255,0.06);
+
+    box-shadow:
+        0 0 10px rgba(139,92,246,0.25);
+
+    color:#ffffff
+    
+}
+
+/* =========================
+   PLACEHOLDER
+========================= */
+
+input::placeholder {
+
+    color: var(--placeholder);
+
+}
+
+
+/* =========================
+   SELECT
+========================= */
+
+select {
+
+    cursor: pointer;
+}
+
+/* =========================
+   BOTÃO
+========================= */
+
+.btn-primary,
+input[type="submit"] {
+
+    width: 100%;
+
+    padding: 12px;
+
+    margin-top: 6px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--blue),
+            var(--purple)
+        );
+
+    color: white;
+
+    font-size: 0.92rem;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: var(--transition);
+}
+
+/* =========================
+   HOVER BOTÃO
+========================= */
+
+.btn-primary:hover,
+input[type="submit"]:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow: var(--glow);
+}
+
+/* =========================
+   LINKS
+========================= */
+
+a {
+
+    text-align: center;
+
+    color: var(--purple);
+
+    text-decoration: none;
+
+    font-size: 0.82rem;
+
+    transition: var(--transition);
+}
+
+/* =========================
+   HOVER LINK
+========================= */
+
+a:hover {
+
+    color: var(--blue);
+}
+
+/* =========================
+   ANIMAÇÃO
+========================= */
+
+select option {
+
+    background: #111827;
+
+    color: #ffffff;
+}
+@keyframes fadeIn {
+
+    from {
+
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 600px) {
+
+    .card-form {
+
+        width: 100%;
+
+        padding: 22px;
+    }
+
+    .logo img {
+
+        width: 145px;
+    }
+}
+
+
+
+
+
+
+/* =========================
+   CARD
+========================= */
+
+/* =========================
+   TELA DE CARGO
+========================= */
+
+
+.cargo-screen {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 42px 34px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 30px;
+
+    background:
+        radial-gradient(circle at top left,
+            rgba(139,92,246,0.18),
+            transparent 35%),
+
+        radial-gradient(circle at bottom right,
+            rgba(59,130,246,0.18),
+            transparent 35%),
+
+        rgba(7, 11, 26, 0.98);
+
+    backdrop-filter: blur(18px);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform:
+        translateX(100%) scale(0.96);
+
+    transition:
+        opacity 0.45s ease,
+        transform 0.45s ease,
+        visibility 0.45s;
+}
+
+/* =========================
+   ABRIR TELA
+========================= */
+
+#cargo:target {
+
+    opacity: 1;
+    visibility: visible;
+
+    transform:
+        translateX(0) scale(1);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.cargo-header {
+
+    text-align: center;
+}
+
+.cargo-header h2 {
+
+    font-size: 2rem;
+
+    font-weight: 700;
+
+    margin-bottom: 8px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #8B5CF6,
+            #3B82F6
+        );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.cargo-header p {
+
+    color: #94a3b8;
+
+    font-size: 0.95rem;
+
+    line-height: 1.5;
+}
+
+/* =========================
+   GRID DOS CARDS
+========================= */
+
+.cargo-options {
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+
+
+}
+
+/* =========================
+   CARD DO CARGO
+========================= */
+
+.cargo-card {
+
+    position: relative;
+
+    padding: 34px 24px;
+
+    border-radius: 24px;
+
+    border:
+        1px solid rgba(255,255,255,0.06);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.05),
+            rgba(255,255,255,0.02)
+        );
+
+    backdrop-filter: blur(12px);
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    transition: 0.35s ease;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 14px;
+
+    min-height: 240px;
+}
+
+/* =========================
+   EFEITO BRILHO
+========================= */
+
+.cargo-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(139,92,246,0.22),
+            transparent 70%
+        );
+
+    top: -80px;
+    right: -80px;
+
+    transition: 0.4s ease;
+}
+
+/* =========================
+   HOVER
+========================= */
+
+.cargo-card:hover {
+
+    transform:
+        translateY(-8px)
+        scale(1.02);
+
+    border-color:
+        rgba(139,92,246,0.45);
+
+    box-shadow:
+        0 0 30px rgba(139,92,246,0.18),
+        0 0 60px rgba(59,130,246,0.12);
+}
+
+.cargo-card:hover::before {
+
+    transform: scale(1.2);
+}
+
+/* =========================
+   ÍCONE
+========================= */
+
+.cargo-icon {
+
+    width: 74px;
+    height: 74px;
+
+    border-radius: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(59,130,246,0.18),
+            rgba(139,92,246,0.22)
+        );
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    font-size: 2rem;
+
+    box-shadow:
+        0 0 18px rgba(139,92,246,0.12);
+}
+
+/* =========================
+   TEXTO
+========================= */
+
+.cargo-card h3 {
+
+    font-size: 1.3rem;
+
+    font-weight: 600;
+
+    color: white;
+}
+
+.cargo-card p {
+
+    text-align: center;
+
+    font-size: 0.9rem;
+
+    line-height: 1.5;
+
+    color: #94a3b8;
+}
+
+.cargo-screen {
+
+    border-radius: 24px;
+}
+/* =========================
+   VOLTAR
+========================= */
+
+.voltar {
+
+    margin-top: 8px;
+
+    color: #8B5CF6;
+
+    font-size: 0.9rem;
+
+    transition: 0.3s ease;
+}
+
+.voltar:hover {
+
+    color: #3B82F6;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 700px) {
+
+    .cargo-options {
+
+        grid-template-columns: 1fr;
+    }
+
+    .cargo-card {
+
+        min-height: 190px;
+    }
+
+    .cargo-header h2 {
+
+        font-size: 1.6rem;
+    }
+}
+
+.cargo-icon {
+
+    width: 72px;
+    height: 72px;
+
+    border-radius: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 10px;
+
+    background: rgba(255,255,255,0.05);
+
+    border: 1px solid rgba(255,255,255,0.06);
+
+    box-shadow: 0 0 18px rgba(139,92,246,0.12);
+
+    overflow: hidden;
+}
+
+.cargo-icon img {
+
+    width: 40px;
+    height: 40px;
+
+    object-fit: contain;
+
+    transition: 0.3s ease;
+}
+
+/* efeito leve no hover do card */
+.cargo-card:hover .cargo-icon img {
+
+    transform: scale(1.08);
+}
