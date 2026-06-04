@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $msg = $ModuloController->cadastrar(
         $_POST['titulo'],
         $_POST['cursos_id'],
-        $_FILES['video']
+        $_POST['video']
     );
 
     echo $msg;
@@ -54,8 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </select>
         <br><br>
 
-        <label for="video">Vídeo:</label>
-        <input type="file" name="video" accept="video/*" required><br><br>
+        <label for="video">Link do Vídeo:</label>
+        <input type="text" name="video" id="video" required><br><br>
 
         <a href="professor.php">Voltar para a Central do Aprendizado</a>
         <input type="submit" value="Cadastrar">

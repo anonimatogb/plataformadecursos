@@ -20,6 +20,12 @@ $moduloAtual = $modulos[$mod] ?? null;
 $matriculaController = new MatriculaController($pdo);
 $cursosController = new CursosController($pdo);
 $cursoAtual = $cursosController->tra($cursoId);
+
+if ($moduloAtual !== null) {
+    $videoUrl = $moduloAtual['video'] ?? '';
+    $embed = str_replace("watch?v=", "embed/", $videoUrl);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,7 +74,7 @@ $cursoAtual = $cursosController->tra($cursoId);
         <?php else: ?>
             <h2><?php echo htmlspecialchars($moduloAtual['titulo'] ?? '', ENT_QUOTES, 'UTF-8'); ?></h2>
 
-            <video controls width="640" src="<?php echo htmlspecialchars($moduloAtual['video'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"></video>
+            <iframe width="560" height="315" src="<?= $embed ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
             <div style="margin-top: 16px;">
                 <?php if ($mod > 0): ?>
