@@ -49,8 +49,14 @@ $fotoPerfil = $usuarioController->buscarFotoPerfil($_SESSION['id']);
     <h2>Cursos:</h2>
     <ul>
         <?php foreach ($cursos as $curso) : ?>
+             <?php  if (!$curso['ativo']) {
+                continue; // Pula módulos inativos
+            } ?>
             <li>
-                <img src="../<?php echo $curso['fotocapa']; ?>" alt="<?php echo $curso['nome']; ?>" width="100">
+<img 
+    src="data:image/jpeg;base64,<?= base64_encode($curso['fotocapa']) ?>"
+    alt="<?= $curso['nome'] ?>"
+    width="100">
                 <strong><?php echo $curso['nome']; ?></strong><br>
                 <?php echo $curso['descricao']; ?><br>
                 <a href="detalhes.php?curso_id=<?php echo $curso['id']; ?>&professor_id=<?php echo $curso['professor']; ?>">Detalhes</a>

@@ -12,54 +12,38 @@ $CursosController = new CursosController($pdo);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+    $_SESSION['cursos_id_modulo'] = null;
     $nome = $_POST['nome'];
     $descricao = $_POST['descricao'];
     $carga_horaria = $_POST['carga_horaria'];
     $professor = $_SESSION['id'];
     $cursos_id = $_SESSION['cursos_id_modulo'];
+    $fotocapa = null;
+    $certificado = null;
 
-    $fotocapaPath = null;
-    $certificadoPath = null;
+    // FOTO CAPA
+    if (isset($_FILES['fotocapa']) && $_FILES['fotocapa']['error'] == 0) {
 
-    if (!empty($_FILES['fotocapa']['name'])) {
-        $erro = $_FILES['fotocapa']['error'] ?? UPLOAD_ERR_NO_FILE;
-        if ($erro === UPLOAD_ERR_OK) {
-            $ext = pathinfo($_FILES['fotocapa']['name'], PATHINFO_EXTENSION);
-            $nomeArquivo = uniqid('capa_', true) . ($ext ? '.' . $ext : '');
+        $tipo = mime_content_type($_FILES['fotocapa']['tmp_name']);
 
-            $destDir = __DIR__ . '/../uploads/cursos/';
-            if (!is_dir($destDir)) {
-                mkdir($destDir, 0777, true);
-            }
-
-            $destFullPath = $destDir . $nomeArquivo;
-
-            if (move_uploaded_file($_FILES['fotocapa']['tmp_name'], $destFullPath)) {
-                $fotocapaPath = 'uploads/cursos/' . $nomeArquivo;
-            }
+        if (str_contains($tipo, 'image')) {
+            $fotocapa = file_get_contents($_FILES['fotocapa']['tmp_name']);
         }
     }
 
-    if (!empty($_FILES['certificado']['name'])) {
-        $erro = $_FILES['certificado']['error'] ?? UPLOAD_ERR_NO_FILE;
-        if ($erro === UPLOAD_ERR_OK) {
-            $ext = pathinfo($_FILES['certificado']['name'], PATHINFO_EXTENSION);
-            $nomeArquivo = uniqid('cert_', true) . ($ext ? '.' . $ext : '');
+    // CERTIFICADO
+    if (isset($_FILES['certificado']) && $_FILES['certificado']['error'] == 0) {
 
-            $destDir = __DIR__ . '/../uploads/certificados/';
-            if (!is_dir($destDir)) {
-                mkdir($destDir, 0777, true);
-            }
+        $tipo = mime_content_type($_FILES['certificado']['tmp_name']);
 
-            $destFullPath = $destDir . $nomeArquivo;
-
-            if (move_uploaded_file($_FILES['certificado']['tmp_name'], $destFullPath)) {
-                $certificadoPath = 'uploads/certificados/' . $nomeArquivo;
-            }
+        if (str_contains($tipo, 'image')) {
+            $certificado = file_get_contents($_FILES['certificado']['tmp_name']);
         }
     }
+    
+    
 
-    $resultado = $CursosController->cadastrar($nome, $descricao, $carga_horaria, $professor, $fotocapaPath, $certificadoPath);
+    $resultado = $CursosController->cadastrar($nome, $descricao, $carga_horaria, $professor, $fotocapa, $certificado);
     
     if ($resultado === "ERRO") {
         echo "Erro ao cadastrar curso. Por favor, tente novamente.";

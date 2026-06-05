@@ -17,7 +17,7 @@ if (!isset($_GET['id_curso'])) {
     exit;
 }
 
-$resultado = $cursosController->deletar($_GET['id_curso']);
+$resultado = $cursosController->desativar($_GET['id_curso']);
 if ($resultado) {
     header("Location: professor.php");
     exit;

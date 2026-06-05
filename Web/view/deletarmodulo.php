@@ -20,7 +20,7 @@ if (!isset($_GET['id_modulo'])) {
 $idModulo = (int)$_GET['id_modulo'];
 
 $moduloController = new ModuloController($pdo);
-$resultado = $moduloController->deletar($idModulo);
+$resultado = $moduloController->desativar($idModulo);
 
 if ($resultado) {
     header("Location: professor.php");

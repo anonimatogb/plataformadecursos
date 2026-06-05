@@ -13,56 +13,42 @@ $cursosController = new CursosController($pdo);
 $cursos = $cursosController->buscarum($_GET['id_curso']);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $fotocapaPath = null;
-    $certificadoPath = null;
+    $fotocapa = null;
+    $certificado = null;
 
-    if (!empty($_FILES['fotocapa']['name'])) {
-        $erro = $_FILES['fotocapa']['error'] ?? UPLOAD_ERR_NO_FILE;
-        if ($erro === UPLOAD_ERR_OK) {
-            $ext = pathinfo($_FILES['fotocapa']['name'], PATHINFO_EXTENSION);
-            $nomeArquivo = uniqid('capa_', true) . ($ext ? '.' . $ext : '');
-
-            $destDir = __DIR__ . '/../uploads/cursos/';
-            if (!is_dir($destDir)) {
-                mkdir($destDir, 0777, true);
-            }
-
-            $destFullPath = $destDir . $nomeArquivo;
-
-            if (move_uploaded_file($_FILES['fotocapa']['tmp_name'], $destFullPath)) {
-                $fotocapaPath = 'uploads/cursos/' . $nomeArquivo;
-            }
-        }
-    }
-
-    if (!empty($_FILES['certificado']['name'])) {
-        $erro = $_FILES['certificado']['error'] ?? UPLOAD_ERR_NO_FILE;
-        if ($erro === UPLOAD_ERR_OK) {
-            $ext = pathinfo($_FILES['certificado']['name'], PATHINFO_EXTENSION);
-            $nomeArquivo = uniqid('cert_', true) . ($ext ? '.' . $ext : '');
-
-            $destDir = __DIR__ . '/../uploads/certificados/';
-            if (!is_dir($destDir)) {
-                mkdir($destDir, 0777, true);
-            }
-
-            $destFullPath = $destDir . $nomeArquivo;
-
-            if (move_uploaded_file($_FILES['certificado']['tmp_name'], $destFullPath)) {
-                $certificadoPath = 'uploads/certificados/' . $nomeArquivo;
-            }
-        }
-    }
+   
 
     $cursos = $cursosController->atualizar(
         $_GET['id_curso'],
         $_POST['nome'],
         $_POST['descricao'],
         $_POST['carga_horaria'],
-        $fotocapaPath,
-        $certificadoPath
+        $fotocapa,
+        $certificado
     );
+    
+
+    // FOTO CAPA
+    if (isset($_FILES['fotocapa']) && $_FILES['fotocapa']['error'] == 0) {
+
+        $tipo = mime_content_type($_FILES['fotocapa']['tmp_name']);
+
+        if (str_contains($tipo, 'image')) {
+            $fotocapa = file_get_contents($_FILES['fotocapa']['tmp_name']);
+        }
+    }
+
+    // CERTIFICADO
+    if (isset($_FILES['certificado']) && $_FILES['certificado']['error'] == 0) {
+
+        $tipo = mime_content_type($_FILES['certificado']['tmp_name']);
+
+        if (str_contains($tipo, 'image')) {
+            $certificado = file_get_contents($_FILES['certificado']['tmp_name']);
+        }
+    }
 }
+
 if(!isset($_GET['id_curso'])){
     echo "<script>
     alert('ID do curso não fornecido!');

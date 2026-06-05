@@ -34,8 +34,11 @@ $modulos = $moduloController->porprof($_SESSION['id']);
     <h3>Seus Cursos:</h3>
     <ul>
         <?php foreach ($cursos as $curso): ?>
-            <li><?php echo  ($curso['nome']) . " | " . ($curso['descricao']) . " | " . ($curso['carga_horaria']) . " horas" . "<a href='editarcurso.php?id_curso=" . $curso['id'] . "'>Editar</a>" . "<a href='deletarcurso.php?id_curso=" . $curso['id'] . "'>Deletar</a>";  ?></li>
-        <?php endforeach; 
+            <?php if (!$curso['ativo']) {
+                continue; // Pula módulos inativos
+            } ?>
+            <li><?php echo ($curso['nome']) . " | " . ($curso['descricao']) . " | " . ($curso['carga_horaria']) . " horas" . "<a href='editarcurso.php?id_curso=" . $curso['id'] . "'>Editar</a>" . "<a href='deletarcurso.php?id_curso=" . $curso['id'] . "'>Deletar</a>";  ?></li>
+        <?php endforeach;
         if (empty($cursos)) {
             echo "Nenhum curso cadastrado ainda.";
         }
@@ -48,10 +51,14 @@ $modulos = $moduloController->porprof($_SESSION['id']);
         <?php
         if (empty($trazer)) {
             echo "Nenhum aluno matriculado ainda.";
-        }else{
-       foreach ($trazer as $matriculado) {
-            echo "<li>" . "Aluno: " . $matriculado['aluno'] . " | Curso: " . $matriculado['curso'] . " | Data de Matrícula: " . date('d/m/Y', strtotime($matriculado['data_matricula'])) . "</li>";
-        }}
+        } else {
+            foreach ($trazer as $matriculado) {
+                if (!$matriculado['ativo']) {
+                    continue; // Pula módulos inativos
+                }
+                echo "<li>" . "Aluno: " . $matriculado['aluno'] . " | Curso: " . $matriculado['curso'] . " | Data de Matrícula: " . date('d/m/Y', strtotime($matriculado['data_matricula'])) . "</li>";
+            }
+        }
         ?>
 
     </ul>
@@ -63,7 +70,10 @@ $modulos = $moduloController->porprof($_SESSION['id']);
         // $modulos já vem ordenado por: curso_nome (A-Z) e dentro por m.id (menor -> maior)
         $modulosPorCurso = [];
         foreach ($modulos as $modulo) {
-            $cursoNome = $modulo['curso_nome'] ?? ('Curso #' . ($modulo['cursos_id'] ?? '')); 
+            if (!$modulo['ativo']) {
+                continue; // Pula módulos inativos
+            }
+            $cursoNome = $modulo['curso_nome'] ?? ('Curso #' . ($modulo['cursos_id'] ?? ''));
             if (!isset($modulosPorCurso[$cursoNome])) {
                 $modulosPorCurso[$cursoNome] = [];
             }
@@ -71,12 +81,12 @@ $modulos = $moduloController->porprof($_SESSION['id']);
         }
 
         foreach ($modulosPorCurso as $cursoNome => $listaModulos) {
+
             echo '<h4>' . htmlspecialchars($cursoNome) . '</h4>';
             echo '<ul>';
             foreach ($listaModulos as $modulo) {
                 echo "<li>";
                 echo htmlspecialchars($modulo['titulo']);
-                echo " | Curso: " . htmlspecialchars($cursoNome);
                 echo " | <a href=\"" . ($modulo['video']) . "\" target=\"_blank\">Assistir Vídeo</a>";
                 echo " | <a href='deletarmodulo.php?id_modulo=" . (int)$modulo['id'] . "'>Deletar</a>";
                 echo "</li>";

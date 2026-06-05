@@ -59,7 +59,7 @@ INNER JOIN cursos
     public function matricular($aluno_id, $cursos_id, $professor_id)
     {
         try {
-            $sql = "INSERT INTO matriculas (aluno_id, cursos_id, professor_id, data_matricula,concluido) VALUES (:aluno_id, :cursos_id, :professor_id, :data_matricula, :concluido)";
+            $sql = "INSERT INTO matriculas (aluno_id, cursos_id, professor_id, data_matricula,concluido,ativo) VALUES (:aluno_id, :cursos_id, :professor_id, :data_matricula, :concluido, 1)";
             $stmt = $this->pdo->prepare($sql);
             return $stmt->execute([
                 ':aluno_id' => $aluno_id,

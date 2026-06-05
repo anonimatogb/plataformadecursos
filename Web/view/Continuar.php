@@ -14,8 +14,23 @@ $cursoId = (int)($_GET['id'] ?? 0);
 $mod = (int)($_GET['mod'] ?? 0);
 
 $moduloController = new ModuloController($pdo);
+
 $modulos = $moduloController->porcurso($cursoId);
-$moduloAtual = $modulos[$mod] ?? null;
+
+// Filtra apenas módulos ativos
+$modulosAtivos = [];
+
+foreach ($modulos as $modulo) {
+
+    if (!$modulo['ativo']) {
+        continue;
+    }
+
+    $modulosAtivos[] = $modulo;
+}
+
+$moduloAtual = $modulosAtivos[$mod] ?? null;
+
 
 $matriculaController = new MatriculaController($pdo);
 $cursosController = new CursosController($pdo);
@@ -64,32 +79,35 @@ if ($moduloAtual !== null) {
                 if (!empty($certificado)):
             ?>
                 <p>
-                    <a href="../<?php echo htmlspecialchars($certificado, ENT_QUOTES, 'UTF-8'); ?>" download>
-                        Baixar certificado
-                    </a>
+
+<a href="download.php?id=<?= $cursoAtual['id'] ?>">
+    Baixar Certificado
+</a>
                 </p>
             <?php endif; ?>
 
             <a href="meus.php">Voltar para meus cursos</a>
+
+
         <?php else: ?>
             <h2><?php echo htmlspecialchars($moduloAtual['titulo'] ?? '', ENT_QUOTES, 'UTF-8'); ?></h2>
 
             <iframe width="560" height="315" src="<?= $embed ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
             <div style="margin-top: 16px;">
-                <?php if ($mod > 0): ?>
-                    <a href="continuar.php?id=<?php echo (int)$cursoId; ?>&mod=<?php echo (int)($mod - 1); ?>">
-                        <button type="button">Voltar</button>
-                    </a>
-                <a href="continuar.php?id=<?php echo (int)$cursoId; ?>&mod=<?php echo (int)($mod + 1); ?>">
-                    <button type="button">Continuar</button>
-                </a>
-                <?php else: ?>
-                <a href="continuar.php?id=<?php echo (int)$cursoId; ?>&mod=<?php echo (int)($mod + 1); ?>">
-                    <button type="button">Continuar</button>
-                </a>
+
+<?php if ($mod > 0): ?>
+
+    <a href="continuar.php?id=<?php echo (int)$cursoId; ?>&mod=<?php echo (int)($mod - 1); ?>">
+        <button type="button">Voltar</button>
+    </a>
+
+<?php endif; ?>
+
+<a href="continuar.php?id=<?php echo (int)$cursoId; ?>&mod=<?php echo (int)($mod + 1); ?>">
+    <button type="button">Continuar</button>
+</a>
             </div>
-        <?php endif; ?>
         <?php endif; ?>
     </main>
 </body>

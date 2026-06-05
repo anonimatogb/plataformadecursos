@@ -30,8 +30,8 @@ class ModuloController
         return $this->moduloModel->porcurso((int)$cursoId);
     }
 
-    public function deletar($id) {
-        return $this->moduloModel->deletar((int)$id);
+    public function desativar($id) {
+        return $this->moduloModel->desativar($id);
     }
 }
 
