@@ -16,14 +16,14 @@ class UsuarioModel
 
     public function buscarFotoPerfil($idUsuario)
     {
-        $sql = "SELECT foto_perfil FROM usuarios WHERE id = :id";
+        $sql = "SELECT * FROM usuarios WHERE id = :id";
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
             ':id' => $idUsuario
         ]);
 
-        return $stmt->fetchColumn();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function buscarUsuario($id): array
@@ -61,5 +61,25 @@ class UsuarioModel
         $stmt = $this->pdo->prepare("SELECT * FROM usuarios WHERE email = :email AND senha = :senha");
         $stmt->execute([':email' => $email, ':senha' => $senha]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+       public function atualizar($id, $nome, $email, $senha, $foto_perfil = null)
+    {
+        try {
+            $sql = "UPDATE usuarios SET nome = :nome, email = :email, senha = :senha, foto_perfil = :foto_perfil WHERE id = :id";
+            $stmt = $this->pdo->prepare($sql);
+            return $stmt->execute([
+                ':id' => (int)$id,
+                ':nome' => $nome,
+                ':email' => $email,
+                ':senha' => $senha,
+                ':foto_perfil' => $foto_perfil
+            ]);
+        } catch (PDOException $e) {
+            if ($e->getCode() == 23000) {
+                return "ERRO";
+            }
+            throw $e;
+        }
     }
 }

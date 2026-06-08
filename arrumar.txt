@@ -3,10 +3,10 @@ $ Alterar os videos para salvar o link do youtube em vez dar upload no video
 $ Implementar a foto de perfil
 $ Arrumar o select da criação de módulos
 $ Rever o projeto para implementar a desativação de um curso em vez da exclusão
-# Arrumar os editar
+$ Arrumar os editar do curso
+$ Fazer a edição de usuário
 # Validação de Professor (algo para comprovar que o professor seria professor)
 # Parte da Assinatura para ter opções de pagamento como pix ou cartão (de preferência depois do cadastro do usuario como aluno) # Tentar colocar Qrcode para o pix
-# Fazer a edição de usuário
 # Criar página Admin.php
 # Fazer todo o processo de CRUD na página admin.php
 # Revisar o projeto para ter certeza de que não está errado #

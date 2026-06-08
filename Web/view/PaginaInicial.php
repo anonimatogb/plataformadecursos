@@ -17,7 +17,7 @@ $matriculaController = new MatriculaController($pdo);
 $sei = $matriculaController->confe($_SESSION['id']);
 
 $usuarioController = new UsuarioController($pdo);
-$fotoPerfil = $usuarioController->buscarFotoPerfil($_SESSION['id']);
+$usuario = $usuarioController->buscarUsuario($_SESSION['id']);
 
 ?>
 
@@ -35,14 +35,11 @@ $fotoPerfil = $usuarioController->buscarFotoPerfil($_SESSION['id']);
         <h1>Lunex</h1>
         <a href="paginainicial.php">Início</a>
         <a href="meus.php">Meus cursos</a>
-        <img
-            src="data:image/jpeg;base64,<?= base64_encode($fotoPerfil) ?>"
-            alt="Foto de Perfil"
-            width="120">
-        <p><?php echo $_SESSION['nome']; ?></p>
+          <a href="editarusuario.php"><img src="data:image/jpeg;base64,<?= base64_encode($usuario['foto_perfil']) ?>" alt="Foto de Perfil" width="100"></a>
+    <p><?php echo htmlspecialchars($usuario['nome']) ?></p>
         <a href="logout.php">Sair</a>
     </nav>
-    <h1>Bem-vindo, <?php echo $_SESSION['nome']; ?>!</h1>
+    <h1>Bem-vindo, <?php echo $usuario['nome']; ?>!</h1>
     <p>Esta é a página inicial para alunos.</p>
 
 

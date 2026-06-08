@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once "../db/database.php";
+require_once "../controller/UsuarioController.php";
 require_once "../Controller/CursosController.php";
 require_once "../Controller/MatriculaController.php";
 require_once "../Controller/moduloController.php";
@@ -15,6 +16,9 @@ $matriculaController = new MatriculaController($pdo);
 $trazer = $matriculaController->macho($_SESSION['id']);
 $moduloController = new ModuloController($pdo);
 $modulos = $moduloController->porprof($_SESSION['id']);
+$usuarioController = new UsuarioController($pdo);
+$usuario = $usuarioController->buscarUsuario($_SESSION['id']);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,10 +30,16 @@ $modulos = $moduloController->porprof($_SESSION['id']);
 </head>
 
 <body>
-    <h1>Central do Aprendizado</h1>
-    <h2>Bem-vindo, Professor <?php echo htmlspecialchars($_SESSION['nome']); ?>!</h2>
-    <p>Aqui você pode gerenciar seus alunos e criar cursos.</p>
+    <nav>
+        <h1>Lunex</h1>
+        <a href="professor.php">Início</a>
+    <a href="editarusuario.php"><img src="data:image/jpeg;base64,<?= base64_encode($usuario['foto_perfil']) ?>" alt="Foto de Perfil" width="100"></a>
+    <p><?php echo htmlspecialchars($usuario['nome']) ?></p>
     <a href="logout.php">Sair</a>
+    </nav>
+    <h1>Central do Aprendizado</h1>
+    <h2>Bem-vindo, Professor <?php echo htmlspecialchars($usuario['nome']); ?>!</h2>
+    <p>Aqui você pode gerenciar seus alunos e criar cursos.</p>
 
     <h3>Seus Cursos:</h3>
     <ul>
@@ -53,7 +63,7 @@ $modulos = $moduloController->porprof($_SESSION['id']);
             echo "Nenhum aluno matriculado ainda.";
         } else {
             foreach ($trazer as $matriculado) {
-                if (!$matriculado['ativo']) {
+                if (!$matriculado['matricula_ativa']) {
                     continue; // Pula módulos inativos
                 }
                 echo "<li>" . "Aluno: " . $matriculado['aluno'] . " | Curso: " . $matriculado['curso'] . " | Data de Matrícula: " . date('d/m/Y', strtotime($matriculado['data_matricula'])) . "</li>";

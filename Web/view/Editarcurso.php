@@ -13,20 +13,9 @@ $cursosController = new CursosController($pdo);
 $cursos = $cursosController->buscarum($_GET['id_curso']);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
     $fotocapa = null;
     $certificado = null;
-
-   
-
-    $cursos = $cursosController->atualizar(
-        $_GET['id_curso'],
-        $_POST['nome'],
-        $_POST['descricao'],
-        $_POST['carga_horaria'],
-        $fotocapa,
-        $certificado
-    );
-    
 
     // FOTO CAPA
     if (isset($_FILES['fotocapa']) && $_FILES['fotocapa']['error'] == 0) {
@@ -46,6 +35,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (str_contains($tipo, 'image')) {
             $certificado = file_get_contents($_FILES['certificado']['tmp_name']);
         }
+    }
+
+    $cursoAtualizado = $cursosController->atualizar(
+        $_GET['id_curso'],
+        $_POST['nome'],
+        $_POST['descricao'],
+        $_POST['carga_horaria'],
+        $fotocapa,
+        $certificado
+    );
+
+    if ($cursoAtualizado) {
+
+        header("Location: professor.php");
+        exit;
+
+    } else {
+
+        echo "Erro ao atualizar curso.";
+
     }
 }
 
@@ -83,3 +92,4 @@ if(!isset($_GET['id_curso'])){
     <button type="submit">Atualizar</button>
     <a href="professor.php">Voltar</a>
 </form>
+

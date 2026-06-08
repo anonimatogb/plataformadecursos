@@ -22,6 +22,7 @@ class MatriculaModel
         $sql = "SELECT 
 usuarios.nome AS aluno,
 cursos.nome AS curso,
+matriculas.ativo AS matricula_ativa,
 matriculas.id,
 matriculas.data_matricula,
 matriculas.professor_id
@@ -88,4 +89,3 @@ INNER JOIN cursos
         }
     }
 }
-
