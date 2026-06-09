@@ -5,8 +5,8 @@ $ Arrumar o select da criação de módulos
 $ Rever o projeto para implementar a desativação de um curso em vez da exclusão
 $ Arrumar os editar do curso
 $ Fazer a edição de usuário
-# Validação de Professor (algo para comprovar que o professor seria professor)
-# Parte da Assinatura para ter opções de pagamento como pix ou cartão (de preferência depois do cadastro do usuario como aluno) # Tentar colocar Qrcode para o pix
+$ Validação de Professor (algo para comprovar que o professor seria professor)
+$ Parte da Assinatura para ter opções de pagamento como pix ou cartão (de preferência depois do cadastro do usuario como aluno) # Tentar colocar Qrcode para o pix
 # Criar página Admin.php
 # Fazer todo o processo de CRUD na página admin.php
 # Revisar o projeto para ter certeza de que não está errado #

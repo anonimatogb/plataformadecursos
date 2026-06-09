@@ -19,10 +19,90 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $resultado = $UsuarioController->cadastrar($nome, $email, $senha, $cargo, $fotoperfil);
 
-    if ($resultado === "duplicado") {
-        echo "Email já cadastrado. Por favor, use outro email.";
+     if ($resultado === "duplicado") {
+        echo "<script>
+                alert('Email já cadastrado. Por favor, use outro email.');
+                window.location.href = 'CadastrarUsuario.php';
+              </script>";
+    }
+    if ($cargo === "professor") {
+
+        echo "
+<style>
+    .se{
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    background: rgba(0,0,0,0.6);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999;
+}
+
+.cndb{
+    background:
+        linear-gradient(
+            135deg,
+            var(--bg-primary),
+            var(--bg-secondary),
+            var(--bg-third)
+        );
+
+    padding: 30px;
+
+    border-radius: 12px;
+
+    width: 350px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+}
+    .cndb label{
+        font-weight: bold;
+color: #ffffff;
+    }
+
+    .cndb input{
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        color: #000000;
+        font-size: 16px;
+    }
+
+        </style>
+
+<section class='se'>
+
+    <section class='cndb' id='cndb'>
+
+        <label>Número da CNDB</label>
+
+        <input
+            type='text'
+            name='cndb'
+            placeholder='Número da CNDB'>
+
+        <a href='index.php' class='btn-primary'>
+            Concluir Registro
+        </a>
+
+    </section>
+
+</section>
+
+";
     } else {
-        header("Location: index.php");
+        header("Location: assinar.php?email=" . urlencode($email));
         exit();
     }
 }
@@ -48,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <h2 class="form-title"> Cadastrar-se </h2>
 
         <!-- PRIMEIRA TELA -->
-        <section class="form-screen" id="inicio" >
+        <section class="form-screen" id="inicio">
 
             <label>Nome</label>
             <input type="text" name="nome" required>
