@@ -43,6 +43,7 @@ WHERE matriculas.professor_id = $id";
         $sql = "SELECT 
 usuarios.nome AS aluno,
 cursos.nome AS curso,
+matriculas.ativo,
 matriculas.id,
 matriculas.data_matricula,
 matriculas.professor_id

@@ -4,7 +4,7 @@ require_once "../Controller/ModuloController.php";
 require_once "../Controller/CursosController.php";
 require_once "../db/database.php";
 
-if (!isset($_SESSION['nome']) || $_SESSION['cargo'] !== 'professor') {
+if (!isset($_SESSION['nome']) || $_SESSION['cargo'] !== 'professor' ) {
     header('Location: Index.php');
     exit();
 }

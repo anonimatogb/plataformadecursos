@@ -3,7 +3,7 @@ session_start();
 require_once "../db/database.php";
 require_once "../controller/UsuarioController.php";
 
-if (!isset($_SESSION['cargo']) || ($_SESSION['cargo'] !== 'professor' && $_SESSION['cargo'] !== 'aluno')) {
+if (!isset($_SESSION['cargo']) || ($_SESSION['cargo'] !== 'professor' && $_SESSION['cargo'] !== 'aluno' && $_SESSION['cargo'] !== 'admin')) {
     header("Location: Index.php");
     exit;
 }

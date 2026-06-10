@@ -2,7 +2,7 @@
 session_start();
 require_once "../Controller/cursosController.php";
 require_once "../db/database.php";
-if (!isset($_SESSION['nome']) || $_SESSION['cargo'] !== 'professor') {
+if (!isset($_SESSION['nome']) || $_SESSION['cargo'] !== 'professor' && $_SESSION['cargo'] !== 'admin') {
     header("Location: Index.php");
     exit;
 }
@@ -18,8 +18,11 @@ if (!isset($_GET['id_curso'])) {
 }
 
 $resultado = $cursosController->desativar($_GET['id_curso']);
-if ($resultado) {
+if ($resultado && $_SESSION['cargo'] == 'professor') {
     header("Location: professor.php");
+    exit;
+}if($resultado && $_SESSION['cargo'] == 'admin'){
+    header("Location: admin.php");
     exit;
 } else {
     echo "Erro ao deletar curso. Por favor, tente novamente.";

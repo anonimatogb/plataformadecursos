@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 03/06/2026 às 14:15
+-- Tempo de geração: 10/06/2026 às 15:27
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -30,11 +30,11 @@ SET time_zone = "+00:00";
 CREATE TABLE `cursos` (
   `id` int(11) NOT NULL,
   `nome` varchar(255) NOT NULL,
-  `fotocapa` varchar(255) NOT NULL,
+  `fotocapa` longblob NOT NULL,
   `descricao` varchar(255) NOT NULL,
   `professor` int(11) NOT NULL,
   `carga_horaria` int(11) NOT NULL,
-  `certificado` varchar(255) NOT NULL,
+  `certificado` longblob NOT NULL,
   `ativo` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -42,8 +42,7 @@ CREATE TABLE `cursos` (
 -- Despejando dados para a tabela `cursos`
 --
 
-INSERT INTO `cursos` (`id`, `nome`, `fotocapa`, `descricao`, `professor`, `carga_horaria`, `certificado`) VALUES
-(7, 'Java Básico', 'uploads/cursos/capa_6a2018f7997d92.13185313.png', 'Aprenda os fundamentos da linguagem Java, uma das tecnologias mais utilizadas no desenvolvimento de software. Neste curso, você conhecerá conceitos essenciais como variáveis, operadores, estruturas de decisão e repetição, métodos, classes e objetos, desen', 5, 15, 'uploads/certificados/cert_6a2018f79a0c88.10036100.png');
+
 
 -- --------------------------------------------------------
 
@@ -61,6 +60,13 @@ CREATE TABLE `matriculas` (
   `ativo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Despejando dados para a tabela `matriculas`
+--
+
+INSERT INTO `matriculas` (`id`, `aluno_id`, `cursos_id`, `professor_id`, `data_matricula`, `concluido`, `ativo`) VALUES
+(1, 2, 8, 2, '2026-06-10', 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -71,18 +77,10 @@ CREATE TABLE `modulo` (
   `id` int(11) NOT NULL,
   `titulo` varchar(255) NOT NULL,
   `cursos_id` int(11) NOT NULL,
-  `video` varchar(255) NOT NULL,
+  `video` longblob NOT NULL,
   `professor` int(11) NOT NULL,
   `ativo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Despejando dados para a tabela `modulo`
---
-
-INSERT INTO `modulo` (`id`, `titulo`, `cursos_id`, `video`, `professor`) VALUES
-(11, 'Introdução a Java', 7, '../videos/6a201a0fb4347.mp4', 5),
-(12, 'Entendendo .This', 7, '../videos/6a201a509bce3.mp4', 5);
 
 -- --------------------------------------------------------
 
@@ -96,13 +94,15 @@ CREATE TABLE `usuarios` (
   `email` varchar(255) NOT NULL,
   `senha` varchar(255) NOT NULL,
   `cargo` varchar(255) NOT NULL,
-  `foto_perfil` varchar(255) NOT NULL
+  `foto_perfil` longblob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Despejando dados para a tabela `usuarios`
 --
 
+INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `cargo`, `foto_perfil`) VALUES
+(1, 'Gabriel', 'gabrielcavalcante22@outlook.com', '123', 'admin', NULL);
 --
 -- Índices para tabelas despejadas
 --

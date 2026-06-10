@@ -3,7 +3,7 @@ session_start();
 require_once "../Controller/CursosController.php";
 require_once "../DB/DataBase.php";
 
-if (!isset($_SESSION['nome']) || $_SESSION['cargo'] !== 'professor') {
+if (!isset($_SESSION['nome']) || $_SESSION['cargo'] !== 'professor' ) {
     header('Location: Index.php');
     exit();
 }

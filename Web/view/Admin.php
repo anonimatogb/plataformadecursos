@@ -51,28 +51,86 @@ $modulos = $moduloController->todos();
         echo "</ul>";
     }
 
+
     if (empty($cursos)) {
         echo "<p>Nenhum curso cadastrado.</p>";
     } else {
-        echo "<h2>Cursos Cadastrados:</h2><ul>";
+        echo "<h2>Cursos Ativos:</h2><ul>";
         foreach ($cursos as $curso) {
-            echo "<li>ID: " . $curso['id'] . " | Nome: " . $curso['nome'] . " | Descrição: " . $curso['descricao'] . " | Carga Horária: " . $curso['carga_horaria'] . " horas | Professor ID: " . $curso['professor'] . "</li>";
+            if (!$curso['ativo']) {
+                continue; // Pula cursos inativos
+            }
+            echo "<li>ID: " . $curso['id'] . " | <img 
+    src='data:image/jpeg;base64," . base64_encode($curso['fotocapa']) . "'
+    alt='" . $curso['nome'] . "'
+     width='100'> | Nome: " . $curso['nome'] . " | Descrição: " . $curso['descricao'] . " | Carga Horária: " . $curso['carga_horaria'] . " horas | Professor ID: " . $curso['professor'] . "</li><a href='editarcurso.php?id_curso=" . $curso['id'] . "'>Editar</a>" . "<a href='deletarcurso.php?id_curso=" . $curso['id'] . "'>Deletar</a>";
         }
         echo "</ul>";
-    }
+    
 
-    if (empty($trazer)) {
-        echo "<p>Nenhum aluno matriculado ainda.</p>";
-    } else {
-        echo "<h2>Relação de Matrículas:</h2><ul>";
-        foreach ($trazer as $matriculado) {
-            echo "<li>" . "Aluno: " . $matriculado['aluno'] . " | Curso: " . $matriculado['curso'] . " | Data de Matrícula: " . date('d/m/Y', strtotime($matriculado['data_matricula'])) . "</li>";
+        echo "<h2>Cursos Desativados:</h2><ul>";
+        foreach ($cursos as $curso) {
+            if ($curso['ativo']) {
+                continue; // Pula cursos inativos
+            }
+            echo "<li>ID: " . $curso['id'] . " | <img 
+    src='data:image/jpeg;base64," . base64_encode($curso['fotocapa']) . "'
+    alt='" . $curso['nome'] . "'
+     width='100'> | Nome: " . $curso['nome'] . " | Descrição: " . $curso['descricao'] . " | Carga Horária: " . $curso['carga_horaria'] . " horas | Professor ID: " . $curso['professor'] . "</li>";
         }
         echo "</ul>";
+    
     }
 
-    ?>
+if (empty($trazer)) {
+    echo "<p>Nenhuma matrícula ativa.</p>";
+} else {
+    echo "<h2>Matrículas Ativas:</h2><ul>";
+    foreach ($trazer as $matriculado) {
+        if (!$matriculado['ativo']) {
+            continue; // Pula matrículas inativas
+        }
+        echo "<li>Aluno: " . $matriculado['aluno'] . " | Curso: " . $matriculado['curso'] . " | Data de Matrícula: " . date('d/m/Y', strtotime($matriculado['data_matricula'])) . "</li>";
+    }
+    echo "</ul>";
+    echo "<h2>Matrículas Inativas:</h2><ul>";
+    foreach ($trazer as $matriculado) {
+        if ($matriculado['ativo']) {
+            continue; // Pula matrículas ativas
+        }
+        echo "<li>Aluno: " . $matriculado['aluno'] . " | Curso: " . $matriculado['curso'] . " | Data de Matrícula: " . date('d/m/Y', strtotime($matriculado['data_matricula'])) . "</li>";
+    }
+    echo "</ul>";
+}
 
+if (empty($modulos)) {
+    echo "<p>Nenhum módulo cadastrado.</p>";
+} else {
+    echo "<h2>Módulos Ativos:</h2><ul>";
+    foreach ($modulos as $modulo) {
+        if (!$modulo['ativo']) {
+            continue; // Pula módulos inativos
+        }
+        echo "<li>ID: " . $modulo['id'] . " | Nome: " . $modulo['nome'] . " | Descrição: " . $modulo['descricao'] . " | Curso ID: " . $modulo['cursos_id'] . "</li>";
+    }
+    echo "</ul>";
+    echo "<h2>Módulos Inativos:</h2><ul>";
+    foreach ($modulos as $modulo) {
+        if ($modulo['ativo']) {
+            continue; // Pula módulos ativos
+        }
+        echo "<li>ID: " . $modulo['id'] . " | Nome: " . $modulo['nome'] . " | Descrição: " . $modulo['descricao'] . " | Curso ID: " . $modulo['cursos_id'] . "</li>";
+    }
+    echo "</ul>";
+}
+
+
+
+
+       ?>
+
+
+    
 
 
 </body>
