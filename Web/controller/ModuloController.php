@@ -33,6 +33,11 @@ class ModuloController
     public function desativar($id) {
         return $this->moduloModel->desativar($id);
     }
+ 
+    public function todos(){
+        return $this->moduloModel->todos();
+    }
+
 }
 
 

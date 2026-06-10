@@ -78,8 +78,16 @@ class ModuloModel
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([':id' => (int)$id]);
     }
-}
 
+    public function todos()
+    {
+        $sql = "SELECT * FROM modulo WHERE ativo = 1 ORDER BY id ASC";
+        $stmt = $this->pdo->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+}
+    
 
 
 

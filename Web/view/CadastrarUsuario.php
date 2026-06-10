@@ -146,6 +146,9 @@ color: #ffffff;
             <a href="#cargo" class="btn-primary">
                 Continuar
             </a>
+             <a href="index.php">
+                Possui uma conta ? Faça login
+            </a>
 
         </section>
 

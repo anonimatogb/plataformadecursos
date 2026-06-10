@@ -34,7 +34,8 @@ CREATE TABLE `cursos` (
   `descricao` varchar(255) NOT NULL,
   `professor` int(11) NOT NULL,
   `carga_horaria` int(11) NOT NULL,
-  `certificado` varchar(255) NOT NULL
+  `certificado` varchar(255) NOT NULL,
+  `ativo` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -56,7 +57,8 @@ CREATE TABLE `matriculas` (
   `cursos_id` int(11) NOT NULL,
   `professor_id` int(11) NOT NULL,
   `data_matricula` date NOT NULL,
-  `concluido` int(11) NOT NULL
+  `concluido` int(11) NOT NULL,
+  `ativo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -70,7 +72,8 @@ CREATE TABLE `modulo` (
   `titulo` varchar(255) NOT NULL,
   `cursos_id` int(11) NOT NULL,
   `video` varchar(255) NOT NULL,
-  `professor` int(11) NOT NULL
+  `professor` int(11) NOT NULL,
+  `ativo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -99,11 +102,6 @@ CREATE TABLE `usuarios` (
 --
 -- Despejando dados para a tabela `usuarios`
 --
-
-INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `cargo`, `foto_perfil`) VALUES
-(5, 'Gabriel Machado Cavalcante', 'gabrielcavalcante22@outlook.com', '123', 'professor', ''),
-(6, 'Vinicius Zucolin', 'vinicius@gmail', '123', 'aluno', ''),
-(7, 'Dhiogo', 'dhiogo@gmail', '123', 'aluno', '');
 
 --
 -- Índices para tabelas despejadas
@@ -146,25 +144,25 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `cursos`
 --
 ALTER TABLE `cursos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT de tabela `matriculas`
 --
 ALTER TABLE `matriculas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT de tabela `modulo`
 --
 ALTER TABLE `modulo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- Restrições para tabelas despejadas
