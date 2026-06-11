@@ -47,6 +47,9 @@ $modulos = $moduloController->todos();
     src='data:image/jpeg;base64," . base64_encode($user['foto_perfil']) . "'
     alt='" . $user['nome'] . "'
      width='100'> | Nome: " . $user['nome'] . " | Email: " . $user['email'] . " | Senha: " . $user['senha'] . " | Cargo: " . $user['cargo'] . "</li>";
+if($user['cargo'] !== 'admin' ){
+   echo "<a href='trans.php?id_curso=" . $user['id'] . "'>Admin</a>";
+}
         }
         echo "</ul>";
     }
@@ -63,7 +66,7 @@ $modulos = $moduloController->todos();
             echo "<li>ID: " . $curso['id'] . " | <img 
     src='data:image/jpeg;base64," . base64_encode($curso['fotocapa']) . "'
     alt='" . $curso['nome'] . "'
-     width='100'> | Nome: " . $curso['nome'] . " | Descrição: " . $curso['descricao'] . " | Carga Horária: " . $curso['carga_horaria'] . " horas | Professor ID: " . $curso['professor'] . "</li><a href='editarcurso.php?id_curso=" . $curso['id'] . "'>Editar</a>" . "<a href='deletarcurso.php?id_curso=" . $curso['id'] . "'>Deletar</a>";
+     width='100'> | Nome: " . $curso['nome'] . " | Descrição: " . $curso['descricao'] . " | Carga Horária: " . $curso['carga_horaria'] . " horas | Professor ID: " . $curso['professor'] . "</li><a href='editarcurso.php?id_curso=" . $curso['id'] . "'>Editar</a>" . "<a href='deletarcurso.php?id_curso=" . $curso['id'] . "'>Desativar</a>";
         }
         echo "</ul>";
     
@@ -107,11 +110,12 @@ if (empty($modulos)) {
     echo "<p>Nenhum módulo cadastrado.</p>";
 } else {
     echo "<h2>Módulos Ativos:</h2><ul>";
+     $modulosPorCurso = [];
     foreach ($modulos as $modulo) {
         if (!$modulo['ativo']) {
             continue; // Pula módulos inativos
         }
-        echo "<li>ID: " . $modulo['id'] . " | Nome: " . $modulo['nome'] . " | Descrição: " . $modulo['descricao'] . " | Curso ID: " . $modulo['cursos_id'] . "</li>";
+        echo "<li>ID: " . $modulo['id'] . " | Nome: " . $modulo['titulo'] . " | Curso ID: " . $modulo['cursos_id'] . "</li> <a href='deletarmodulo.php?id_curso=" . $modulo['id'] . "'>Desativar</a>";
     }
     echo "</ul>";
     echo "<h2>Módulos Inativos:</h2><ul>";
@@ -119,11 +123,10 @@ if (empty($modulos)) {
         if ($modulo['ativo']) {
             continue; // Pula módulos ativos
         }
-        echo "<li>ID: " . $modulo['id'] . " | Nome: " . $modulo['nome'] . " | Descrição: " . $modulo['descricao'] . " | Curso ID: " . $modulo['cursos_id'] . "</li>";
+        echo "<li>ID: " . $modulo['id'] . " | Nome: " . $modulo['titulo'] . " | Curso ID: " . $modulo['cursos_id'] . "</li>";
     }
     echo "</ul>";
 }
-
 
 
 
