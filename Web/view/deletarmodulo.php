@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once "../Controller/moduloController.php";
+require_once "../controller/ModuloController.php";
 require_once "../db/database.php";
 
 if (!isset($_SESSION['nome']) || $_SESSION['cargo'] !== 'professor' && $_SESSION['cargo'] !== 'admin') {

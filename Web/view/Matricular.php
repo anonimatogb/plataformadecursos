@@ -2,8 +2,8 @@
 try{
 session_start();
 
-require_once "../Controller/MatriculaController.php";
-require_once "../DB/DataBase.php";
+require_once "../controller/MatriculaController.php";
+require_once "../db/database.php";
 
 
 $matriculaController = new MatriculaController($pdo);

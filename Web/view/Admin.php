@@ -1,10 +1,10 @@
 <?php
 session_start();
-require_once "../DB/DataBase.php";
-require_once "../Controller/UsuarioController.php";
-require_once "../Controller/CursosController.php";
-require_once "../Controller/MatriculaController.php";
-require_once "../Controller/ModuloController.php";
+require_once "../db/database.php";
+require_once "../controller/UsuarioController.php";
+require_once "../controller/CursosController.php";
+require_once "../controller/MatriculaController.php";
+require_once "../controller/ModuloController.php";
 
 
 if (!isset($_SESSION['cargo']) || $_SESSION['cargo'] !== 'admin') {

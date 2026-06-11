@@ -7,10 +7,64 @@ $ Arrumar os editar do curso
 $ Fazer a edição de usuário
 $ Validação de Professor (algo para comprovar que o professor seria professor)
 $ Parte da Assinatura para ter opções de pagamento como pix ou cartão (de preferência depois do cadastro do usuario como aluno) # Tentar colocar Qrcode para o pix
-# Criar página Admin.php
-# Fazer todo o processo de CRUD na página admin.php
+$ Criar página Admin.php
+$ Fazer todo o processo de CRUD na página admin.php
 # Revisar o projeto para ter certeza de que não está errado #
 
+
+# =====================================================
+# ACHADOS DE VALIDAÇÃO (RISCOS QUE PODEM FALHAR NO TESTE DO USUÁRIO)
+# =====================================================
+
+# [ALTO] 1) Fatal error por caminhos/pastas e casing inconsistentes
+# - Controllers existem em pastas diferentes:
+#   Web/controller/UsuarioController.php ("controller")
+#   Web/Controller/cursosController.php e Web/Controller/MatriculaController.php ("Controller")
+# - Views incluem com paths diferentes (../controller/... vs ../Controller/...). Em ambientes diferentes isso pode quebrar.
+
+# [ALTO] 2) SQL Injection / query com concatenação de parâmetros
+# - Web/model/MatriculaModel.php:
+#   confe($id) e macho($id) concatenam $id na string SQL.
+# - Web/model/CursosModel.php:
+#   buscarcursos($id) concatena $id.
+# - Web/model/UsuarioModel.php:
+#   buscarUsuario($id) concatena $id.
+
+# [ALTO] 3) Login inconsistente e senha em texto puro
+# - UsuarioController::login() buscaTodos() e compara email/senha em memória.
+# - UsuarioModel::login() existe mas não garante ser usado no fluxo principal.
+# - Não há password_hash/password_verify.
+
+# [ALTO] 4) Trans/admin: possível troca de cargo com id errado e inconsistência de require
+# - Trans.php chama UsuarioController->trans($_GET['id_curso']). O nome do parâmetro sugere curso, mas o model altera cargo por id do usuário.
+
+# [MÉDIO] 5) Views com alta probabilidade de quebra por arquivos/URLs com case diferente
+# - Ex.: Index.php redireciona para "Paginainicial.php" (pode não bater com "PaginaInicial.php" em case-sensitive).
+
+# [MÉDIO] 6) Admin.php expõe senha em tela (falha de segurança)
+# - Admin.php imprime $user['senha'].
+
+# [MÉDIO] 7) Conexão PDO hardcoded e die() em erro
+# - Web/db/database.php usa credenciais fixas e die() no catch.
+
+# =====================================================
+
+# [A AJUSTAR] CAMINHOS (SOMENTE PARA ARRUMAR REQUIRES/INCLUDES E EVITAR CLASS NOT FOUND)
+# - WEB/VIEW/INDEX.PHP USA:
+#   REQUIRE_ONCE "../CONTROLLER/USUARIOCONTROLLER.PHP" E "../DB/DATABASE.PHP" (CASO DIFERENTE EXISTENTE)
+#   EXISTE: WEB/CONTROLLER/USUARIOCONTROLLER.PHP E WEB/DB/DATABASE.PHP
+# - WEB/VIEW/PAGAINICIAL.PHP USA "../CONTROLLER/..." E "../DB/DATABASE.PHP" (PADRONIZAR PARA EXISTIR)
+# - WEB/VIEW/PROFESSOR.PHP USA "../CONTROLLER" E "../DB" (HÁ MISTURA DE CASE ENTRE CONTROLLER/CONTROLLER E DB/DATABASE)
+# - WEB/VIEW/TRANS.PHP USA "../CONTROLLER/USUARIOCONTROLLER.PHP" (EVITAR "USUARIocontroller.php" EM MINÚSCULO)
+# - WEB/VIEW/MATRICULAR.PHP USA "../CONTROLLER/MATRICULACONTROLLER.PHP" MAS REFERENCIA "../DB/DATABASE.PHP" COM CASE DIFERENTE (PADRONIZAR)
+# - WEB/VIEW/EDITARCURSO.PHP E DELETARCURSO.PHP USAM "../DB/DATABASE.PHP" E "../CONTROLLER/..." MISTURADOS (PADRONIZAR)
+#
+# CORREÇÃO SUGERIDA (OPÇÃO DE PADRÃO):
+#   - CONTROLLERS: PADRÃO "../CONTROLLER/*.PHP" OU "../CONTROLLER/*.PHP" (UM SÓ CASO)
+#   - DB: SEMPRE "../DB/DATABASE.PHP"
+#   - EVITAR "DATABSE/DB/DataBase.php" (SÓ EXISTE "WEB/DB/DATABASE.PHP")
+#
+# OBS.: ESTA LISTA FOI ADICIONADA APÓS VALIDADAR ALGUNS REQUIRES NAS VIEWS ABERTAS.
 
 
 # = fazer

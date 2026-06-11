@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "../Controller/cursosController.php";
+require_once "../controller/CursosController.php";
 require_once "../db/database.php";
 if (!isset($_SESSION['nome']) || $_SESSION['cargo'] !== 'professor' && $_SESSION['cargo'] !== 'admin') {
     header("Location: Index.php");
