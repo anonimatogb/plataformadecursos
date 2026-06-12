@@ -1,9 +1,9 @@
 <?php
 session_start();
+require_once "../DB/DataBase.php";
 require_once "../Controller/UsuarioController.php";
 require_once "../Controller/CursosController.php";
 require_once "../Controller/MatriculaController.php";
-require_once "../DB/DataBase.php";
 if (!isset($_SESSION['cargo']) || $_SESSION['cargo'] !== 'aluno') {
     header("Location: Index.php");
     exit();
@@ -26,6 +26,7 @@ $quantidade=1;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/Detalhes.css"> 
     <title>Detalhes</title>
 </head>
 

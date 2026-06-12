@@ -69,6 +69,7 @@ if(!isset($_GET['id_curso'])){
 
 ?>
 <head>
+    <link rel="stylesheet" href="../css/EditarCursos.css">
     <title>Editar Curso</title>
 </head>
 

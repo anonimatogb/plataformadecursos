@@ -26,6 +26,7 @@ $usuario = $usuarioController->buscarUsuario($_SESSION['id']);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/PaginaProfessor.css">
     <title>Central do Aprendizado</title>
 </head>
 
@@ -97,7 +98,15 @@ $usuario = $usuarioController->buscarUsuario($_SESSION['id']);
             foreach ($listaModulos as $modulo) {
                 echo "<li>";
                 echo htmlspecialchars($modulo['titulo']);
-                echo " | <a href=\"" . ($modulo['video']) . "\" target=\"_blank\">Assistir Vídeo</a>";
+                  $https = ("https://") ;
+    $video = $modulo['video'] ?? '';
+    if (!preg_match('/^https?:\/\//', $video)) {
+        $video = $https . $video;
+    }
+
+        $video = preg_replace('#^https:/([^/])#', 'https://$1', $video);
+    echo "<li>ID: {$modulo['id']} | Nome: {$modulo['titulo']} | Curso ID: {$modulo['cursos_id']}
+    | <a href=\"{$video}\" target=\"_blank\">Assistir Vídeo</a>";
                 echo " | <a href='deletarmodulo.php?id_modulo=" . (int)$modulo['id'] . "'>Deletar</a>";
                 echo "</li>";
             }

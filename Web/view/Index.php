@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once "../controller/UsuarioController.php";
 require_once "../db/database.php";
+require_once "../controller/UsuarioController.php";
 
 $UsuarioController = new UsuarioController($pdo);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="../CSS/style2.css">
+    <link rel="stylesheet" href="../CSS/Login.css">
 </head>
 
 <body>

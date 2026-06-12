@@ -3,7 +3,6 @@ session_start();
 require_once "../db/database.php";
 require_once "../controller/CursosController.php";
 require_once "../controller/MatriculaController.php";
-require_once "../controller/moduloController.php";
 require_once "../controller/ModuloController.php";
 if (!isset($_SESSION['nome']) || $_SESSION['cargo'] !== 'aluno') {
     header('Location: Index.php');
@@ -37,8 +36,24 @@ $cursosController = new CursosController($pdo);
 $cursoAtual = $cursosController->tra($cursoId);
 
 if ($moduloAtual !== null) {
-    $videoUrl = $moduloAtual['video'] ?? '';
-    $embed = str_replace("watch?v=", "embed/", $videoUrl);
+ $videoUrl = trim($moduloAtual['video'] ?? '');
+
+// Corrige URLs quebradas (https:/ -> https://)
+$videoUrl = str_replace('https:/', 'https://', $videoUrl);
+
+// Se vier sem https://
+if (!preg_match('#^https?://#', $videoUrl)) {
+    $videoUrl = 'https://' . $videoUrl;
+}
+
+// Extrai ID do YouTube corretamente
+preg_match('/(?:v=|\/embed\/|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $videoUrl, $matches);
+
+$videoId = $matches[1] ?? null;
+
+$embed = $videoId
+    ? "https://www.youtube.com/embed/$videoId"
+    : $videoUrl;
 }
 
 ?>
@@ -48,6 +63,7 @@ if ($moduloAtual !== null) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/Continuar.css">
     <title>Lunex</title>
 </head>
 
