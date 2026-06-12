@@ -13,9 +13,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $cargo = $_POST['cargo'];
     $fotoperfil = null;
 
-    if (!empty($_FILES['foto_perfil']['tmp_name'])) {
-        $fotoperfil = file_get_contents($_FILES['foto_perfil']['tmp_name']);
+  if (!empty($_FILES['foto_perfil']['tmp_name'])) {
+
+    $tamanhoMaximo = 2 * 1024 * 1024; // 2MB
+
+    if ($_FILES['foto_perfil']['size'] > $tamanhoMaximo) {
+        echo "<script>
+                alert('A imagem é muito grande! Tamanho máximo permitido: 2MB.');
+                window.location.href = 'CadastrarUsuario.php';
+              </script>";
+        exit();
     }
+
+    $fotoperfil = file_get_contents($_FILES['foto_perfil']['tmp_name']);
+}
 
     $resultado = $UsuarioController->cadastrar($nome, $email, $senha, $cargo, $fotoperfil);
 
@@ -102,8 +113,17 @@ color: #ffffff;
 
 ";
     } else {
-        header("Location: assinar.php?email=" . urlencode($email));
-        exit();
+        if($resultado === "duplicado") {
+            echo "<script>
+                    alert('Email já cadastrado. Por favor, use outro email.');
+                    window.location.href = 'CadastrarUsuario.php';
+                  </script>";
+            exit();
+        }else{
+            header("Location: assinar.php?email=" . urlencode($email));
+            exit();
+            
+        }
     }
 }
 ?>

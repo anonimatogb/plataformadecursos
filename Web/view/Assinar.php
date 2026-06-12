@@ -105,6 +105,7 @@ $finalar = isset($_GET['finalizar']);
                 Finalizar Pagamento
             </button>
 
+            
         </div>
 
     </div>
