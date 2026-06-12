@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once "../Controller/usuariocontroller.php";
 require_once "../db/database.php";
+require_once "../Controller/usuariocontroller.php";
 if (!isset($_SESSION['nome']) || $_SESSION['cargo'] !== 'admin') {
     header("Location: Index.php");
     exit;
