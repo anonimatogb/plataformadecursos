@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once "../controller/UsuarioController.php";
 require_once "../db/database.php";
+require_once "../controller/UsuarioController.php";
 
 $UsuarioController = new UsuarioController($pdo);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
