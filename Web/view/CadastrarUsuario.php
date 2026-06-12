@@ -13,9 +13,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $cargo = $_POST['cargo'];
     $fotoperfil = null;
 
-    if (!empty($_FILES['foto_perfil']['tmp_name'])) {
-        $fotoperfil = file_get_contents($_FILES['foto_perfil']['tmp_name']);
+  if (!empty($_FILES['foto_perfil']['tmp_name'])) {
+
+    $tamanhoMaximo = 2 * 1024 * 1024; // 2MB
+
+    if ($_FILES['foto_perfil']['size'] > $tamanhoMaximo) {
+        echo "<script>
+                alert('A imagem é muito grande! Tamanho máximo permitido: 2MB.');
+                window.location.href = 'CadastrarUsuario.php';
+              </script>";
+        exit();
     }
+
+    $fotoperfil = file_get_contents($_FILES['foto_perfil']['tmp_name']);
+}
 
     $resultado = $UsuarioController->cadastrar($nome, $email, $senha, $cargo, $fotoperfil);
 
@@ -102,8 +113,17 @@ color: #ffffff;
 
 ";
     } else {
-        header("Location: assinar.php?email=" . urlencode($email));
-        exit();
+        if($resultado === "duplicado") {
+            echo "<script>
+                    alert('Email já cadastrado. Por favor, use outro email.');
+                    window.location.href = 'CadastrarUsuario.php';
+                  </script>";
+            exit();
+        }else{
+            header("Location: assinar.php?email=" . urlencode($email));
+            exit();
+            
+        }
     }
 }
 ?>
@@ -139,8 +159,15 @@ color: #ffffff;
             <label>Senha</label>
             <input type="password" name="senha" required>
 
-            <label>Foto de Perfil</label>
-            <input type="file" name="foto_perfil" accept="image/*">
+            <div class="avatar-container">
+    <label class="avatar-label">Foto de Perfil</label>
+    <label for="foto_perfil" class="avatar-wrapper">
+        <div class="avatar-preview" id="avatarPreview">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="camera-icon"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path><circle cx="12" cy="13" r="3"></circle></svg>
+        </div>
+    </label>
+    <input type="file" name="foto_perfil" id="foto_perfil" accept="image/*" onchange="previewImagem(event)">
+</div>
 
             <!-- abre segunda tela -->
             <a href="#cargo" class="btn-primary">
@@ -217,13 +244,32 @@ color: #ffffff;
     </form>
 
     <script>
-        function selecionarCargo(cargo) {
+    function selecionarCargo(cargo) {
+        document.getElementById("cargoInput").value = cargo;
+        window.location.href = "#inicio";
+    }
 
-            document.getElementById("cargoInput").value = cargo;
-
-            window.location.href = "#inicio";
+    function previewImagem(event) {
+        const input = event.target;
+        const preview = document.getElementById('avatarPreview');
+        
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                // Define a foto selecionada como plano de fundo do círculo
+                preview.style.backgroundImage = `url('${e.target.result}')`;
+                // Limpa o ícone da câmera de dentro do círculo
+                preview.innerHTML = '';
+                // Muda a borda tracejada para uma linha sólida elegante
+                preview.style.borderStyle = 'solid';
+                preview.style.borderColor = 'var(--purple)';
+            }
+            
+            reader.readAsDataURL(input.files[0]);
         }
-    </script>
+    }
+</script>
 </body>
 
 </html>

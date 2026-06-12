@@ -139,37 +139,40 @@ nav a:hover {
 
     background: rgba(255,255,255,0.06);
 }
+nav .profile-link {
+    display: flex;
+    align-items: center;
+}
 
-nav img {
-
+.profile-pic {
     width: 45px;
     height: 45px;
-
-    border-radius: 100px;
-
+    border-radius: 50px;
     border: 1px solid var(--border);
-
     object-fit: cover;
-
     transition: var(--transition);
 }
 
-nav img:hover {
-
+.profile-pic:hover {
     transform: scale(1.1);
-
     border-color: var(--purple);
 }
 
-nav p {
-
-    color: var(--text-soft);
-
-    font-size: 0.95rem;
-
-    font-weight: 400;
+.profile-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--purple), var(--blue));
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
 }
 
+.profile-name {
+    color: var(--text-soft);
+    font-size: 0.95rem;
+    font-weight: 400;
+}
 /* =========================
    CONTEÚDO PRINCIPAL
 ========================= */
