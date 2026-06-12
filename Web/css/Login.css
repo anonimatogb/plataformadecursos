@@ -685,3 +685,68 @@ select option {
 
     transform: scale(1.08);
 }
+
+/* =========================
+   AVATAR PREVIEW MODERN
+========================= */
+
+.avatar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 0;
+}
+
+/* Garante que o texto "Foto de Perfil" continue alinhado à esquerda */
+.avatar-label {
+    align-self: flex-start;
+    font-size: 0.85rem;
+    color: var(--text-soft);
+    margin-bottom: 2px;
+}
+
+.avatar-wrapper {
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.avatar-preview {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: var(--input-bg);
+    border: 2px dashed rgba(255, 255, 255, 0.15);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--placeholder);
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: var(--transition);
+}
+
+/* Efeito de Hover interativo combinando com seu tema */
+.avatar-wrapper:hover .avatar-preview {
+    border-color: var(--purple);
+    color: var(--text);
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+    transform: scale(1.03);
+}
+
+.camera-icon {
+    opacity: 0.5;
+    transition: var(--transition);
+}
+
+.avatar-wrapper:hover .camera-icon {
+    opacity: 1;
+    color: var(--purple);
+}
+
+/* Esconde o input file padrão do navegador por completo */
+input[type="file"]#foto_perfil {
+    display: none !important;
+}

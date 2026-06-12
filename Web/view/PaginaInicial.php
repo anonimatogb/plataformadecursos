@@ -36,10 +36,19 @@ $usuario = $usuarioController->buscarUsuario($_SESSION['id']);
         <h1>Lunex</h1>
         <a href="paginainicial.php">Início</a>
         <a href="meus.php">Meus cursos</a>
-          <a href="editarusuario.php"><img src="data:image/jpeg;base64,<?= base64_encode($usuario['foto_perfil']) ?>" alt="Foto de Perfil" width="100"></a>
-    <p><?php echo htmlspecialchars($usuario['nome']) ?></p>
+          <a href="editarusuario.php" class="profile-link">
+    <?php if (!empty($usuario['foto_perfil'])) : ?>
+        <img src="data:image/jpeg;base64,<?= base64_encode($usuario['foto_perfil']) ?>" alt="Foto de Perfil" class="profile-pic">
+    <?php else : ?>
+        <div class="profile-pic profile-placeholder">
+            <?= strtoupper(substr($usuario['nome'], 0, 1)) ?>
+        </div>
+    <?php endif; ?>
+</a>
+<p class="profile-name"><?= htmlspecialchars($usuario['nome']) ?></p> </p>
         <a href="logout.php">Sair</a>
     </nav>
+
     <h1>Bem-vindo, <?php echo $usuario['nome']; ?>!</h1>
     <p>Esta é a página inicial para alunos.</p>
 
@@ -47,9 +56,9 @@ $usuario = $usuarioController->buscarUsuario($_SESSION['id']);
     <h2>Cursos:</h2>
     <ul>
         <?php foreach ($cursos as $curso) : ?>
-             <?php  if (!$curso['ativo']) {
-                continue; // Pula módulos inativos
-            } ?>
+            <?php if (isset($curso['ativo']) && !$curso['ativo']) {
+    continue; // Pula módulos inativos
+} ?>
             <li>
 <img 
     src="data:image/jpeg;base64,<?= base64_encode($curso['fotocapa']) ?>"

@@ -12,6 +12,7 @@ $CursosController = new CursosController($pdo);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+
     $_SESSION['cursos_id_modulo'] = null;
     $nome = $_POST['nome'];
     $descricao = $_POST['descricao'];
@@ -34,6 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </script>";
           exit();
           }
+          
+    $fotocapa = file_get_contents($_FILES['fotocapa']['tmp_name']);
       }
   
       // CERTIFICADO
@@ -48,6 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </script>";
               exit();
           }
+          
+    $certificado = file_get_contents($_FILES['certificado']['tmp_name']);
       }
 
     $resultado = $CursosController->cadastrar($nome, $descricao, $carga_horaria, $professor, $fotocapa, $certificado);
