@@ -1,0 +1,229 @@
+:root {
+    --bg-primary: #070B1A;
+    --bg-secondary: #0B1023;
+    --bg-third: #111827;
+    --card-bg: rgba(15, 23, 42, 0.82);
+    --border: rgba(255,255,255,0.05);
+    --input-bg: rgba(255,255,255,0.04);
+    --text: #ffffff;
+    --text-soft: #cbd5e1;
+    --placeholder: #94a3b8;
+    --purple: #8B5CF6;
+    --blue: #3B82F6;
+    --transition: 0.3s ease;
+    --shadow: 0 0 25px rgba(0,0,0,0.35);
+    --glow: 0 0 14px rgba(139,92,246,0.35);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    background-color: var(--bg-primary);
+    background-image:
+        linear-gradient(rgba(139, 92, 246, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+    color: var(--text);
+    line-height: 1.6;
+    padding: 24px;
+}
+
+/* NAVBAR */
+nav {
+    max-width: 1200px;
+    margin: 0 auto 35px auto;
+    padding: 16px 20px;
+    background: rgba(11, 16, 35, 0.92);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+nav h1 {
+    font-size: 1.8rem;
+    color: var(--text);
+    text-shadow: 0 0 16px rgba(139, 92, 246, 0.45);
+}
+
+nav p {
+    color: var(--text-soft);
+    font-weight: 600;
+    margin: 0;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    padding: 10px 16px;
+    border-radius: 10px;
+    transition: var(--transition);
+    font-weight: 600;
+}
+
+nav a:hover {
+    transform: translateY(-2px);
+    border-color: rgba(139, 92, 246, 0.35);
+    box-shadow: var(--glow);
+    background: linear-gradient(135deg, var(--purple), var(--blue));
+}
+
+/* TÍTULOS */
+body > h1 {
+    max-width: 1200px;
+    margin: 0 auto 8px auto;
+    font-size: 2.5rem;
+    text-align: center;
+    color: var(--text);
+}
+
+body > p {
+    max-width: 1200px;
+    margin: 0 auto 28px auto;
+    text-align: center;
+    color: var(--text-soft);
+}
+
+h2 {
+    max-width: 1200px;
+    margin: 0 auto 18px auto;
+    padding: 14px 18px;
+    background: var(--bg-secondary);
+    border-left: 4px solid var(--purple);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text);
+    box-shadow: var(--shadow);
+}
+
+/* LISTA DE CURSOS */
+ul {
+    max-width: 1200px;
+    margin: 0 auto;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+    padding: 0;
+}
+
+li {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    overflow: hidden;
+}
+
+li:hover {
+    transform: translateY(-4px);
+    border-color: rgba(139, 92, 246, 0.3);
+    box-shadow: var(--glow), var(--shadow);
+}
+
+/* IMAGEM DO CURSO */
+li img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 14px;
+    border: 1px solid var(--border);
+}
+
+/* TEXTO DO CARD */
+li strong {
+    display: block;
+    font-size: 1.1rem;
+    color: var(--text);
+    margin-bottom: 8px;
+}
+
+li br {
+    display: none;
+}
+
+li {
+    color: var(--text-soft);
+    font-size: 0.95rem;
+}
+
+/* BOTÃO DETALHES */
+li a {
+    display: inline-block;
+    margin-top: 14px;
+    text-decoration: none;
+    color: var(--text);
+    background: linear-gradient(135deg, var(--purple), var(--blue));
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-weight: 700;
+    box-shadow: var(--glow);
+    transition: var(--transition);
+}
+
+li a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 24px rgba(139, 92, 246, 0.6);
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+    body {
+        padding: 14px;
+    }
+
+    nav {
+        padding: 14px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    nav h1 {
+        width: 100%;
+    }
+
+    body > h1 {
+        font-size: 1.9rem;
+    }
+
+    ul {
+        grid-template-columns: 1fr;
+    }
+
+    li img {
+        height: 180px;
+    }
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--purple);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--blue);
+}
