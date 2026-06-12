@@ -1,0 +1,417 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================
+   VARIÁVEIS
+========================= */
+
+:root {
+    --bg-primary: #070B1A;
+    --bg-secondary: #0B1023;
+    --bg-third: #111827;
+
+    --card-bg: rgba(15, 23, 42, 0.82);
+
+    --border: rgba(255,255,255,0.05);
+
+    --text: #ffffff;
+    --text-soft: #cbd5e1;
+    --placeholder: #94a3b8;
+
+    --purple: #8B5CF6;
+    --blue: #3B82F6;
+
+    --transition: 0.3s ease;
+
+    --shadow:
+        0 0 25px rgba(0,0,0,0.35);
+
+    --glow:
+        0 0 14px rgba(139,92,246,0.35);
+}
+
+/* =========================
+   BODY
+========================= */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background:
+        linear-gradient(
+            135deg,
+            var(--bg-primary),
+            var(--bg-secondary),
+            var(--bg-third)
+        );
+    min-height: 100vh;
+    color: var(--text);
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+nav {
+    background: var(--card-bg);
+    backdrop-filter: blur(18px);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 18px 34px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow);
+    margin-bottom: 30px;
+    position: sticky;
+    top: 20px;
+    z-index: 100;
+}
+
+nav h1 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            var(--purple),
+            var(--blue)
+        );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-right: 30px;
+}
+
+nav a {
+    color: var(--purple);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: var(--transition);
+    padding: 8px 16px;
+    border-radius: 11px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+nav a:hover {
+    color: var(--blue);
+    background: rgba(139,92,246,0.1);
+    transform: translateY(-2px);
+}
+
+nav img {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+nav img:hover {
+    transform: scale(1.1);
+    border-color: var(--purple);
+}
+
+nav p {
+    color: var(--text-soft);
+    font-size: 0.92rem;
+    margin-left: 15px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+body > h1 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 12px;
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            var(--purple),
+            var(--blue)
+        );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+body > h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-align: center;
+    color: var(--text-soft);
+    margin-bottom: 16px;
+}
+
+body > p {
+    text-align: center;
+    color: var(--placeholder);
+    font-size: 0.95rem;
+    margin-bottom: 30px;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+h3 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 16px;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+h3::before {
+    content: "";
+    width: 4px;
+    height: 24px;
+    background: var(--purple);
+    border-radius: 2px;
+    box-shadow: var(--glow);
+}
+
+h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--blue);
+    margin-bottom: 12px;
+    margin-top: 20px;
+    padding-left: 12px;
+}
+
+/* =========================
+   CARDS (LISTAS)
+========================= */
+
+ul {
+    background: var(--card-bg);
+    backdrop-filter: blur(18px);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: var(--shadow);
+    list-style: none;
+    margin-bottom: 24px;
+}
+
+ul li {
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-soft);
+    font-size: 0.95rem;
+    transition: var(--transition);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+ul li:last-child {
+    border-bottom: none;
+}
+
+ul li:hover {
+    background: rgba(139,92,246,0.08);
+    border-radius: 11px;
+    transform: translateX(5px);
+}
+
+ul li:hover a {
+    color: var(--blue);
+}
+
+/* =========================
+   LINKS EM LISTAS
+========================= */
+
+ul li a {
+    color: var(--purple);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 8px;
+    transition: var(--transition);
+    display: inline-block;
+    margin-left: 8px;
+}
+
+ul li a:hover {
+    color: white;
+    background: var(--purple);
+    transform: translateY(-2px);
+    box-shadow: var(--glow);
+}
+
+ul li a[href*="Assistir"] {
+    background: rgba(59,130,246,0.15);
+    color: var(--blue);
+}
+
+ul li a[href*="Assistir"]:hover {
+    background: var(--blue);
+}
+
+/* =========================
+   BOTÕES DE CADASTRO
+========================= */
+
+body a[href*="cadastrar"],
+body a[href*="Cadastro"] {
+    display: inline-block;
+    width: 100%;
+    max-width: 320px;
+    padding: 14px 24px;
+    margin: 20px auto;
+    text-align: center;
+    border: none;
+    border-radius: 11px;
+    background:
+        linear-gradient(
+            90deg,
+            var(--blue),
+            var(--purple)
+        );
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    box-shadow: var(--shadow);
+}
+
+body a[href*="cadastrar"]:hover,
+body a[href*="Cadastro"]:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--glow), 0 0 30px rgba(139,92,246,0.25);
+}
+
+/* =========================
+   TEXTO EMPTY
+========================= */
+
+ul li:only-child,
+ul:only-child {
+    color: var(--placeholder);
+    text-align: center;
+    font-style: italic;
+}
+
+/* =========================
+   ANIMAÇÃO
+========================= */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+nav, h3, ul {
+    animation: fadeIn 0.6s ease;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 15px;
+        padding: 18px 20px;
+    }
+
+    nav h1 {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    nav a {
+        width: 100%;
+        justify-content: center;
+    }
+
+    nav p {
+        margin-left: 0;
+        margin-top: 5px;
+    }
+
+    body > h1 {
+        font-size: 2rem;
+    }
+
+    body > h2 {
+        font-size: 1.2rem;
+    }
+
+    ul {
+        padding: 16px;
+    }
+
+    ul li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    ul li a {
+        margin-left: 0;
+        margin-top: 5px;
+    }
+
+    body a[href*="cadastrar"],
+    body a[href*="Cadastro"] {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    nav h1 {
+        font-size: 1.5rem;
+    }
+
+    body > h1 {
+        font-size: 1.6rem;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
+
+    ul li {
+        font-size: 0.9rem;
+    }
+}

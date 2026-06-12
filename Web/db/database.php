@@ -2,11 +2,11 @@
     // =======================
     // RAILWAY (PRODUÇÃO)
     // =======================
-    $host = 'thomas.proxy.rlwy.net';
-    $port = 45121;
-    $dbname = 'railway';
+    $host = 'localhost';
+    $port = 3306;
+    $dbname = 'plataformacursos';
     $user = 'root';
-    $password = 'bZUpmmEEIeEYSyJMxPdjomcFLKFtxVfP';
+    $password = '';
 
 try {
     $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8", $user, $password);
