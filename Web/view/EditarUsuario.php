@@ -66,6 +66,7 @@ if (!empty($_POST['senha'])) {
 ?>
 
 <head>
+    <link rel="stylesheet" href="../css/EditarUsuarios.css">
     <title>Editar Usuário</title>
 </head>
 
