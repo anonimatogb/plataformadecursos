@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================
+   VARIÁVEIS
+========================= */
+
+.form-title {
+    font-family: "Montserrat", sans-serif;
+    justify-content: center;
+    display: flex;
+}
+
+:root {
+    --bg-primary: #070B1A;
+    --bg-secondary: #0B1023;
+    --bg-third: #111827;
+
+    --card-bg: rgba(15, 23, 42, 0.82);
+
+    --border: rgba(255,255,255,0.05);
+
+    --input-bg: rgba(255,255,255,0.04);
+
+    --text: #ffffff;
+    --text-soft: #cbd5e1;
+    --placeholder: #94a3b8;
+
+    --purple: #8B5CF6;
+    --blue: #3B82F6;
+
+    --transition: 0.3s ease;
+
+    --shadow: 0 0 25px rgba(0,0,0,0.35);
+
+    --glow: 0 0 14px rgba(139,92,246,0.35);
+}
+
+/* =========================
+   BODY
+========================= */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary), var(--bg-third));
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: var(--text);
+    overflow-x: hidden;
+}
+
+/* =========================
+   FORM
+========================= */
+
+form {
+    width: 100%;
+    max-width: 520px;
+    padding: 24px 34px;
+    border-radius: 24px;
+    background: var(--card-bg);
+    backdrop-filter: blur(18px);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    animation: fadeIn 0.6s ease;
+}
+
+/* =========================
+   FORM-TITLE
+========================= */
+
+.form-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+    text-align: center;
+    background: linear-gradient(90deg, #ffffff, #8B5CF6, #3B82F6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* =========================
+   LABELS
+========================= */
+
+label {
+    font-size: 0.85rem;
+    color: var(--text-soft);
+    margin-bottom: 2px;
+    display: block;
+}
+
+/* =========================
+   INPUTS TEXTO E NUMBER
+========================= */
+
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 11px;
+    border: 1px solid var(--border);
+    background: var(--input-bg);
+    color: var(--text);
+    font-size: 0.92rem;
+    outline: none;
+    transition: var(--transition);
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+    border: 1px solid var(--purple);
+    background: rgba(255,255,255,0.06);
+    box-shadow: 0 0 10px rgba(139,92,246,0.25);
+    color: #ffffff;
+}
+
+input::placeholder {
+    color: var(--placeholder);
+}
+
+/* =========================
+   INPUT FILE
+========================= */
+
+input[type="file"] {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 11px;
+    border: 1px solid var(--border);
+    background: var(--input-bg);
+    color: var(--text-soft);
+    font-size: 0.88rem;
+    outline: none;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+input[type="file"]:hover {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(139,92,246,0.35);
+}
+
+input[type="file"]::file-selector-button {
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: none;
+    background: linear-gradient(90deg, var(--blue), var(--purple));
+    color: white;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-right: 12px;
+    transition: var(--transition);
+}
+
+input[type="file"]::file-selector-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--glow);
+}
+
+/* =========================
+   BOTÃO SUBMIT
+========================= */
+
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 6px;
+    border: none;
+    border-radius: 11px;
+    background: linear-gradient(90deg, var(--blue), var(--purple));
+    color: white;
+    font-size: 0.92rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--glow);
+}
+
+/* =========================
+   LINKS
+========================= */
+
+a {
+    display: inline-block;
+    padding: 10px 18px;
+    margin-top: 8px;
+    border-radius: 11px;
+    background: rgba(255,255,255,0.05);
+    color: var(--purple);
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: var(--transition);
+    border: 1px solid var(--border);
+    text-align: center;
+}
+
+a:hover {
+    background: rgba(139,92,246,0.15);
+    border-color: rgba(139,92,246,0.35);
+    transform: translateY(-2px);
+    color: var(--blue);
+}
+
+/* =========================
+   ANIMAÇÃO
+========================= */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 600px) {
+    form {
+        width: 100%;
+        padding: 22px;
+    }
+    
+    .form-title {
+        font-size: 1.3rem;
+    }
+    
+    input[type="text"],
+    input[type="number"],
+    input[type="file"] {
+        padding: 10px 12px;
+    }
+    
+    button[type="submit"] {
+        padding: 10px;
+    }
+}
