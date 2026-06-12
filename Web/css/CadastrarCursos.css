@@ -301,3 +301,15 @@ input[type="file"] {
 label + input {
     margin-top: 2px;
 }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+h1 {
+    width: 100%;
+    text-align: center;
+}

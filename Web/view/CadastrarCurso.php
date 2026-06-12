@@ -63,7 +63,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body>
-    <h1>Cadastrar Curso</h1>
+
+
+    <div class="container">
+        <h1>Cadastrar Curso</h1>
+
+   
     <form method="post" enctype="multipart/form-data">
 
         <label for="nome">Nome:</label>
@@ -83,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <a href="professor.php">Voltar para a Central do Aprendizado</a>
         <input type="submit" value="Cadastrar">
-
+ </div>
 
     </form>
 </body>

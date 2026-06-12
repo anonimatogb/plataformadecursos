@@ -71,13 +71,6 @@ CREATE TABLE `modulo` (
   `ativo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Despejando dados para a tabela `modulo`
------------
-
---
--- Estrutura para tabela `usuarios`
---
 
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
@@ -88,22 +81,10 @@ CREATE TABLE `usuarios` (
   `foto_perfil` longblob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Despejando dados para a tabela `usuarios`
-
--- Índices para tabelas despejadas
---
-
---
--- Índices de tabela `cursos`
---
 ALTER TABLE `cursos`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_professor` (`professor`);
 
---
--- Índices de tabela `matriculas`
---
 ALTER TABLE `matriculas`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_professor_matricula` (`professor_id`),

@@ -511,3 +511,43 @@ ul li:only-child:not(:has(img)) {
         padding: 30px 15px;
     }
 }
+
+.acoes-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.btn-topo {
+    text-decoration: none;
+    padding: 12px 22px;
+    border-radius: 14px;
+    font-weight: 600;
+    transition: 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Botão Página Inicial */
+.btn-voltar {
+    background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+    color: white;
+}
+
+.btn-voltar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 18px rgba(139, 92, 246, 0.4);
+}
+
+/* Botão Sair */
+.btn-sair {
+    background: rgba(255, 255, 255, 0.05);
+    color: #f87171;
+    border: 1px solid rgba(248, 113, 113, 0.3);
+}
+
+.btn-sair:hover {
+    background: rgba(248, 113, 113, 0.15);
+    color: white;
+    transform: translateY(-2px);
+}

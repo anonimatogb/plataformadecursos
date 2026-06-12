@@ -28,9 +28,17 @@ $cursos = $cursosController->todosaluno($_SESSION['id']);
 
 <body>
 
-    <h1>Meus Cursos</h1>
-    <a href="PaginaInicial.php">Voltar para a Página Inicial</a>
-    <a href="logout.php">Sair</a>
+    <div class="acoes-topo">
+    <a href="PaginaInicial.php" class="btn-topo btn-voltar">
+        ← Página Inicial
+    </a>
+
+    <a href="logout.php" class="btn-topo btn-sair">
+        Sair
+    </a>
+</div>
+
+<h1>Meus Cursos</h1>
     <ul>
         <?php foreach ($cursos as $curso): ?>
             <?php if (!$curso['ativo']) { ?>

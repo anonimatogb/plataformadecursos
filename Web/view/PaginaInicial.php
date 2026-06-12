@@ -38,7 +38,8 @@ $usuario = $usuarioController->buscarUsuario($_SESSION['id']);
         <a href="meus.php">Meus cursos</a>
           <a href="editarusuario.php"><img src="data:image/jpeg;base64,<?= base64_encode($usuario['foto_perfil']) ?>" alt="Foto de Perfil" width="100"></a>
     <p><?php echo htmlspecialchars($usuario['nome']) ?></p>
-        <a href="logout.php">Sair</a>
+    <div class="acoes-topo">
+    <a href="logout.php">Sair</a>
     </nav>
     <h1>Bem-vindo, <?php echo $usuario['nome']; ?>!</h1>
     <p>Esta é a página inicial para alunos.</p>

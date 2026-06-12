@@ -37,10 +37,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../CSS/CadastrarModulos.css">
+    <link rel="stylesheet" href="../CSS/CadastrarCursos.css">
     <title>Cadastro de Módulos</title>
 </head>
 <body>
+     <div class="container">
     <h1>Cadastro de Módulos</h1>
 
     <form method="post" enctype="multipart/form-data">
@@ -61,5 +62,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <a href="professor.php">Voltar para a Central do Aprendizado</a>
         <input type="submit" value="Cadastrar">
     </form>
+</div>
+
+
 </body>
 </html>
