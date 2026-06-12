@@ -47,5 +47,8 @@ public function buscarFotoPerfil($idUsuario)
     {
         return $this->usuarioModel->atualizar($id, $nome, $email, $senha, $foto_perfil);
     }
+    public function trans($id){
+        return $this->usuarioModel->trans($id);
+    }
 
 }

@@ -82,4 +82,13 @@ class UsuarioModel
             throw $e;
         }
     }
+    public function trans($id)
+    {
+         $sql = "UPDATE usuarios SET cargo = 'admin' WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([':id' => (int)$id]);
+
+
+    }
+
 }

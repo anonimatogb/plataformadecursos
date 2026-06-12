@@ -1,19 +1,6 @@
-:root {
-    --bg-primary: #070B1A;
-    --bg-secondary: #0B1023;
-    --bg-third: #111827;
-    --card-bg: rgba(15, 23, 42, 0.82);
-    --border: rgba(255,255,255,0.05);
-    --input-bg: rgba(255,255,255,0.04);
-    --text: #ffffff;
-    --text-soft: #cbd5e1;
-    --placeholder: #94a3b8;
-    --purple: #8B5CF6;
-    --blue: #3B82F6;
-    --transition: 0.3s ease;
-    --shadow: 0 0 25px rgba(0,0,0,0.35);
-    --glow: 0 0 14px rgba(139,92,246,0.35);
-}
+/* =========================
+   RESET
+========================= */
 
 * {
     margin: 0;
@@ -21,209 +8,435 @@
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    min-height: 100vh;
-    background-color: var(--bg-primary);
-    background-image:
-        linear-gradient(rgba(139, 92, 246, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
-    background-size: 30px 30px;
-    color: var(--text);
-    line-height: 1.6;
-    padding: 24px;
+/* =========================
+   FONTS
+========================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* =========================
+   VARIÁVEIS
+========================= */
+
+:root {
+
+    --bg-primary: #070B1A;
+    --bg-secondary: #0B1023;
+    --bg-third: #111827;
+
+    --card-bg: rgba(15, 23, 42, 0.82);
+
+    --border: rgba(255,255,255,0.05);
+
+    --input-bg: rgba(255,255,255,0.04);
+
+    --text: #ffffff;
+    --text-soft: #cbd5e1;
+    --placeholder: #94a3b8;
+
+    --purple: #8B5CF6;
+    --blue: #3B82F6;
+
+    --transition: 0.3s ease;
+
+    --shadow:
+        0 0 25px rgba(0,0,0,0.35);
+
+    --glow:
+        0 0 14px rgba(139,92,246,0.35);
 }
 
-/* NAVBAR */
+/* =========================
+   BODY
+========================= */
+
+body {
+
+    font-family: 'Poppins', sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--bg-primary),
+            var(--bg-secondary),
+            var(--bg-third)
+        );
+
+    min-height: 100vh;
+
+    color: var(--text);
+
+    overflow-x: hidden;
+}
+
+/* =========================
+   NAV
+========================= */
+
 nav {
-    max-width: 1200px;
-    margin: 0 auto 35px auto;
-    padding: 16px 20px;
-    background: rgba(11, 16, 35, 0.92);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    box-shadow: var(--shadow);
+
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    gap: 14px;
-    flex-wrap: wrap;
+    align-items: center;
+
+    padding: 20px 40px;
+
+    background: var(--card-bg);
+
+    backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid var(--border);
+
+    box-shadow: var(--shadow);
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 nav h1 {
-    font-size: 1.8rem;
-    color: var(--text);
-    text-shadow: 0 0 16px rgba(139, 92, 246, 0.45);
-}
 
-nav p {
-    color: var(--text-soft);
-    font-weight: 600;
-    margin: 0;
+    font-family: "Montserrat", sans-serif;
+
+    font-size: 1.8rem;
+
+    font-weight: 700;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            var(--purple),
+            var(--blue)
+        );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 nav a {
+
+    color: var(--purple);
+
     text-decoration: none;
-    color: var(--text);
-    background: rgba(255,255,255,0.04);
-    border: 1px solid var(--border);
-    padding: 10px 16px;
-    border-radius: 10px;
+
+    font-size: 0.92rem;
+
+    font-weight: 500;
+
+    padding: 8px 16px;
+
+    border-radius: 11px;
+
     transition: var(--transition);
-    font-weight: 600;
 }
 
 nav a:hover {
-    transform: translateY(-2px);
-    border-color: rgba(139, 92, 246, 0.35);
-    box-shadow: var(--glow);
-    background: linear-gradient(135deg, var(--purple), var(--blue));
+
+    color: var(--blue);
+
+    background: rgba(255,255,255,0.06);
 }
 
-/* TÍTULOS */
+nav img {
+
+    width: 45px;
+    height: 45px;
+
+    border-radius: 100px;
+
+    border: 1px solid var(--border);
+
+    object-fit: cover;
+
+    transition: var(--transition);
+}
+
+nav img:hover {
+
+    transform: scale(1.1);
+
+    border-color: var(--purple);
+}
+
+nav p {
+
+    color: var(--text-soft);
+
+    font-size: 0.95rem;
+
+    font-weight: 400;
+}
+
+/* =========================
+   CONTEÚDO PRINCIPAL
+========================= */
+
 body > h1 {
-    max-width: 1200px;
-    margin: 0 auto 8px auto;
-    font-size: 2.5rem;
+
+    font-size: 2.2rem;
+
+    font-weight: 700;
+
     text-align: center;
-    color: var(--text);
+
+    margin: 40px 20px 16px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            var(--purple),
+            var(--blue)
+        );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 body > p {
-    max-width: 1200px;
-    margin: 0 auto 28px auto;
+
     text-align: center;
+
     color: var(--text-soft);
+
+    font-size: 1rem;
+
+    margin-bottom: 30px;
 }
+
+/* =========================
+   TÍTULO DE CURSOS
+========================= */
 
 h2 {
-    max-width: 1200px;
-    margin: 0 auto 18px auto;
-    padding: 14px 18px;
-    background: var(--bg-secondary);
-    border-left: 4px solid var(--purple);
-    border: 1px solid var(--border);
-    border-radius: 12px;
+
+    font-size: 1.6rem;
+
+    font-weight: 600;
+
+    margin: 20px 40px 16px;
+
     color: var(--text);
-    box-shadow: var(--shadow);
 }
 
-/* LISTA DE CURSOS */
 ul {
-    max-width: 1200px;
-    margin: 0 auto;
-    list-style: none;
+
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 18px;
-    padding: 0;
+
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+
+    gap: 24px;
+
+    padding: 0 40px 40px;
+
+    list-style: none;
 }
 
-li {
-    background: var(--card-bg);
+/* =========================
+   CARD DE CURSO
+========================= */
+
+ul li {
+
+    position: relative;
+
+    padding: 24px;
+
+    border-radius: 24px;
+
     border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 18px;
-    box-shadow: var(--shadow);
-    transition: var(--transition);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.05),
+            rgba(255,255,255,0.02)
+        );
+
+    backdrop-filter: blur(12px);
+
     overflow: hidden;
+
+    transition: 0.35s ease;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
 }
 
-li:hover {
-    transform: translateY(-4px);
-    border-color: rgba(139, 92, 246, 0.3);
-    box-shadow: var(--glow), var(--shadow);
+ul li::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(139,92,246,0.22),
+            transparent 70%
+        );
+
+    top: -80px;
+    right: -80px;
+
+    transition: 0.4s ease;
 }
 
-/* IMAGEM DO CURSO */
-li img {
+ul li:hover {
+
+    transform:
+        translateY(-8px)
+        scale(1.02);
+
+    border-color:
+        rgba(139,92,246,0.45);
+
+    box-shadow:
+        0 0 30px rgba(139,92,246,0.18),
+        0 0 60px rgba(59,130,246,0.12);
+}
+
+ul li:hover::before {
+
+    transform: scale(1.2);
+}
+
+ul li img {
+
     width: 100%;
-    height: 150px;
+
+    height: 180px;
+
+    border-radius: 16px;
+
     object-fit: cover;
-    border-radius: 12px;
-    margin-bottom: 14px;
+
     border: 1px solid var(--border);
 }
 
-/* TEXTO DO CARD */
-li strong {
-    display: block;
-    font-size: 1.1rem;
-    color: var(--text);
-    margin-bottom: 8px;
+ul li strong {
+
+    font-size: 1.3rem;
+
+    font-weight: 600;
+
+    color: white;
 }
 
-li br {
-    display: none;
-}
+ul li a {
 
-li {
-    color: var(--text-soft);
-    font-size: 0.95rem;
-}
+    color: var(--purple);
 
-/* BOTÃO DETALHES */
-li a {
-    display: inline-block;
-    margin-top: 14px;
     text-decoration: none;
-    color: var(--text);
-    background: linear-gradient(135deg, var(--purple), var(--blue));
-    padding: 10px 16px;
-    border-radius: 10px;
-    font-weight: 700;
-    box-shadow: var(--glow);
+
+    font-size: 0.92rem;
+
+    font-weight: 600;
+
+    padding: 10px 18px;
+
+    border-radius: 11px;
+
+    border: 1px solid transparent;
+
     transition: var(--transition);
+
+    display: inline-block;
+
+    margin-top: 8px;
 }
 
-li a:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 24px rgba(139, 92, 246, 0.6);
+ul li a:hover {
+
+    color: var(--blue);
+
+    border-color: var(--purple);
+
+    background: rgba(255,255,255,0.06);
 }
 
-/* RESPONSIVO */
+/* =========================
+   RESPONSIVO
+========================= */
+
 @media (max-width: 768px) {
-    body {
-        padding: 14px;
-    }
 
     nav {
-        padding: 14px;
-        justify-content: center;
-        text-align: center;
+
+        flex-direction: column;
+
+        gap: 16px;
+
+        padding: 16px 20px;
     }
 
     nav h1 {
-        width: 100%;
+
+        font-size: 1.5rem;
+    }
+
+    nav a {
+
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+
+    nav img {
+
+        width: 40px;
+        height: 40px;
     }
 
     body > h1 {
-        font-size: 1.9rem;
+
+        font-size: 1.8rem;
+
+        margin: 24px 16px 12px;
+    }
+
+    h2 {
+
+        font-size: 1.4rem;
+
+        margin: 16px 20px 12px;
     }
 
     ul {
+
         grid-template-columns: 1fr;
+
+        padding: 0 20px 30px;
     }
 
-    li img {
-        height: 180px;
+    ul li {
+
+        padding: 20px;
     }
 }
 
-/* SCROLLBAR */
-::-webkit-scrollbar {
-    width: 8px;
-}
+@media (max-width: 480px) {
 
-::-webkit-scrollbar-track {
-    background: var(--bg-primary);
-}
+    body > h1 {
 
-::-webkit-scrollbar-thumb {
-    background: var(--purple);
-    border-radius: 4px;
-}
+        font-size: 1.6rem;
+    }
 
-::-webkit-scrollbar-thumb:hover {
-    background: var(--blue);
+    ul li strong {
+
+        font-size: 1.15rem;
+    }
+
+    ul li a {
+
+        font-size: 0.85rem;
+        padding: 8px 14px;
+    }
 }
