@@ -16,7 +16,6 @@ $cursos = $cursosController->todosprof($_SESSION['id']);
 
 $matriculaController = new MatriculaController($pdo);
 $trazer = $matriculaController->macho($_SESSION['id']);
-
 $moduloController = new ModuloController($pdo);
 $modulos = $moduloController->porprof($_SESSION['id']);
 
@@ -154,31 +153,30 @@ $totalAlunos = is_array($trazer) ? count($trazer) : 0;
             $modulosPorCurso[$cursoNome][] = $modulo;
         }
 
-        foreach ($modulosPorCurso as $cursoNome => $listaModulos):
-        ?>
-            <h4>📁 <?= htmlspecialchars($cursoNome) ?></h4>
-            <ul>
-                <?php foreach ($listaModulos as $modulo): 
-                    $video = $modulo['video'] ?? '';
-                    if (!empty($video) && !preg_match('/^https?:\/\//', $video)) {
-                        $video = "https://" . $video;
-                    }
-                    $video = preg_replace('#^https:/([^/])#', 'https://$1', $video);
-                ?>
-                    <li>
-                        <div>
-                            <span style="color: var(--placeholder); margin-right: 8px;">ID: <?= (int)$modulo['id'] ?></span>
-                            <strong><?= htmlspecialchars($modulo['titulo']) ?></strong>
-                        </div>
-                        <div>
-                            <a href="<?= htmlspecialchars($video) ?>" target="_blank" class="btn-watch">Assistir Vídeo</a>
-                            <a href="deletarmodulo.php?id_modulo=<?= (int)$modulo['id'] ?>" style="color: #ef4444;" onclick="return confirm('Tem certeza que deseja deletar este módulo?')">Deletar</a>
-                        </div>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        <?php endforeach; ?>
-    <?php endif; ?>
+        foreach ($modulosPorCurso as $cursoNome => $listaModulos) {
 
+            echo '<h4>' . htmlspecialchars($cursoNome) . '</h4>';
+            echo '<ul>';
+            foreach ($listaModulos as $modulo) {
+                echo "<li>";
+                echo htmlspecialchars($modulo['titulo']);
+                  $https = ("https://") ;
+    $video = $modulo['video'] ?? '';
+    if (!preg_match('/^https?:\/\//', $video)) {
+        $video = $https . $video;
+    }
+
+        $video = preg_replace('#^https:/([^/])#', 'https://$1', $video);
+    echo "<li>ID: {$modulo['id']} | Nome: {$modulo['titulo']} | Curso ID: {$modulo['cursos_id']}
+    | <a href=\"{$video}\" target=\"_blank\">Assistir Vídeo</a>";
+                echo " | <a href='deletarmodulo.php?id_modulo=" . (int)$modulo['id'] . "'>Deletar</a>";
+                echo "</li>";
+            }
+            echo '</ul>';
+        }
+    }
+    ?>
+
+    <a href="CadastroModulo.php">Cadastrar Novo Módulo</a>
 </body>
 </html>

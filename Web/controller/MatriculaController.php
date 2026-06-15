@@ -36,5 +36,9 @@ class MatriculaController
     {
         return $this->matriculaModel->concluirCurso($matriculaId);
     }
+    public function contarAlunosUnicosProfessor(int $id)
+    {
+        return $this->matriculaModel->contarAlunosUnicosProfessor($id);
+    }
 }
 

@@ -50,7 +50,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <label for="cursos_id">Curso:</label>
         <select id="cursos_id" name="cursos_id" required>
-            <?php foreach ($cursos as $curso): ?>
+            <?php foreach ($cursos as $curso): 
+                  if (!$curso['ativo']) {
+                    continue; // Pula cursos inativos
+                }
+                ?>
+                
                 <option value="<?php echo (int)$curso['id']; ?>"><?php echo htmlspecialchars($curso['nome']); ?></option>
             <?php endforeach; ?>
         </select>

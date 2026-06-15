@@ -13,7 +13,6 @@ $cursos = $cursosController->todosaluno($_SESSION['id']);
 
 
 
-
 ?>
 
 <!DOCTYPE html>
@@ -40,21 +39,15 @@ $cursos = $cursosController->todosaluno($_SESSION['id']);
 
 <h1>Meus Cursos</h1>
     <ul>
-        <?php foreach ($cursos as $curso): ?>
-            <?php if (!$curso['ativo']) { ?>
-                <li>
-                    <img src="../<?php echo $curso['fotocapa']; ?>" alt="<?php echo $curso['nome']; ?>" width="100">
-                    <?php echo $curso['nome'] . " | " . $curso['descricao'] . " | " . ($curso['concluido'] == 0 ? "Em andamento" : "Concluído") . " | ".
-                    ($curso['concluido'] == 0 ? " Curso Desativado" : "<a href='continuar.php?id=" . $curso['id'] . "'>Continuar</a>"); ?>
-                </li>
-            <?php continue; // Pula módulos inativos
-            } ?>
+        <?php
+        foreach ($cursos as $curso): ?>
+            
             <li>
                 <img 
     src="data:image/jpeg;base64,<?= base64_encode($curso['fotocapa']) ?>"
     alt="<?= $curso['nome'] ?>"
     width="100">
-                <?php echo $curso['nome'] . " | " . $curso['descricao'] . " | " . ($curso['concluido'] == 0 ? "Em andamento" : "Concluído") . " |  <a href='continuar.php?id=" . $curso['id'] . "'>Continuar</a>"; ?>
+                <?php echo $curso['nome'] . " | " . $curso['descricao'] . " | " . ($curso['concluido'] == 0 ? "Em andamento" : "Concluído") . " | " . ($curso['ativo'] == 0 ? " Curso Desativado" : "<a href='continuar.php?id=" . $curso['id'] . "'>Continuar</a>"); ?>
             </li>
         <?php endforeach;
         if (empty($cursos)) {
