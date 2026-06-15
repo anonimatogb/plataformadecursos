@@ -14,6 +14,7 @@ $cursosController = new CursosController($pdo);
 $cursos = $cursosController->todosprof($_SESSION['id']);
 $matriculaController = new MatriculaController($pdo);
 $trazer = $matriculaController->macho($_SESSION['id']);
+$totalAlunos = $matriculaController->contarAlunosUnicosProfessor($_SESSION['id']);
 $moduloController = new ModuloController($pdo);
 $modulos = $moduloController->porprof($_SESSION['id']);
 $usuarioController = new UsuarioController($pdo);
@@ -116,6 +117,20 @@ $usuario = $usuarioController->buscarUsuario($_SESSION['id']);
     ?>
 
     <a href="CadastroModulo.php">Cadastrar Novo Módulo</a>
+
+
+ <h3>Ganho Total</h3>
+    <ul>
+        <?php
+        echo "<h4>Total de Alunos: " . $totalAlunos . "</h4>";
+        echo "<h4>Ganho Total: R$ " . ($totalAlunos * 15) . ",00</h4>";
+        ?>
+       
+    </ul>
+
+
+
+
 </body>
 
 </html>

@@ -89,4 +89,19 @@ INNER JOIN cursos
             return false;
         }
     }
+
+    public function contarAlunosUnicosProfessor($professor_id): int
+{
+    $sql = "SELECT COUNT(DISTINCT aluno_id) AS total
+FROM matriculas
+WHERE professor_id = :professor_id
+  AND ativo = 1";
+
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute([
+        ':professor_id' => $professor_id
+    ]);
+
+    return (int) $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+}
 }

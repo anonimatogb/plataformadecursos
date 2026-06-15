@@ -47,7 +47,7 @@ $finalar = isset($_GET['finalizar']);
             Por favor, faça o pagamento para concluir seu cadastro.
         </p>
 
-        <h2>Apenas R$ 99,90</h2>
+        <h2>Apenas R$ 55,00</h2>
 
         <h3>Escolha sua forma de pagamento:</h3>
 
@@ -70,12 +70,12 @@ $finalar = isset($_GET['finalizar']);
 
             <h3>Pagamento via PIX</h3>
 
-            <img src="../IMG/qr-code.png" width="250">
+            <img src="../IMG/qr-code.svg" width="250">
 
             <p>
-                Escaneie o QR Code para pagar ou faça o pagamento para o email:
+                Escaneie o QR Code para pagar ou faça o pagamento para o CPF:
             </p>
-            <h2><strong>Zucolin@gmail.com</strong></h2>
+            <h2><strong>471.623.758.39</strong></h2>
 
 
             <button onclick="finalizar()">

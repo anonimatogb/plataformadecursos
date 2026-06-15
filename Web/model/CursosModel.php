@@ -32,8 +32,7 @@ class CursosModel
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(':aluno_id', (int)$alunoId, PDO::PARAM_INT);
-            
-
+        $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
