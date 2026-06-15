@@ -13,7 +13,6 @@
 ========================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* =========================
@@ -21,15 +20,12 @@
 ========================= */
 
 :root {
-
     --bg-primary: #070B1A;
     --bg-secondary: #0B1023;
     --bg-third: #111827;
 
     --card-bg: rgba(15, 23, 42, 0.82);
-
     --border: rgba(255,255,255,0.05);
-
     --input-bg: rgba(255,255,255,0.04);
 
     --text: #ffffff;
@@ -38,14 +34,11 @@
 
     --purple: #8B5CF6;
     --blue: #3B82F6;
+    --danger: #ef4444;
 
-    --transition: 0.3s ease;
-
-    --shadow:
-        0 0 25px rgba(0,0,0,0.35);
-
-    --glow:
-        0 0 14px rgba(139,92,246,0.35);
+    --transition: cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+    --shadow: 0 0 25px rgba(0,0,0,0.35);
+    --glow: 0 0 14px rgba(139,92,246,0.35);
 }
 
 /* =========================
@@ -53,393 +46,518 @@
 ========================= */
 
 body {
-
     font-family: 'Poppins', sans-serif;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--bg-primary),
-            var(--bg-secondary),
-            var(--bg-third)
-        );
-
+    background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary), var(--bg-third));
     min-height: 100vh;
-
     color: var(--text);
-
     overflow-x: hidden;
+    padding: 0 0 40px 0; /* Espaço extra no fundo */
 }
 
 /* =========================
-   NAV
+   NAVBAR (ESTILO CARTÃO FLUTUANTE)
 ========================= */
 
 nav {
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    padding: 20px 40px;
-
+    padding: 16px 32px;
     background: var(--card-bg);
-
-    backdrop-filter: blur(18px);
-
-    border-bottom: 1px solid var(--border);
-
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: 20px; /* Bordos arredondados como no professor */
     box-shadow: var(--shadow);
-
     position: sticky;
-    top: 0;
+    top: 20px; /* Margem do topo para flutuar */
+    margin: 20px 40px; /* Margens laterais */
     z-index: 100;
 }
 
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
 nav h1 {
-
     font-family: "Montserrat", sans-serif;
-
     font-size: 1.8rem;
-
-    font-weight: 700;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ffffff,
-            var(--purple),
-            var(--blue)
-        );
-
+    font-weight: 800;
+    background: linear-gradient(90deg, #ffffff, var(--purple), var(--blue));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+}
+
+.badge-role {
+    background: rgba(59, 130, 246, 0.12);
+    color: var(--blue);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 nav a {
-
-    color: var(--purple);
-
+    color: var(--text-soft);
     text-decoration: none;
-
-    font-size: 0.92rem;
-
+    font-size: 0.95rem;
     font-weight: 500;
-
     padding: 8px 16px;
-
     border-radius: 11px;
-
     transition: var(--transition);
 }
 
 nav a:hover {
-
-    color: var(--blue);
-
+    color: white;
     background: rgba(255,255,255,0.06);
 }
-nav .profile-link {
+
+/* Container Unificado do Perfil */
+.profile-container {
     display: flex;
     align-items: center;
+    gap: 10px;
+    padding: 4px 12px !important;
+    text-decoration: none;
 }
 
-.profile-pic {
-    width: 45px;
-    height: 45px;
-    border-radius: 50px;
+.profile-container img, .profile-pic-placeholder {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
     border: 1px solid var(--border);
     object-fit: cover;
     transition: var(--transition);
 }
 
-.profile-pic:hover {
-    transform: scale(1.1);
-    border-color: var(--purple);
-}
-
-.profile-placeholder {
+.profile-pic-placeholder {
+    background: linear-gradient(135deg, var(--purple), var(--blue));
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--purple), var(--blue));
     color: white;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
-.profile-name {
-    color: var(--text-soft);
-    font-size: 0.95rem;
-    font-weight: 400;
+.profile-container:hover img,
+.profile-container:hover .profile-pic-placeholder {
+    transform: scale(1.08);
+    border-color: var(--purple);
+    box-shadow: var(--glow);
 }
+
+.profile-container p {
+    color: var(--text);
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+/* Botão Sair Estilizado */
+.logout-btn {
+    color: var(--danger) !important;
+    font-weight: 600;
+}
+
+.logout-btn:hover {
+    background: rgba(239, 68, 68, 0.1) !important;
+    color: #f87171 !important;
+}
+
 /* =========================
-   CONTEÚDO PRINCIPAL
+   HERO SECTION
 ========================= */
 
-body > h1 {
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1300px;
+    margin: 40px auto 60px;
+    padding: 60px 40px;
+    background: linear-gradient(145deg, rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.1));
+    border-radius: 32px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
 
-    font-size: 2.2rem;
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -30%;
+    left: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(139,92,246,0.1), transparent 70%);
+    z-index: 0;
+    pointer-events: none;
+}
 
+.hero-content {
+    flex: 1.2;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.hero-badge {
+    background: rgba(139, 92, 246, 0.15);
+    color: var(--purple);
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.hero-title {
+    font-size: 3.2rem;
     font-weight: 700;
+    line-height: 1.2;
+    color: var(--text);
+    margin: 0;
+}
 
-    text-align: center;
-
-    margin: 40px 20px 16px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ffffff,
-            var(--purple),
-            var(--blue)
-        );
-
+.hero-title .highlight {
+    background: linear-gradient(90deg, #ffffff, var(--purple), var(--blue));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-body > p {
-
-    text-align: center;
-
+.hero-subtitle {
+    font-size: 1.15rem;
     color: var(--text-soft);
+    max-width: 540px;
+    line-height: 1.7;
+    margin: 0;
+}
 
+.hero-actions {
+    display: flex;
+    gap: 16px;
+    margin-top: 15px;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 14px 32px;
+    border-radius: 14px;
+    font-weight: 600;
     font-size: 1rem;
+    text-decoration: none;
+    transition: var(--transition);
+}
 
-    margin-bottom: 30px;
+.btn-primary {
+    background: linear-gradient(135deg, var(--purple), var(--blue));
+    color: white;
+    box-shadow: var(--glow);
+}
+
+.btn-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(139,92,246,0.5);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--text-soft);
+    color: white;
+    transform: translateY(-4px);
+}
+
+.hero-visual {
+    flex: 0.8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.glow-orb {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    background: linear-gradient(135deg, var(--purple), var(--blue));
+    filter: blur(80px);
+    opacity: 0.4;
+    border-radius: 50%;
+    animation: pulse 6s infinite alternate;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+    animation: float 5s ease-in-out infinite;
+    position: relative;
+    z-index: 2;
+}
+
+.glass-icon {
+    font-size: 3rem;
+    background: rgba(255,255,255,0.1);
+    padding: 15px;
+    border-radius: 18px;
+}
+
+.glass-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: white;
+}
+
+.glass-desc {
+    font-size: 0.95rem;
+    color: var(--purple);
+    font-weight: 500;
+    margin-top: 4px;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.3; }
+    100% { transform: scale(1.1); opacity: 0.6; }
 }
 
 /* =========================
-   TÍTULO DE CURSOS
+   TÍTULO DE CURSOS E CARD
 ========================= */
 
 h2 {
-
+    font-family: "Montserrat", sans-serif;
     font-size: 1.6rem;
-
-    font-weight: 600;
-
+    font-weight: 700;
     margin: 20px 40px 16px;
-
     color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+h2::before {
+    content: "";
+    width: 4px;
+    height: 22px;
+    background: var(--purple);
+    border-radius: 4px;
+    box-shadow: var(--glow);
 }
 
 ul {
-
     display: grid;
-
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-
     gap: 24px;
-
     padding: 0 40px 40px;
-
     list-style: none;
 }
 
-/* =========================
-   CARD DE CURSO
-========================= */
-
 ul li {
-
     position: relative;
-
     padding: 24px;
-
     border-radius: 24px;
-
     border: 1px solid var(--border);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,0.05),
-            rgba(255,255,255,0.02)
-        );
-
+    background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
     backdrop-filter: blur(12px);
-
     overflow: hidden;
-
     transition: 0.35s ease;
-
     display: flex;
     flex-direction: column;
-
     gap: 16px;
 }
 
 ul li::before {
-
     content: "";
-
     position: absolute;
-
     width: 180px;
     height: 180px;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(139,92,246,0.22),
-            transparent 70%
-        );
-
+    background: radial-gradient(circle, rgba(139,92,246,0.22), transparent 70%);
     top: -80px;
     right: -80px;
-
     transition: 0.4s ease;
 }
 
 ul li:hover {
-
-    transform:
-        translateY(-8px)
-        scale(1.02);
-
-    border-color:
-        rgba(139,92,246,0.45);
-
-    box-shadow:
-        0 0 30px rgba(139,92,246,0.18),
-        0 0 60px rgba(59,130,246,0.12);
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba(139,92,246,0.45);
+    box-shadow: 0 0 30px rgba(139,92,246,0.18), 0 0 60px rgba(59,130,246,0.12);
 }
 
 ul li:hover::before {
-
     transform: scale(1.2);
 }
 
 ul li img {
-
     width: 100%;
-
     height: 180px;
-
     border-radius: 16px;
-
     object-fit: cover;
-
     border: 1px solid var(--border);
 }
 
 ul li strong {
-
     font-size: 1.3rem;
-
     font-weight: 600;
-
     color: white;
 }
 
 ul li a {
-
     color: var(--purple);
-
     text-decoration: none;
-
     font-size: 0.92rem;
-
     font-weight: 600;
-
     padding: 10px 18px;
-
     border-radius: 11px;
-
     border: 1px solid transparent;
-
     transition: var(--transition);
-
     display: inline-block;
-
     margin-top: 8px;
 }
 
 ul li a:hover {
-
     color: var(--blue);
-
     border-color: var(--purple);
-
     background: rgba(255,255,255,0.06);
 }
 
 /* =========================
-   RESPONSIVO
+   RESPONSIVO ECRÃS MENORES
 ========================= */
 
-@media (max-width: 768px) {
+/* =========================
+   RESPONSIVO ECRÃS MENORES
+========================= */
 
+@media (max-width: 992px) {
+    /* Divide a Navbar em 2 blocos verticais (Topo e Baixo) */
     nav {
-
-        flex-direction: column;
-
-        gap: 16px;
-
-        padding: 16px 20px;
+        flex-direction: column !important;
+        gap: 15px !important;
+        padding: 20px !important;
+        margin: 20px !important;
     }
 
-    nav h1 {
-
-        font-size: 1.5rem;
+    /* Primeira Linha: "Lunex" e "Área do Aluno" lado a lado */
+    .nav-left {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100%;
+        gap: 12px;
     }
 
+    /* Segunda Linha: Botões, Perfil e Sair lado a lado */
+    .nav-right {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: center !important;
+        align-items: center !important;
+        flex-wrap: wrap !important;
+        width: 100%;
+        gap: 15px;
+    }
+
+    /* O SEGREDO ESTÁ AQUI: Garante que os botões não ocupam o ecrã todo */
     nav a {
-
+        width: auto !important; 
+        display: inline-flex !important;
+        justify-content: center;
         padding: 8px 12px;
-        font-size: 0.85rem;
     }
 
-    nav img {
-
-        width: 40px;
-        height: 40px;
+    /* Ajustes da Hero Section para Mobile */
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 20px;
+        margin: 20px 20px 40px;
     }
-
-    body > h1 {
-
-        font-size: 1.8rem;
-
-        margin: 24px 16px 12px;
+    
+    .hero-content {
+        align-items: center;
     }
-
-    h2 {
-
-        font-size: 1.4rem;
-
-        margin: 16px 20px 12px;
+    
+    .hero-title, .hero-subtitle {
+        text-align: center;
     }
+    
+    .hero-visual {
+        margin-top: 50px;
+        width: 100%;
+    }
+}
 
+@media (max-width: 768px) {
     ul {
-
         grid-template-columns: 1fr;
-
         padding: 0 20px 30px;
     }
 
     ul li {
-
         padding: 20px;
     }
 }
 
 @media (max-width: 480px) {
+    /* Em ecrãs muito pequenos (telemóveis antigos), reduzimos a fonte para caber tudo */
+    nav a {
+        font-size: 0.85rem;
+        padding: 6px 10px;
+    }
 
-    body > h1 {
-
-        font-size: 1.6rem;
+    .hero-title {
+        font-size: 2.2rem;
+    }
+    
+    .hero-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .btn-primary, .btn-secondary {
+        width: 100%;
+        text-align: center;
     }
 
     ul li strong {
-
         font-size: 1.15rem;
-    }
-
-    ul li a {
-
-        font-size: 0.85rem;
-        padding: 8px 14px;
     }
 }

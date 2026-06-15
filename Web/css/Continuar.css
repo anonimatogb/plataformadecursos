@@ -1,109 +1,115 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-/* =========================
-   RESET
-========================= */
+    /* =========================
+    RESET
+    ========================= */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-/* =========================
-   VARIÁVEIS
-========================= */
+    /* =========================
+    VARIÁVEIS
+    ========================= */
 
-:root {
-    --bg-primary: #070B1A;
-    --bg-secondary: #0B1023;
-    --bg-third: #111827;
-    
-    --card-bg: rgba(15, 23, 42, 0.82);
-    
-    --border: rgba(255,255,255,0.05);
-    
-    --text: #ffffff;
-    --text-soft: #cbd5e1;
-    --placeholder: #94a3b8;
-    
-    --purple: #8B5CF6;
-    --blue: #3B82F6;
-    
-    --transition: 0.3s ease;
-    
-    --shadow:
-        0 0 25px rgba(0,0,0,0.35);
-    
-    --glow:
-        0 0 14px rgba(139,92,246,0.35);
-}
+    :root {
+        --bg-primary: #070B1A;
+        --bg-secondary: #0B1023;
+        --bg-third: #111827;
+        
+        --card-bg: rgba(15, 23, 42, 0.82);
+        
+        --border: rgba(255,255,255,0.05);
+        
+        --text: #ffffff;
+        --text-soft: #cbd5e1;
+        --placeholder: #94a3b8;
+        
+        --purple: #8B5CF6;
+        --blue: #3B82F6;
+        
+        --transition: 0.3s ease;
+        
+        --shadow:
+            0 0 25px rgba(0,0,0,0.35);
+        
+        --glow:
+            0 0 14px rgba(139,92,246,0.35);
+    }
 
-/* =========================
-   BODY
-========================= */
+    /* =========================
+    BODY
+    ========================= */
 
-body {
-    font-family: 'Poppins', sans-serif;
-    
-    background:
-        linear-gradient(
-            135deg,
-            var(--bg-primary),
-            var(--bg-secondary),
-            var(--bg-third)
-        );
-    
-    min-height: 100vh;
-    
-    color: var(--text);
-    
-    overflow-x: hidden;
-}
+    body {
+        font-family: 'Poppins', sans-serif;
+        
+        background:
+            linear-gradient(
+                135deg,
+                var(--bg-primary),
+                var(--bg-secondary),
+                var(--bg-third)
+            );
+        
+        min-height: 100vh;
+        
+        color: var(--text);
+        
+        overflow-x: hidden;
+    }
 
-/* =========================
-   NAVBAR
-========================= */
+    /* =========================
+    NAVBAR
+    ========================= */
 
-nav {
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        padding: 20px 34px;
+        
+        background: var(--card-bg);
+        
+        backdrop-filter: blur(18px);
+        
+        border: 1px solid var(--border);
+        
+        border-bottom: none;
+        
+        box-shadow: var(--shadow);
+        
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    nav h1 {
+        font-family: "Montserrat", sans-serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        
+        background:
+            linear-gradient(
+                90deg,
+                #ffffff,
+                var(--purple),
+                var(--blue)
+            );
+        
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+.nav-links {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    
-    padding: 20px 34px;
-    
-    background: var(--card-bg);
-    
-    backdrop-filter: blur(18px);
-    
-    border: 1px solid var(--border);
-    
-    border-bottom: none;
-    
-    box-shadow: var(--shadow);
-    
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-nav h1 {
-    font-family: "Montserrat", sans-serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    
-    background:
-        linear-gradient(
-            90deg,
-            #ffffff,
-            var(--purple),
-            var(--blue)
-        );
-    
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    gap: 15px;
 }
 
 nav a {
@@ -111,228 +117,238 @@ nav a {
     text-decoration: none;
     font-size: 0.92rem;
     font-weight: 500;
-    
     transition: var(--transition);
-    
     padding: 8px 16px;
-    
     border-radius: 8px;
 }
 
-nav a:hover {
-    color: var(--blue);
-    
-    background: rgba(139,92,246,0.15);
-}
-
-nav p {
-    color: var(--text-soft);
-    font-size: 0.9rem;
-    
-    padding: 8px 16px;
-}
-
-/* =========================
-   MAIN
-========================= */
-
-main {
-    max-width: 900px;
-    
-    margin: 40px auto;
-    
-    padding: 34px;
-    
-    background: var(--card-bg);
-    
-    backdrop-filter: blur(18px);
-    
-    border: 1px solid var(--border);
-    
-    border-radius: 24px;
-    
-    box-shadow: var(--shadow);
-    
-    animation: fadeIn 0.6s ease;
-}
-
-/* =========================
-   TÍTULO DO MÓDULO/CURSO
-========================= */
-
-main h2 {
-    font-size: 1.8rem;
-    font-weight: 600;
-    
-    margin-bottom: 24px;
-    
-    color: var(--text);
-    
-    text-align: center;
-}
-
-main h2:hover {
-    color: var(--purple);
-}
-
-/* =========================
-   IFRAME (VÍDEO)
-========================= */
-
-iframe {
-    width: 100%;
-    
-    max-width: 700px;
-    
-    height: auto;
-    
-    border-radius: 16px;
-    
-    border: 1px solid var(--border);
-    
-    box-shadow:
-        0 10px 40px rgba(0,0,0,0.4);
-    
-    display: block;
-    
-    margin: 0 auto 24px auto;
-}
-
-/* =========================
-   BOTÕES (VOLTAR/CONTINUAR)
-========================= */
-
-main div {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    
-    margin-top: 24px;
-}
-
-button[type="button"] {
-    padding: 12px 32px;
-    
-    border: none;
-    
-    border-radius: 11px;
-    
-    background:
-        linear-gradient(
-            90deg,
-            var(--blue),
-            var(--purple)
-        );
-    
-    color: white;
-    
-    font-size: 0.95rem;
-    font-weight: 600;
-    
-    cursor: pointer;
-    
-    transition: var(--transition);
-    
-    box-shadow:
-        0 4px 15px rgba(59,130,246,0.3);
-}
-
-button[type="button"]:hover {
-    transform: translateY(-2px);
-    
-    box-shadow: var(--glow);
-}
-
-button[type="button"]:first-child {
-    background:
-        linear-gradient(
-            90deg,
-            var(--purple),
-            var(--blue)
-        );
-}
-
-/* =========================
-   LINKS DE NAVEGÇÃO
-========================= */
-
-main a:not(nav a) {
-    color: var(--purple);
-    text-decoration: none;
-    font-size: 0.92rem;
-    
-    transition: var(--transition);
-    
-    display: inline-block;
-    
-    margin-top: 16px;
-}
-
-main a:not(nav a):hover {
-    color: var(--blue);
-}
-
-/* =========================
-   MENSAGEM DE CURSO CONCLUÍDO
-========================= */
-
-main h2:has(+ p) {
-    color: var(--blue);
-}
-
-main p {
-    color: var(--text-soft);
-    font-size: 1rem;
-    
-    text-align: center;
-    
-    line-height: 1.6;
-    
-    margin-bottom: 16px;
-}
-
-/* =========================
-   CERTIFICADO
-========================= */
-
-main a[href="download.php"] {
-    padding: 12px 28px;
-    
-    background: rgba(139,92,246,0.15);
-    
-    border: 1px solid var(--purple);
-    
-    border-radius: 11px;
-    
-    font-weight: 600;
-    
-    display: inline-block;
-    
-    margin: 16px auto;
-}
-
-main a[href="download.php"]:hover {
-    background: rgba(139,92,246,0.25);
-    
-    box-shadow: var(--glow);
-}
-
-/* =========================
-   ANIMAÇÃO
-========================= */
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
+    nav a {
+        color: var(--purple);
+        text-decoration: none;
+        font-size: 0.92rem;
+        font-weight: 500;
+        
+        transition: var(--transition);
+        
+        padding: 8px 16px;
+        
+        border-radius: 8px;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
-/* =========================
+    nav a:hover {
+        color: var(--blue);
+        
+        background: rgba(139,92,246,0.15);
+    }
+
+    nav p {
+        color: var(--text-soft);
+        font-size: 0.9rem;
+        
+        padding: 8px 16px;
+    }
+
+    /* =========================
+    MAIN
+    ========================= */
+
+    main {
+        max-width: 900px;
+        
+        margin: 40px auto;
+        
+        padding: 34px;
+        
+        background: var(--card-bg);
+        
+        backdrop-filter: blur(18px);
+        
+        border: 1px solid var(--border);
+        
+        border-radius: 24px;
+        
+        box-shadow: var(--shadow);
+        
+        animation: fadeIn 0.6s ease;
+    }
+
+    /* =========================
+    TÍTULO DO MÓDULO/CURSO
+    ========================= */
+
+    main h2 {
+        font-size: 1.8rem;
+        font-weight: 600;
+        
+        margin-bottom: 24px;
+        
+        color: var(--text);
+        
+        text-align: center;
+    }
+
+    main h2:hover {
+        color: var(--purple);
+    }
+
+    /* =========================
+    IFRAME (VÍDEO)
+    ========================= */
+
+    iframe {
+        width: 100%;
+        
+        max-width: 700px;
+        
+        height: auto;
+        
+        border-radius: 16px;
+        
+        border: 1px solid var(--border);
+        
+        box-shadow:
+            0 10px 40px rgba(0,0,0,0.4);
+        
+        display: block;
+        
+        margin: 0 auto 24px auto;
+    }
+
+    /* =========================
+    BOTÕES (VOLTAR/CONTINUAR)
+    ========================= */
+
+    main div {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        
+        margin-top: 24px;
+    }
+
+    button[type="button"] {
+        padding: 12px 32px;
+        
+        border: none;
+        
+        border-radius: 11px;
+        
+        background:
+            linear-gradient(
+                90deg,
+                var(--blue),
+                var(--purple)
+            );
+        
+        color: white;
+        
+        font-size: 0.95rem;
+        font-weight: 600;
+        
+        cursor: pointer;
+        
+        transition: var(--transition);
+        
+        box-shadow:
+            0 4px 15px rgba(59,130,246,0.3);
+    }
+
+    button[type="button"]:hover {
+        transform: translateY(-2px);
+        
+        box-shadow: var(--glow);
+    }
+
+    button[type="button"]:first-child {
+        background:
+            linear-gradient(
+                90deg,
+                var(--purple),
+                var(--blue)
+            );
+    }
+
+    /* =========================
+    LINKS DE NAVEGÇÃO
+    ========================= */
+
+    main a:not(nav a) {
+        color: var(--purple);
+        text-decoration: none;
+        font-size: 0.92rem;
+        
+        transition: var(--transition);
+        
+        display: inline-block;
+        
+        margin-top: 16px;
+    }
+
+    main a:not(nav a):hover {
+        color: var(--blue);
+    }
+
+    /* =========================
+    MENSAGEM DE CURSO CONCLUÍDO
+    ========================= */
+
+    main h2:has(+ p) {
+        color: var(--blue);
+    }
+
+    main p {
+        color: var(--text-soft);
+        font-size: 1rem;
+        
+        text-align: center;
+        
+        line-height: 1.6;
+        
+        margin-bottom: 16px;
+    }
+
+    /* =========================
+    CERTIFICADO
+    ========================= */
+
+    main a[href="download.php"] {
+        padding: 12px 28px;
+        
+        background: rgba(139,92,246,0.15);
+        
+        border: 1px solid var(--purple);
+        
+        border-radius: 11px;
+        
+        font-weight: 600;
+        
+        display: inline-block;
+        
+        margin: 16px auto;
+    }
+
+    main a[href="download.php"]:hover {
+        background: rgba(139,92,246,0.25);
+        
+        box-shadow: var(--glow);
+    }
+
+    /* =========================
+    ANIMAÇÃO
+    ========================= */
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* =========================
    RESPONSIVO
 ========================= */
 
@@ -340,12 +356,27 @@ main a[href="download.php"]:hover {
     nav {
         flex-direction: column;
         gap: 16px;
-        
         padding: 16px 22px;
     }
     
+    /* NOVO: Controla a quebra de linha dos links no mobile */
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+    }
+
     nav a {
         padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+
+    nav p {
+        width: 100%; /* Força o nome do usuário a ficar em uma linha própria, se desejar */
+        text-align: center;
+        padding: 4px;
+        margin: 0;
     }
     
     main {
@@ -368,15 +399,5 @@ main a[href="download.php"]:hover {
     
     button[type="button"] {
         width: 100%;
-    }
-}
-
-@media (max-width: 480px) {
-    nav h1 {
-        font-size: 1.4rem;
-    }
-    
-    main {
-        padding: 18px;
     }
 }

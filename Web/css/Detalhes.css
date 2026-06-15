@@ -110,6 +110,12 @@ nav h1 {
     -webkit-text-fill-color: transparent;
 }
 
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
 nav a {
 
     color: var(--purple);
@@ -151,7 +157,7 @@ nav p {
    CONTEÚDO PRINCIPAL
 ========================= */
 
-div {
+.container {
 
     width: 100%;
 
@@ -185,7 +191,7 @@ div {
    LINK VOLTAR
 ========================= */
 
-div a[href="paginainicial.php"] {
+.container a[href="paginainicial.php"] {
 
     color: var(--purple);
 
@@ -202,7 +208,7 @@ div a[href="paginainicial.php"] {
     gap: 6px;
 }
 
-div a[href="paginainicial.php"]:hover {
+.container a[href="paginainicial.php"]:hover {
 
     color: var(--blue);
 
@@ -213,7 +219,7 @@ div a[href="paginainicial.php"]:hover {
    TÍTULO DO CURSO
 ========================= */
 
-div h2 {
+.container h2 {
 
     font-size: 2.2rem;
 
@@ -237,7 +243,7 @@ div h2 {
    IMAGEM DO CURSO
 ========================= */
 
-div img {
+.container img {
 
     width: 180px;
 
@@ -256,7 +262,7 @@ div img {
     transition: var(--transition);
 }
 
-div img:hover {
+.container img:hover {
 
     transform: scale(1.03) translateY(-4px);
 
@@ -269,7 +275,7 @@ div img:hover {
    PROFESSOR
 ========================= */
 
-div h4 {
+.container h4 {
 
     font-size: 1.1rem;
 
@@ -284,7 +290,7 @@ div h4 {
    SECTIONS (Descrição e Conteúdo)
 ========================= */
 
-div h3 {
+.container h3 {
 
     font-size: 1.4rem;
 
@@ -301,7 +307,7 @@ div h3 {
     border-bottom: 1px solid var(--border);
 }
 
-div p {
+.container p {
 
     font-size: 0.95rem;
 
@@ -316,8 +322,8 @@ div p {
    BOTÕES DE AÇÃO
 ========================= */
 
-div a[href^="meus.php"],
-div a[href^="Matricular.php"] {
+.container a[href^="meus.php"],
+.container a[href^="Matricular.php"] {
 
     display: inline-block;
 
@@ -359,8 +365,8 @@ div a[href^="Matricular.php"] {
         var(--shadow);
 }
 
-div a[href^="meus.php"]:hover,
-div a[href^="Matricular.php"]:hover {
+.container a[href^="meus.php"]:hover,
+.container a[href^="Matricular.php"]:hover {
 
     transform: translateY(-3px);
 
@@ -393,29 +399,30 @@ div a[href^="Matricular.php"]:hover {
 ========================= */
 
 @media (max-width: 768px) {
-
     nav {
-
+        flex-direction: column;
+        gap: 16px;
         padding: 16px 20px;
-
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 12px;
     }
 
     nav h1 {
-
         font-size: 1.5rem;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
     }
 
     nav a,
     nav p {
-
         padding: 6px 12px;
         font-size: 0.85rem;
     }
 
-    div {
+    .container {
 
         max-width: 95%;
 
@@ -426,14 +433,14 @@ div a[href^="Matricular.php"]:hover {
         gap: 16px;
     }
 
-    div h2 {
+    .container h2 {
 
         font-size: 1.8rem;
 
         text-align: center;
     }
 
-    div img {
+    .container img {
 
         width: 140px;
 
@@ -444,20 +451,20 @@ div a[href^="Matricular.php"]:hover {
         display: block;
     }
 
-    div h3 {
+    .container h3 {
 
         font-size: 1.2rem;
     }
 
-    div p {
+    .container p {
 
         font-size: 0.9rem;
 
         text-align: center;
     }
 
-    div a[href^="meus.php"],
-    div a[href^="Matricular.php"] {
+    .container a[href^="meus.php"],
+    .container a[href^="Matricular.php"] {
 
         width: 100%;
 
@@ -472,17 +479,17 @@ div a[href^="Matricular.php"]:hover {
         font-size: 1.3rem;
     }
 
-    div {
+    .container {
 
         padding: 20px;
     }
 
-    div h2 {
+    .container h2 {
 
         font-size: 1.5rem;
     }
 
-    div img {
+    .container img {
 
         width: 120px;
 

@@ -70,10 +70,12 @@ $embed = $videoId
 <body>
     <nav>
         <h1>Lunex</h1>
-        <a href="paginainicial.php">Início</a>
-        <a href="meus.php">Meus cursos</a>
-        <p><?php echo htmlspecialchars($_SESSION['nome'] ?? '', ENT_QUOTES, 'UTF-8'); ?></p>
-        <a href="logout.php">Sair</a>
+        <div class="nav-links">
+            <a href="paginainicial.php">Início</a>
+            <a href="meus.php">Meus cursos</a>
+            <p><?php echo htmlspecialchars($_SESSION['nome'] ?? '', ENT_QUOTES, 'UTF-8'); ?></p>
+            <a href="logout.php">Sair</a>
+        </div>
     </nav>
 
     <main>

@@ -33,13 +33,14 @@ $quantidade=1;
 <body>
     <nav>
         <h1>Lunex</h1>
-        <a href="PaginaInicial.php">Início</a>
-        <a href="meus.php">Meus cursos</a>
-        <p><?php echo $_SESSION['nome']; ?></p>
-        <a href="logout.php">Sair</a>
+        <div class="nav-links">
+            <a href="PaginaInicial.php">Início</a>
+            <a href="meus.php">Meus cursos</a>
+            <p><?php echo $_SESSION['nome']; ?></p>
+            <a href="logout.php">Sair</a>
+        </div>
     </nav>
-    <div>
-        <a href="paginainicial.php">Voltar</a>
+    <div class="container"> <a href="paginainicial.php">Voltar</a>
         <h2><?php echo $curso['nome']; ?></h2>
         <img src="data:image/jpeg;base64,<?= base64_encode($curso['fotocapa']) ?>" alt="<?php echo $curso['nome']; ?>" width="100">
         <h4>Professor: <?php echo $curso['professor_nome'] ?></h4>
