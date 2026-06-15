@@ -47,7 +47,7 @@ $finalar = isset($_GET['finalizar']);
             Por favor, faça o pagamento para concluir seu cadastro.
         </p>
 
-        <h2>Apenas R$ 99,90</h2>
+        <h2>Apenas R$ 55,00</h2>
 
         <h3>Escolha sua forma de pagamento:</h3>
 
