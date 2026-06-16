@@ -2,11 +2,11 @@
     // =======================
     // RAILWAY (PRODUÇÃO)
     // =======================
-    $host = 'localhost';
-    $port = 3306;
-    $dbname = 'plataformacursos';
+    $host = 'yamanote.proxy.rlwy.net';
+    $port = 55219;
+    $dbname = 'railway';
     $user = 'root';
-    $password = '';
+    $password = 'DGhJTzpyFFHFrhWSVavJJDmaIXJaVtQE';
 
 try {
     $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8", $user, $password);
