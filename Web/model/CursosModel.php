@@ -32,7 +32,9 @@ class CursosModel
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(':aluno_id', (int)$alunoId, PDO::PARAM_INT);
-            
+        
+        // ESTA É A LINHA QUE O GIT APAGOU 👇
+        $stmt->execute(); 
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

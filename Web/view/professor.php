@@ -154,29 +154,24 @@ $totalAlunos = is_array($trazer) ? count($trazer) : 0;
         }
 
         foreach ($modulosPorCurso as $cursoNome => $listaModulos) {
-
             echo '<h4>' . htmlspecialchars($cursoNome) . '</h4>';
             echo '<ul>';
             foreach ($listaModulos as $modulo) {
-                echo "<li>";
-                echo htmlspecialchars($modulo['titulo']);
-                  $https = ("https://") ;
-    $video = $modulo['video'] ?? '';
-    if (!preg_match('/^https?:\/\//', $video)) {
-        $video = $https . $video;
-    }
-
-        $video = preg_replace('#^https:/([^/])#', 'https://$1', $video);
-    echo "<li>ID: {$modulo['id']} | Nome: {$modulo['titulo']} | Curso ID: {$modulo['cursos_id']}
-    | <a href=\"{$video}\" target=\"_blank\">Assistir Vídeo</a>";
-                echo " | <a href='deletarmodulo.php?id_modulo=" . (int)$modulo['id'] . "'>Deletar</a>";
-                echo "</li>";
+                
+                $https = "https://";
+                $video = $modulo['video'] ?? '';
+                if (!preg_match('/^https?:\/\//', $video)) {
+                    $video = $https . $video;
+                }
+                $video = preg_replace('#^https:/([^/])#', 'https://$1', $video);
+                
+                // Imprimindo a linha da lista de forma limpa em uma única tag <li>
+                echo "<li>ID: {$modulo['id']} | Nome: " . htmlspecialchars($modulo['titulo']) . " | Curso ID: {$modulo['cursos_id']} | <a href=\"{$video}\" target=\"_blank\">Assistir Vídeo</a> | <a href='deletarmodulo.php?id_modulo=" . (int)$modulo['id'] . "'>Deletar</a></li>";
             }
             echo '</ul>';
         }
-    }
-    ?>
-
+        ?>
+    <?php endif; ?> <br>
     <a href="CadastroModulo.php">Cadastrar Novo Módulo</a>
 </body>
 </html>

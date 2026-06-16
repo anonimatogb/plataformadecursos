@@ -191,16 +191,15 @@ nav a {
         color: var(--purple);
     }
 
-    /* =========================
+   /* =========================
     IFRAME (VÍDEO)
     ========================= */
 
     iframe {
         width: 100%;
         
-        max-width: 700px;
-        
-        height: auto;
+        /* A mágica acontece aqui: mantém a proporção perfeita de vídeo do YouTube */
+        aspect-ratio: 16 / 9; 
         
         border-radius: 16px;
         
