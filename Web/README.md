@@ -189,7 +189,12 @@ Use para criar/restaurar tabelas e dados base do projeto.
 4. Acesse a URL de `Web/view/Index.php` (login).
 
 ---
+## 10) Feedback
+
+Vitor Cardoso: Falta muito para ser ruim
+Dhiogo Marestoni: Falta css
+Vitor Hugo: css ruim
+
 
 ### Arquivo principal desta documentação
 - `Web/README.md`
-
